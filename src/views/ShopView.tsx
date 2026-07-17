@@ -42,7 +42,7 @@ export default function ShopView({
   const sizesList = ['S', 'M', 'L', 'XL', 'XXL', '7', '8', '9', '10', '11', 'One Size'];
   const fitsList = ['Oversized', 'Relaxed', 'Regular', 'Regular Tapered', 'Snug'];
   
-  // Custom Color Map with actual hex codes for visual swatches in filter
+  // Custom Color Map
   const colorsList = [
     { name: 'Charcoal Black', hex: '#1C1C1C' },
     { name: 'Vintage Asphalt', hex: '#3A3A3A' },
@@ -74,11 +74,11 @@ export default function ShopView({
     setSortOption('newest');
   };
 
-  // Perform dynamic client-side filtering and sorting
+  // Perform client-side filtering and sorting
   const filteredProducts = useMemo(() => {
     return products
       .filter((p) => {
-        // Search matches
+        // Search query filter
         if (searchQuery) {
           const query = searchQuery.toLowerCase();
           const matchesName = p.name.toLowerCase().includes(query);
@@ -87,32 +87,32 @@ export default function ShopView({
           if (!matchesName && !matchesDesc && !matchesCat) return false;
         }
 
-        // Category matches
+        // Category filter
         if (categoryFilter && p.category.toLowerCase() !== categoryFilter.toLowerCase()) {
           return false;
         }
 
-        // Gender matches
+        // Gender filter
         if (selectedGender && p.gender !== 'unisex' && p.gender !== selectedGender) {
           return false;
         }
 
-        // Fit matches
+        // Fit filter
         if (selectedFit && p.fit !== selectedFit) {
           return false;
         }
 
-        // Size matches
+        // Size filter
         if (selectedSize && !p.sizes.includes(selectedSize)) {
           return false;
         }
 
-        // Color matches
+        // Color filter
         if (selectedColor && !p.colors.some((c) => c.name === selectedColor)) {
           return false;
         }
 
-        // Price matches
+        // Price filter
         const activePrice = p.discountPrice || p.price;
         if (activePrice > priceMax) {
           return false;
@@ -138,7 +138,6 @@ export default function ShopView({
         if (sortOption === 'popularity') {
           return b.reviewCount - a.reviewCount;
         }
-        // Default newest
         return b.isNewArrival ? 1 : -1;
       });
   }, [products, searchQuery, categoryFilter, selectedGender, selectedFit, selectedSize, selectedColor, priceMax, sortOption]);
@@ -146,98 +145,97 @@ export default function ShopView({
   const categories = ['Oversized', 'T-Shirts', 'Hoodies', 'Cargo Pants', 'Sneakers', 'Accessories'];
 
   return (
-    <div id="shop-view" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 pt-[140px] min-h-screen bg-[#F8F8F6] text-[#0B0B0B]">
+    <div id="shop-view" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 pt-[120px] min-h-screen bg-[#f1f5f9] text-[#1e293b]">
       
-      {/* 1. Header & Active Query Badges */}
-      <div className="border-b border-[#0B0B0B]/10 pb-6 mb-8 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+      {/* 1. Shop Header Row */}
+      <div className="bg-white p-5 rounded-xl border border-gray-200 shadow-xs mb-6 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
         <div>
-          <span className="text-[9px] font-mono tracking-[0.3em] text-neutral-500 uppercase">BLACKFAWN APPARELS ARCHIVE</span>
-          <h1 className="text-2xl sm:text-3xl font-display font-black tracking-widest text-[#0B0B0B] uppercase mt-1">
-            {categoryFilter || 'SHOP ALL RELEASES'}
+          <span className="text-[10px] font-bold text-gray-400 tracking-wider uppercase">Catalog Release List</span>
+          <h1 className="text-xl sm:text-2xl font-extrabold text-gray-900 tracking-wide mt-1 uppercase">
+            {categoryFilter || 'Shop All Releases'}
           </h1>
           {searchQuery && (
-            <p className="text-[10px] font-mono text-neutral-500 mt-2 uppercase tracking-widest flex items-center gap-1.5">
-              <Sparkles size={11} className="text-[#C9A227]" /> SEARCHING KEYS: <span className="text-[#0B0B0B] font-bold">"{searchQuery}"</span> ({filteredProducts.length} results)
+            <p className="text-xs text-gray-500 font-medium mt-1.5 flex items-center gap-1">
+              <Sparkles size={12} className="text-[#f97316]" /> Search results for: <span className="text-gray-900 font-bold">"{searchQuery}"</span> ({filteredProducts.length} items)
             </p>
           )}
         </div>
 
-        {/* View Layout & Sort Filters */}
-        <div className="flex items-center gap-3 self-end sm:self-auto">
-          {/* Grid/List switch */}
-          <div className="flex border border-[#0B0B0B]/10 p-1 bg-white rounded-none">
+        {/* Layout & Filters Switcher */}
+        <div className="flex items-center gap-3">
+          <div className="flex border border-gray-200 p-1 bg-gray-50 rounded-lg shrink-0">
             <button
               onClick={() => setViewMode('grid')}
-              className={`p-1.5 transition-colors cursor-pointer rounded-none ${viewMode === 'grid' ? 'text-black bg-neutral-100' : 'text-neutral-400 hover:text-black'}`}
+              className={`p-1.5 transition-colors cursor-pointer rounded-md ${viewMode === 'grid' ? 'text-[#f97316] bg-white shadow-xs' : 'text-gray-400 hover:text-gray-600'}`}
               title="Grid View"
             >
-              <Grid size={14} />
+              <Grid size={15} />
             </button>
             <button
               onClick={() => setViewMode('list')}
-              className={`p-1.5 transition-colors cursor-pointer rounded-none ${viewMode === 'list' ? 'text-black bg-neutral-100' : 'text-neutral-400 hover:text-black'}`}
+              className={`p-1.5 transition-colors cursor-pointer rounded-md ${viewMode === 'list' ? 'text-[#f97316] bg-white shadow-xs' : 'text-gray-400 hover:text-gray-600'}`}
               title="List View"
             >
-              <List size={14} />
+              <List size={15} />
             </button>
           </div>
 
           <button
             onClick={() => setShowFilters(!showFilters)}
-            className={`px-4 py-2 border text-[10px] font-display font-bold tracking-widest uppercase transition-all cursor-pointer flex items-center gap-2 rounded-none ${
-              showFilters ? 'bg-[#0B0B0B] text-[#F8F8F6] border-[#0B0B0B]' : 'bg-white border-[#0B0B0B]/15 text-[#0B0B0B] hover:bg-neutral-50'
+            className={`px-4 py-2 border rounded-lg text-xs font-bold tracking-wider uppercase transition-all cursor-pointer flex items-center gap-2 ${
+              showFilters ? 'bg-[#131921] text-white border-slate-900 shadow-sm' : 'bg-white border-gray-200 text-gray-700 hover:bg-gray-50 shadow-xs'
             }`}
           >
-            <SlidersHorizontal size={12} /> {showFilters ? 'HIDE FILTERS' : 'SHOW FILTERS'}
+            <SlidersHorizontal size={13} /> {showFilters ? 'Hide Filters' : 'Show Filters'}
           </button>
         </div>
       </div>
 
-      <div className="flex flex-col lg:flex-row gap-10">
+      <div className="flex flex-col lg:flex-row gap-6">
         
-        {/* 2. ADVANCED FILTERS BOARD */}
+        {/* 2. Side filter bar */}
         <AnimatePresence>
           {showFilters && (
             <motion.aside
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
-              className="w-full lg:w-64 shrink-0 bg-white border border-[#0B0B0B]/10 p-5 rounded-none space-y-6 h-fit max-h-[100vh] overflow-y-auto shadow-xs"
+              className="w-full lg:w-64 shrink-0 bg-white border border-gray-200 p-5 rounded-xl space-y-6 h-fit max-h-[85vh] overflow-y-auto shadow-xs"
             >
-              <div className="flex justify-between items-center border-b border-[#0B0B0B]/10 pb-3.5">
-                <span className="text-[10px] font-display font-bold tracking-widest text-[#0B0B0B] uppercase">FILTERS SELECTOR</span>
+              <div className="flex justify-between items-center border-b border-gray-100 pb-3">
+                <span className="text-xs font-bold text-gray-900 tracking-wider uppercase">Filter Selection</span>
                 <button
                   onClick={resetFilters}
-                  className="text-[9px] font-mono text-neutral-400 hover:text-[#C9A227] flex items-center gap-1 cursor-pointer uppercase tracking-wider"
+                  className="text-[10px] font-bold text-gray-400 hover:text-[#f97316] flex items-center gap-1 cursor-pointer"
                 >
-                  <RotateCcw size={10} /> RESET ALL
+                  <RotateCcw size={11} /> Clear All
                 </button>
               </div>
 
-              {/* Department Categories Selector */}
-              <div className="space-y-3">
-                <h4 className="text-[9px] font-mono tracking-widest text-neutral-400 uppercase">CATEGORY DEPT</h4>
-                <div className="flex flex-col gap-1">
+              {/* Categories list filter */}
+              <div className="space-y-2">
+                <h4 className="text-[10px] font-bold text-gray-400 tracking-wider uppercase">Departments</h4>
+                <div className="flex flex-col gap-0.5">
                   {categories.map((cat) => (
                     <button
                       key={cat}
                       onClick={() => setCategoryFilter(categoryFilter === cat ? '' : cat)}
-                      className={`text-left text-[11px] font-mono uppercase tracking-wider py-1.5 px-2 rounded-none cursor-pointer hover:bg-neutral-50 flex justify-between items-center transition-colors ${
-                        categoryFilter === cat ? 'text-[#0B0B0B] font-bold bg-[#F8F8F6] border-l-2 border-[#C9A227] pl-3' : 'text-neutral-500'
+                      className={`text-left text-xs py-1.5 px-2.5 rounded-lg cursor-pointer flex justify-between items-center transition-all ${
+                        categoryFilter === cat ? 'text-[#f97316] font-bold bg-orange-50/60' : 'text-gray-600 hover:bg-gray-50'
                       }`}
                     >
                       <span>{cat}</span>
-                      {categoryFilter === cat && <Check size={10} className="text-[#C9A227]" />}
+                      {categoryFilter === cat && <Check size={12} className="text-[#f97316]" />}
                     </button>
                   ))}
                 </div>
               </div>
 
-              {/* Price Max Slider */}
-              <div className="space-y-3 border-t border-[#0B0B0B]/10 pt-4">
+              {/* Price Max slider */}
+              <div className="space-y-3 border-t border-gray-100 pt-4">
                 <div className="flex justify-between items-center">
-                  <h4 className="text-[9px] font-mono tracking-widest text-neutral-400 uppercase">MAX PRICE</h4>
-                  <span className="text-xs font-mono font-bold text-[#0B0B0B]">₹{priceMax}</span>
+                  <h4 className="text-[10px] font-bold text-gray-400 tracking-wider uppercase">Max Price Range</h4>
+                  <span className="text-xs font-extrabold text-gray-900">₹{priceMax}</span>
                 </div>
                 <input
                   type="range"
@@ -246,42 +244,42 @@ export default function ShopView({
                   step={100}
                   value={priceMax}
                   onChange={(e) => setPriceMax(Number(e.target.value))}
-                  className="w-full accent-[#C9A227] bg-neutral-200 h-1 cursor-pointer"
+                  className="w-full accent-[#f97316] bg-gray-200 h-1 rounded-lg cursor-pointer"
                 />
-                <div className="flex justify-between text-[8px] font-mono text-neutral-400 uppercase tracking-widest">
+                <div className="flex justify-between text-[9px] text-gray-400 font-bold uppercase">
                   <span>₹500</span>
                   <span>₹6,000</span>
                 </div>
               </div>
 
-              {/* Sorting */}
-              <div className="space-y-3 border-t border-[#0B0B0B]/10 pt-4">
-                <h4 className="text-[9px] font-mono tracking-widest text-neutral-400 uppercase">ORDER ARCHIVE BY</h4>
+              {/* Sorting Order */}
+              <div className="space-y-2 border-t border-gray-100 pt-4">
+                <h4 className="text-[10px] font-bold text-gray-400 tracking-wider uppercase">Sort By</h4>
                 <select
                   value={sortOption}
                   onChange={(e) => setSortOption(e.target.value)}
-                  className="w-full bg-[#F8F8F6] border border-[#0B0B0B]/15 text-[#0B0B0B] text-[11px] font-mono p-2.5 focus:border-[#C9A227] outline-none uppercase tracking-widest rounded-none"
+                  className="w-full bg-gray-50 border border-gray-200 text-xs text-gray-800 p-2.5 rounded-lg focus:ring-1 focus:ring-[#f97316] focus:border-[#f97316] outline-none"
                 >
-                  <option value="newest">Newest Drops First</option>
-                  <option value="popularity">Popularity (Most Reviewed)</option>
+                  <option value="newest">Newest Launch</option>
+                  <option value="popularity">Popularity (Rating Count)</option>
                   <option value="price-low">Price: Low to High</option>
                   <option value="price-high">Price: High to Low</option>
-                  <option value="discount">Act II Sales Discount</option>
+                  <option value="discount">Act II Special Discount</option>
                 </select>
               </div>
 
-              {/* Gender Selection */}
-              <div className="space-y-3 border-t border-[#0B0B0B]/10 pt-4">
-                <h4 className="text-[9px] font-mono tracking-widest text-neutral-400 uppercase">GENDER BIAS</h4>
-                <div className="flex gap-1.5">
+              {/* Gender filter button group */}
+              <div className="space-y-2.5 border-t border-gray-100 pt-4">
+                <h4 className="text-[10px] font-bold text-gray-400 tracking-wider uppercase">Ideal For</h4>
+                <div className="flex gap-2">
                   {['men', 'women'].map((g) => (
                     <button
                       key={g}
                       onClick={() => setSelectedGender(selectedGender === g ? '' : g)}
-                      className={`flex-1 py-1.5 border text-[9px] font-mono uppercase tracking-widest text-center transition-all cursor-pointer rounded-none ${
+                      className={`flex-1 py-1.5 border text-xs font-bold capitalize rounded-lg transition-all cursor-pointer ${
                         selectedGender === g
-                          ? 'bg-[#0B0B0B] text-[#F8F8F6] border-[#0B0B0B] font-bold'
-                          : 'bg-white border-[#0B0B0B]/10 text-neutral-500 hover:border-black/20'
+                          ? 'bg-[#131921] text-white border-slate-900'
+                          : 'bg-white border-gray-200 text-gray-600 hover:border-gray-300'
                       }`}
                     >
                       {g}
@@ -290,18 +288,18 @@ export default function ShopView({
                 </div>
               </div>
 
-              {/* Size Selector Grid */}
-              <div className="space-y-3 border-t border-[#0B0B0B]/10 pt-4">
-                <h4 className="text-[9px] font-mono tracking-widest text-neutral-400 uppercase">SIZE CAPSULES</h4>
-                <div className="grid grid-cols-4 gap-1">
+              {/* Size Capsules */}
+              <div className="space-y-3.5 border-t border-gray-100 pt-4">
+                <h4 className="text-[10px] font-bold text-gray-400 tracking-wider uppercase">Sizes</h4>
+                <div className="grid grid-cols-4 gap-1.5">
                   {sizesList.map((s) => (
                     <button
                       key={s}
                       onClick={() => setSelectedSize(selectedSize === s ? '' : s)}
-                      className={`py-1.5 border text-[9px] font-mono text-center transition-all cursor-pointer rounded-none ${
+                      className={`py-1.5 border text-[10px] font-semibold text-center rounded-md transition-all cursor-pointer ${
                         selectedSize === s
-                          ? 'bg-[#0B0B0B] text-[#F8F8F6] border-[#0B0B0B] font-black'
-                          : 'bg-white border-[#0B0B0B]/10 text-neutral-500 hover:border-[#C9A227]'
+                          ? 'bg-[#f97316] text-white border-[#f97316]'
+                          : 'bg-white border-gray-200 text-gray-600 hover:border-[#f97316] hover:text-[#f97316]'
                       }`}
                     >
                       {s}
@@ -310,44 +308,29 @@ export default function ShopView({
                 </div>
               </div>
 
-              {/* Drop Fit */}
-              <div className="space-y-3 border-t border-[#0B0B0B]/10 pt-4">
-                <h4 className="text-[9px] font-mono tracking-widest text-neutral-400 uppercase">SILHOUETTE GEOMETRY</h4>
-                <select
-                  value={selectedFit}
-                  onChange={(e) => setSelectedFit(e.target.value)}
-                  className="w-full bg-[#F8F8F6] border border-[#0B0B0B]/15 text-[#0B0B0B] text-[11px] font-mono p-2.5 focus:border-[#C9A227] outline-none uppercase tracking-widest rounded-none"
-                >
-                  <option value="">All Silhouette Cuts</option>
-                  {fitsList.map((f) => (
-                    <option key={f} value={f}>{f}</option>
-                  ))}
-                </select>
-              </div>
-
-              {/* Advanced Color Swatches Selectors - Nobero style */}
-              <div className="space-y-3 border-t border-[#0B0B0B]/10 pt-4">
-                <h4 className="text-[9px] font-mono tracking-widest text-neutral-400 uppercase">VISUAL COLOR TONES</h4>
-                <div className="flex flex-wrap gap-1.5">
+              {/* Color filter visual swatches */}
+              <div className="space-y-3.5 border-t border-gray-100 pt-4">
+                <h4 className="text-[10px] font-bold text-gray-400 tracking-wider uppercase">Color Swatches</h4>
+                <div className="flex flex-wrap gap-2">
                   {colorsList.map((c) => (
                     <button
                       key={c.name}
                       onClick={() => setSelectedColor(selectedColor === c.name ? '' : c.name)}
-                      className={`w-6 h-6 rounded-none border transition-all relative ${
-                        selectedColor === c.name ? 'border-[#C9A227] scale-110 shadow-sm' : 'border-[#0B0B0B]/15 opacity-80 hover:opacity-100'
+                      className={`w-6 h-6 rounded-full border transition-all relative ${
+                        selectedColor === c.name ? 'border-[#f97316] scale-110 shadow-md ring-2 ring-[#f97316]/30' : 'border-gray-200 hover:scale-105'
                       }`}
                       style={{ backgroundColor: c.hex }}
                       title={c.name}
                     >
                       {selectedColor === c.name && (
-                        <span className="absolute inset-0 flex items-center justify-center text-[8px] text-[#C9A227] mix-blend-difference font-bold">✓</span>
+                        <span className="absolute inset-0 flex items-center justify-center text-[10px] text-white font-bold mix-blend-difference">✓</span>
                       )}
                     </button>
                   ))}
                 </div>
                 {selectedColor && (
-                  <p className="text-[8px] font-mono text-neutral-400 uppercase tracking-widest">
-                    Active: <span className="text-[#0B0B0B] font-bold">{selectedColor}</span>
+                  <p className="text-[9px] font-bold text-[#f97316] uppercase mt-1">
+                    Selected: {selectedColor}
                   </p>
                 )}
               </div>
@@ -355,27 +338,27 @@ export default function ShopView({
           )}
         </AnimatePresence>
 
-        {/* 3. PRODUCTS GRID LIST */}
+        {/* 3. Products List View Container */}
         <main className="flex-1">
           {filteredProducts.length === 0 ? (
-            <div className="text-center py-24 border border-[#0B0B0B]/10 bg-white rounded-none flex flex-col items-center justify-center shadow-xs">
-              <AlertCircle className="text-neutral-400" size={32} />
-              <p className="mt-4 text-xs font-display font-bold tracking-widest text-[#0B0B0B] uppercase">
-                NO METROPOLIS RELEASES COINCIDE WITH ACTIVE FILTERS
+            <div className="text-center py-20 border border-gray-200 bg-white rounded-xl flex flex-col items-center justify-center shadow-xs">
+              <AlertCircle className="text-gray-400" size={36} />
+              <p className="mt-4 text-sm font-bold text-gray-900 uppercase tracking-wide">
+                No Apparel Matches Found
               </p>
-              <p className="text-[9px] font-mono text-neutral-400 uppercase tracking-wider mt-1.5 max-w-xs leading-relaxed">
-                We couldn't query any physical items under these exact parameters. Try widening your price filter or clearing selected sizes.
+              <p className="text-xs text-gray-500 mt-1 max-w-xs leading-relaxed">
+                We couldn't retrieve any items matching your filter settings. Please expand your price range or select other sizes.
               </p>
               <button
                 onClick={resetFilters}
-                className="mt-6 px-6 py-2.5 bg-[#0B0B0B] text-[#F8F8F6] text-xs font-display font-bold tracking-widest uppercase hover:bg-[#C9A227] hover:text-[#0B0B0B] transition-all cursor-pointer rounded-none"
+                className="mt-6 px-6 py-2.5 bg-[#f97316] text-white text-xs font-bold uppercase hover:bg-[#e0620d] transition-all cursor-pointer rounded-lg shadow-sm"
               >
-                CLEAR FILTER BOARD
+                Clear All Filters
               </button>
             </div>
           ) : viewMode === 'grid' ? (
-            /* Grid View */
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 animate-fade-in">
+            /* Grid layout */
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
               {filteredProducts.map((product) => (
                 <ProductCard
                   key={product.id}
@@ -389,51 +372,55 @@ export default function ShopView({
               ))}
             </div>
           ) : (
-            /* List View Layout - Zara Minimalist */
-            <div className="space-y-4 animate-fade-in">
+            /* E-commerce List View layout */
+            <div className="space-y-4">
               {filteredProducts.map((product) => {
+                const discount = product.discountPrice ? Math.round(((product.price - product.discountPrice) / product.price) * 100) : 0;
                 return (
                   <div
                     key={product.id}
-                    className="flex flex-col sm:flex-row gap-6 p-4 bg-white border border-[#0B0B0B]/10 hover:border-[#C9A227] rounded-none transition-colors cursor-pointer group"
+                    className="flex flex-col sm:flex-row gap-5 p-4 bg-white border border-gray-200 hover:border-[#f97316] rounded-xl transition-all cursor-pointer group shadow-xs hover:shadow-md"
                     onClick={() => onProductClick(product)}
                   >
-                    <div className="w-full sm:w-44 aspect-[3/4] bg-neutral-100 rounded-none overflow-hidden shrink-0 relative">
-                      <img src={product.images[0]} alt={product.name} className="w-full h-full object-cover object-top group-hover:scale-102 transition-transform duration-500" referrerPolicy="no-referrer" />
+                    <div className="w-full sm:w-40 aspect-[3/4] bg-gray-50 rounded-lg overflow-hidden shrink-0 relative">
+                      <img src={product.images[0]} alt={product.name} className="w-full h-full object-cover object-top group-hover:scale-103 transition-all duration-500" referrerPolicy="no-referrer" />
+                      {discount > 0 && (
+                        <span className="absolute top-2.5 left-2.5 bg-red-600 text-white font-bold text-[9px] px-2 py-0.5 rounded shadow-xs">{discount}% OFF</span>
+                      )}
                     </div>
 
                     <div className="flex-1 flex flex-col justify-between py-1">
                       <div className="space-y-2">
-                        <span className="text-[8px] font-mono tracking-[0.25em] text-[#C9A227] uppercase font-bold">
-                          {product.category} • {product.fit} SILHOUETTE
+                        <span className="text-[10px] font-bold text-[#f97316] tracking-wider uppercase">
+                          {product.category}
                         </span>
                         
-                        <h3 className="text-md font-display font-bold text-[#0B0B0B] uppercase tracking-wider">
+                        <h3 className="text-base font-bold text-gray-900 group-hover:text-[#f97316] transition-colors">
                           {product.name}
                         </h3>
 
-                        <p className="text-xs text-neutral-500 uppercase tracking-wide leading-relaxed line-clamp-2 max-w-xl">
+                        <p className="text-xs text-gray-500 leading-relaxed line-clamp-2 max-w-xl">
                           {product.description}
                         </p>
 
-                        <div className="flex flex-wrap gap-1.5 pt-1">
+                        <div className="flex flex-wrap gap-1 pt-1.5">
                           {product.sizes.map((s) => (
-                            <span key={s} className="text-[9px] font-mono border border-[#0B0B0B]/10 text-neutral-500 px-2 py-0.5 rounded-none bg-[#F8F8F6]">
+                            <span key={s} className="text-[10px] font-semibold border border-gray-200 text-gray-600 px-2 py-0.5 rounded-md bg-gray-50">
                               {s}
                             </span>
                           ))}
                         </div>
                       </div>
 
-                      <div className="flex justify-between items-end border-t border-[#0B0B0B]/5 pt-4 mt-6 sm:mt-0">
-                        <div className="flex items-baseline gap-2.5">
+                      <div className="flex justify-between items-end border-t border-gray-100 pt-4 mt-6 sm:mt-0">
+                        <div className="flex items-baseline gap-2">
                           {product.discountPrice ? (
                             <>
-                              <span className="text-lg font-display font-black text-[#0B0B0B]">₹{product.discountPrice}</span>
-                              <span className="text-xs font-mono text-neutral-400 line-through">₹{product.price}</span>
+                              <span className="text-lg font-black text-gray-900">₹{product.discountPrice}</span>
+                              <span className="text-xs text-gray-400 line-through">₹{product.price}</span>
                             </>
                           ) : (
-                            <span className="text-lg font-display font-black text-[#0B0B0B]">₹{product.price}</span>
+                            <span className="text-lg font-black text-gray-900">₹{product.price}</span>
                           )}
                         </div>
 
@@ -443,18 +430,18 @@ export default function ShopView({
                               e.stopPropagation();
                               onQuickView(product);
                             }}
-                            className="px-4 py-2 border border-[#0B0B0B]/15 hover:border-[#0B0B0B] text-black text-[10px] font-mono uppercase tracking-widest rounded-none bg-[#F8F8F6]"
+                            className="px-3.5 py-2 border border-gray-200 hover:bg-gray-50 text-gray-700 text-xs font-bold rounded-lg transition-colors bg-white cursor-pointer"
                           >
-                            SPECS VIEW
+                            Quick View
                           </button>
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
                               onAddToCart(product, product.sizes[0], product.colors[0].name);
                             }}
-                            className="px-5 py-2 bg-[#0B0B0B] text-[#F8F8F6] text-[10px] font-display font-black uppercase tracking-widest rounded-none hover:bg-[#C9A227] hover:text-[#0B0B0B] transition-colors"
+                            className="px-5 py-2 bg-[#f97316] text-white text-xs font-bold rounded-lg hover:bg-[#e0620d] transition-colors cursor-pointer"
                           >
-                            ADD TO BAG
+                            Add to Cart
                           </button>
                         </div>
                       </div>

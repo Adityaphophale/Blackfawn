@@ -318,7 +318,6 @@ export default function App() {
           setTab('shop');
         }}
         toggleCart={() => setCartOpen(!cartOpen)}
-        toggleAIAssistant={() => setAiAssistantOpen(!aiAssistantOpen)}
         products={products}
       />
 
@@ -350,7 +349,6 @@ export default function App() {
               onQuickView={(p) => setQuickViewProduct(p)}
               setTab={setTab}
               setCategoryFilter={setCategoryFilter}
-              toggleAIAssistant={() => setAiAssistantOpen(!aiAssistantOpen)}
             />
           ) : tab === 'shop' ? (
             <ShopView
