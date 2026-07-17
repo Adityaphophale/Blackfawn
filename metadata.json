@@ -1,0 +1,6 @@
+{
+  "name": "BLACKFAWN",
+  "description": "Premium luxury streetwear eCommerce platform featuring oversized apparel, curated collections, and AI-powered style consultations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

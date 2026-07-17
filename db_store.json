@@ -1,0 +1,142 @@
+{
+  "users": [
+    {
+      "id": "usr-guest-1",
+      "email": "aphophale@gmail.com",
+      "name": "Abhishek Phophale",
+      "phone": "+91 98765 43210",
+      "points": 450,
+      "addresses": [
+        {
+          "id": "addr-1",
+          "type": "home",
+          "name": "Abhishek Phophale",
+          "addressLine1": "Flat 402, Building A, Sky Heights",
+          "addressLine2": "Senapati Bapat Road",
+          "city": "Pune",
+          "state": "Maharashtra",
+          "postalCode": "411016",
+          "phone": "+91 98765 43210",
+          "isDefault": true
+        }
+      ],
+      "couponsUsed": [],
+      "role": "admin",
+      "createdAt": "2026-07-16T08:08:15.453Z"
+    }
+  ],
+  "orders": [
+    {
+      "id": "BF-82931-IN",
+      "userId": "usr-guest-1",
+      "customerName": "Abhishek Phophale",
+      "customerEmail": "aphophale@gmail.com",
+      "items": [
+        {
+          "productId": "fawn-01-tee",
+          "productName": "FAWN-01 Heavyweight Oversized Tee",
+          "productImage": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=1000",
+          "size": "L",
+          "color": "Charcoal Black",
+          "price": 1499,
+          "quantity": 1
+        },
+        {
+          "productId": "fawn-beanie",
+          "productName": "BLACKFAWN Signature Metal Beanie",
+          "productImage": "https://images.unsplash.com/photo-1576871337622-98d48d4aa53e?auto=format&fit=crop&q=80&w=1000",
+          "size": "One Size",
+          "color": "Onyx Black",
+          "price": 699,
+          "quantity": 1
+        }
+      ],
+      "shippingAddress": {
+        "id": "addr-1",
+        "type": "home",
+        "name": "Abhishek Phophale",
+        "addressLine1": "Flat 402, Building A, Sky Heights",
+        "addressLine2": "Senapati Bapat Road",
+        "city": "Pune",
+        "state": "Maharashtra",
+        "postalCode": "411016",
+        "phone": "+91 98765 43210",
+        "isDefault": true
+      },
+      "discount": 0,
+      "subtotal": 2198,
+      "shippingFee": 0,
+      "gstAmount": 110,
+      "total": 2198,
+      "paymentMethod": "stripe",
+      "paymentStatus": "paid",
+      "orderStatus": "delivered",
+      "trackingNumber": "IN-FAWN-772911",
+      "trackingStatus": "Delivered to Customer Gate",
+      "createdAt": "2026-07-11T08:08:15.454Z",
+      "updatedAt": "2026-07-11T08:08:15.454Z",
+      "gstInvoiceRequested": true,
+      "gstNumber": "27AAAAA1111A1Z1"
+    }
+  ],
+  "reviews": [
+    {
+      "id": "r1",
+      "productId": "fawn-01-tee",
+      "userName": "Aarav Sharma",
+      "userEmail": "aarav.sharma@gmail.com",
+      "rating": 5,
+      "comment": "This is easily the highest quality oversized tee I have ever bought in India. The 240 GSM feels premium and sits perfectly without feeling suffocatingly hot. The charcoal color has that perfect acid vintage finish.",
+      "date": "July 10, 2026",
+      "verified": true,
+      "helpfulCount": 24,
+      "reply": "Appreciate the massive support, Aarav! We spent 6 months perfecting the Charcoal wash texture. Stay tuned for drop 2!"
+    },
+    {
+      "id": "r2",
+      "productId": "fawn-01-tee",
+      "userName": "Priya Patel",
+      "userEmail": "priya.patel@outlook.com",
+      "rating": 5,
+      "comment": "Absolutely obsessed with the drape! Dropped shoulders sit exactly where they should. Washed it twice already, no shrinkage or color bleed. 10/10 worth every rupee.",
+      "date": "July 05, 2026",
+      "verified": true,
+      "helpfulCount": 15
+    },
+    {
+      "id": "r3",
+      "productId": "nightwalker-cargos",
+      "userName": "Rohan Das",
+      "userEmail": "rohan.das@rediffmail.com",
+      "rating": 5,
+      "comment": "Cargos are outstanding. The ripstop fabric actually repels water, tried it during Delhi rains. Strap adjusters are very high quality, not cheap plastic. Sizing is true to size.",
+      "date": "June 25, 2026",
+      "verified": true,
+      "helpfulCount": 38,
+      "reply": "Thanks for testing the ripstop twill, Rohan! Built to withstand active weather while retaining that tactical techwear drip."
+    }
+  ],
+  "banners": [
+    {
+      "id": "banner-1",
+      "imageUrl": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=1600",
+      "title": "ACT I: SHADOWS OF INDUS",
+      "subtitle": "A modern street tribute to structural minimalism and luxury drapery.",
+      "link": "Oversized"
+    },
+    {
+      "id": "banner-2",
+      "imageUrl": "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&q=80&w=1600",
+      "title": "ACID REBELLION DROP",
+      "subtitle": "Experience heavy-knit enzyme washes, raw edges, and 400 GSM armor hoodies.",
+      "link": "Hoodies"
+    },
+    {
+      "id": "banner-3",
+      "imageUrl": "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&q=80&w=1600",
+      "title": "TACTICAL CARGOS V2",
+      "subtitle": "Water-repellent ripstop weaves designed for active modular travel.",
+      "link": "Cargo Pants"
+    }
+  ]
+}
