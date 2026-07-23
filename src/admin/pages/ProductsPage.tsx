@@ -95,11 +95,15 @@ export default function ProductsPage({
               },
               body: JSON.stringify({ fileData: resultUrl, fileName: file.name }),
             });
+            if (!res.ok) throw new Error('Upload API unavailable');
             const data = await res.json();
             if (data.url) {
               setImages((prev) => [...prev, data.url]);
+            } else {
+              setImages((prev) => [...prev, resultUrl]);
             }
           } catch (err) {
+            // Fallback: use base64 data URL directly
             setImages((prev) => [...prev, resultUrl]);
           }
         }
@@ -122,12 +126,14 @@ export default function ProductsPage({
         },
         body: JSON.stringify({ fileData: '', fileName: imageUrlInput }),
       });
+      if (!res.ok) throw new Error('Upload API unavailable');
       const data = await res.json();
       if (data.url) {
         setImages((prev) => [...prev, data.url]);
         setImageUrlInput('');
       }
     } catch (err) {
+      // Fallback: use the URL directly
       setImages((prev) => [...prev, imageUrlInput]);
       setImageUrlInput('');
     }
