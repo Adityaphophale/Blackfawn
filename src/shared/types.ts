@@ -11,32 +11,81 @@ export interface Address {
   isDefault?: boolean;
 }
 
+export interface SEOConfig {
+  title: string;
+  description: string;
+  keywords: string;
+}
+
+export interface ProductVariant {
+  id: string;
+  sku: string;
+  size: string;
+  color: string;
+  price: number;
+  salePrice?: number;
+  stock: number;
+  reservedStock: number;
+  availableStock: number;
+  weight?: number; // in grams
+  dimensions?: string; // e.g. "10x10x2 cm"
+  images: string[];
+}
+
 export interface Product {
   id: string;
   name: string;
-  description: string;
-  category: string; // oversized, t-shirts, shirts, hoodies, cargo pants, joggers, sneakers, accessories
-  price: number;
-  discountPrice?: number;
-  images: string[];
-  sizes: string[];
-  colors: { name: string; hex: string }[];
-  fit: string; // Oversized, Relaxed, Regular, Slim
-  sleeve?: string; // Short Sleeve, Long Sleeve, Sleeveless
-  material: string; // 100% Terry Cotton, French Terry, Heavyweight Fleece, Cotton Twill, etc.
-  pattern: string; // Graphic, Solid, Acid Wash, Tie-Dye, Distress
+  slug: string;
+  shortDescription: string;
+  description: string; // HTML Rich Text description
+  category: string;
+  collection?: string;
+  brand: string;
+  baseSku: string;
+  barcode?: string;
+  material: string;
+  fabric: string;
+  fit: string;
   gender: 'unisex' | 'men' | 'women';
-  rating: number;
-  reviewCount: number;
+  season?: string;
+  countryOfOrigin?: string;
+  gstRate: number; // e.g. 5, 12, 18
+  tags: string[];
+  seo: SEOConfig;
+  status: 'active' | 'draft' | 'archived';
+  isFeatured?: boolean;
+  isTrending?: boolean;
   isBestSeller?: boolean;
   isNewArrival?: boolean;
   isLimited?: boolean;
-  isOversized?: boolean;
-  stock: number;
-  features: string[];
-  sizeChart: { size: string; chest: number; length: number; shoulder: number }[];
+  images: string[]; // fallback list of main product images
+  video?: string;
+  threeSixtyImages?: string[];
+  variants: ProductVariant[];
+  rating: number;
+  reviewCount: number;
   codAvailable: boolean;
   deliveryDaysEst: number;
+  price: number; // Base retail price fallback
+  discountPrice?: number; // Base discount price fallback
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Category {
+  id: string;
+  name: string;
+  slug: string;
+  description?: string;
+  image?: string;
+}
+
+export interface Collection {
+  id: string;
+  name: string;
+  slug: string;
+  description?: string;
+  image?: string;
 }
 
 export interface User {
@@ -44,19 +93,20 @@ export interface User {
   email: string;
   name: string;
   phone?: string;
-  points: number; // loyalty points
+  points: number;
   addresses: Address[];
   couponsUsed: string[];
-  role: 'user' | 'admin';
+  role: 'user' | 'admin' | 'staff';
   createdAt: string;
 }
 
 export interface CartItem {
-  id: string; // cart item unique id (product_size_color)
+  id: string;
   productId: string;
   product: Product;
   size: string;
   color: string;
+  variantId?: string;
   quantity: number;
 }
 
@@ -68,6 +118,7 @@ export interface OrderItem {
   color: string;
   price: number;
   quantity: number;
+  sku: string;
 }
 
 export interface Order {
@@ -121,18 +172,31 @@ export interface Review {
 }
 
 export interface Coupon {
+  id: string;
   code: string;
   type: 'percentage' | 'fixed';
   value: number;
   minPurchase: number;
   description: string;
   expiresAt: string;
+  usageCount: number;
 }
 
-export interface ChatMessage {
+export interface ReturnRequest {
   id: string;
-  sender: 'user' | 'ai';
-  text: string;
+  orderId: string;
+  customerName: string;
+  items: { sku: string; reason: string; qty: number }[];
+  status: 'pending' | 'approved' | 'rejected' | 'processed';
+  type: 'return' | 'exchange';
   createdAt: string;
-  suggestedProducts?: string[]; // IDs of products suggested by AI
+}
+
+export interface GiftCard {
+  id: string;
+  code: string;
+  balance: number;
+  initialBalance: number;
+  expiryDate: string;
+  isActive: boolean;
 }

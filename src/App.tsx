@@ -1,52 +1,110 @@
-import { useState, useEffect, lazy, Suspense } from 'react';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import CartDrawer from './components/CartDrawer';
+import { useState, useEffect, Suspense } from 'react';
 
-// Core Eager Views
-import HomeView from './views/HomeView';
-import ShopView from './views/ShopView';
-import ProductDetailView from './views/ProductDetailView';
+// Customer Components
+import Header from './customer/components/Header';
+import Footer from './customer/components/Footer';
+import CartDrawer from './customer/components/CartDrawer';
+import QuickViewModal from './customer/components/QuickViewModal';
 
-// Code-Split Dynamic Views & Modals
-const CheckoutView = lazy(() => import('./views/CheckoutView'));
-const ProfileView = lazy(() => import('./views/ProfileView'));
-const AdminView = lazy(() => import('./views/AdminView'));
-const QuickViewModal = lazy(() => import('./components/QuickViewModal'));
+// Customer Views
+import HomeView from './customer/views/HomeView';
+import ShopView from './customer/views/ShopView';
+import ProductDetailView from './customer/views/ProductDetailView';
+import CheckoutView from './customer/views/CheckoutView';
+import ProfileView from './customer/views/ProfileView';
 
-import { Product, CartItem, Coupon, User, Address, Order } from './types';
+// Admin Layout & Pages
+import AdminLayout from './admin/layouts/AdminLayout';
+import AdminLogin from './admin/pages/AdminLogin';
+import DashboardPage from './admin/pages/DashboardPage';
+import ProductsPage from './admin/pages/ProductsPage';
+import InventoryPage from './admin/pages/InventoryPage';
+import OrdersPage from './admin/pages/OrdersPage';
+import CategoriesPage from './admin/pages/CategoriesPage';
+import CouponsPage from './admin/pages/CouponsPage';
+import ReviewsPage from './admin/pages/ReviewsPage';
+import ReturnRequestsPage from './admin/pages/ReturnRequestsPage';
+import GiftCardsPage from './admin/pages/GiftCardsPage';
+import BlogsPage from './admin/pages/BlogsPage';
+
+import { Product, CartItem, Coupon, User, Address, Order } from './shared/types';
 
 export default function App() {
-  const [tab, setTab] = useState<string>('home'); // 'home' | 'shop' | 'product' | 'checkout' | 'profile'
+  const [tab, setTab] = useState<string>(() => {
+    const hash = window.location.hash;
+    if (hash.startsWith('#/admin')) return 'admin';
+    return 'home';
+  });
+
+  const [activeSubTab, setActiveSubTab] = useState<string>('dashboard');
   const [products, setProducts] = useState<Product[]>([]);
+  const [categories, setCategories] = useState<any[]>([]);
+  const [collections, setCollections] = useState<any[]>([]);
   const [coupons, setCoupons] = useState<Coupon[]>([]);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
+
+  // Dashboard admin metrics
+  const [metrics, setMetrics] = useState<any>({
+    totalSales: 0,
+    pendingOrders: 0,
+    returnedOrders: 0,
+    totalCustomers: 0,
+    salesHistory: [],
+    orders: [],
+    users: [],
+    productsCount: 0,
+  });
 
   // Search & Filters state
   const [searchQuery, setSearchQuery] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('');
 
-  // Shopping Bag and Saved Wishlist (persisted in localStorage)
+  // Shopping Bag and Wishlist
   const [cart, setCart] = useState<CartItem[]>(() => {
-    const saved = localStorage.getItem('blackfawn_cart');
-    return saved ? JSON.parse(saved) : [];
+    try {
+      const saved = localStorage.getItem('blackfawn_cart');
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
   });
   const [wishlist, setWishlist] = useState<Product[]>(() => {
-    const saved = localStorage.getItem('blackfawn_wishlist');
-    return saved ? JSON.parse(saved) : [];
+    try {
+      const saved = localStorage.getItem('blackfawn_wishlist');
+      return saved ? JSON.parse(saved) : [];
+    } catch {
+      return [];
+    }
   });
 
   // Drawer & Modals state
   const [cartOpen, setCartOpen] = useState(false);
-  const [aiAssistantOpen, setAiAssistantOpen] = useState(false);
   const [selectedProductId, setSelectedProductId] = useState<string | null>(null);
   const [quickViewProduct, setQuickViewProduct] = useState<Product | null>(null);
 
   // Active Promo Code
   const [couponApplied, setCouponApplied] = useState<Coupon | null>(() => {
-    const saved = localStorage.getItem('blackfawn_coupon');
-    return saved ? JSON.parse(saved) : null;
+    try {
+      const saved = localStorage.getItem('blackfawn_coupon');
+      return saved ? JSON.parse(saved) : null;
+    } catch {
+      return null;
+    }
   });
+
+  // Keep hash location updated for simple SPA routing
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash;
+      if (hash.startsWith('#/admin')) {
+        setTab('admin');
+      } else {
+        setTab('home');
+      }
+    };
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
 
   // Save Cart to Local Storage on update
   useEffect(() => {
@@ -67,26 +125,64 @@ export default function App() {
     }
   }, [couponApplied]);
 
-  // Bootstrapping: Fetch initial catalog, coupons, and active user session
-  useEffect(() => {
-    // Products
+  // Bootstrapping: Load resources from Dynamic JSON Database REST APIs
+  const fetchProductsAndSettings = () => {
     fetch('/api/products')
       .then((res) => res.json())
       .then((data) => setProducts(data))
       .catch((err) => console.error('Error loading products:', err));
 
-    // Coupons
-    fetch('/api/coupons')
+    fetch('/api/categories')
       .then((res) => res.json())
-      .then((data) => setCoupons(data))
-      .catch((err) => console.error('Error loading coupons:', err));
+      .then((data) => setCategories(data))
+      .catch((err) => console.error('Error loading categories:', err));
 
-    // Restore login session from localStorage if present
-    const savedUser = localStorage.getItem('blackfawn_user');
-    if (savedUser) {
-      setCurrentUser(JSON.parse(savedUser));
+    fetch('/api/collections')
+      .then((res) => res.json())
+      .then((data) => setCollections(data))
+      .catch((err) => console.error('Error loading collections:', err));
+
+    // Restore login session from localStorage
+    try {
+      const savedUser = localStorage.getItem('blackfawn_user');
+      if (savedUser) {
+        const parsed = JSON.parse(savedUser);
+        if (parsed && parsed.name && parsed.name.toLowerCase().includes('phophale')) {
+          parsed.name = 'Admin User';
+          localStorage.setItem('blackfawn_user', JSON.stringify(parsed));
+        }
+        setCurrentUser(parsed);
+      }
+    } catch {
+      localStorage.removeItem('blackfawn_user');
     }
+  };
+
+  useEffect(() => {
+    fetchProductsAndSettings();
   }, []);
+
+  // Fetch admin dashboard details when user is authenticated
+  const fetchDashboardMetrics = () => {
+    const token = localStorage.getItem('blackfawn_token');
+    if (!token) return;
+
+    fetch('/api/admin/dashboard', {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        setMetrics(data);
+        if (data.orders) setMetrics((m: any) => ({ ...m, orders: data.orders }));
+      })
+      .catch((err) => console.error('Error fetching dashboard:', err));
+  };
+
+  useEffect(() => {
+    if (tab === 'admin' && currentUser && (currentUser.role === 'admin' || currentUser.role === 'staff')) {
+      fetchDashboardMetrics();
+    }
+  }, [tab, currentUser]);
 
   // API Authentication wrappers
   const handleLogin = async (email: string, password: string) => {
@@ -100,7 +196,11 @@ export default function App() {
       if (data.success) {
         setCurrentUser(data.user);
         localStorage.setItem('blackfawn_user', JSON.stringify(data.user));
-        if (data.token) localStorage.setItem('blackfawn_token', data.token);
+        if (data.token) {
+          localStorage.setItem('blackfawn_token', data.token);
+          localStorage.setItem('token', data.token);
+        }
+        fetchProductsAndSettings();
         return { success: true, user: data.user };
       } else {
         return { success: false, error: data.error };
@@ -121,7 +221,10 @@ export default function App() {
       if (data.success) {
         setCurrentUser(data.user);
         localStorage.setItem('blackfawn_user', JSON.stringify(data.user));
-        if (data.token) localStorage.setItem('blackfawn_token', data.token);
+        if (data.token) {
+          localStorage.setItem('blackfawn_token', data.token);
+          localStorage.setItem('token', data.token);
+        }
         return { success: true, user: data.user };
       } else {
         return { success: false, error: data.error };
@@ -135,6 +238,8 @@ export default function App() {
     setCurrentUser(null);
     localStorage.removeItem('blackfawn_user');
     localStorage.removeItem('blackfawn_token');
+    localStorage.removeItem('token');
+    window.location.hash = '#/';
     setTab('home');
   };
 
@@ -219,7 +324,6 @@ export default function App() {
       alert("Please select a size blueprint.");
       return;
     }
-    // Clear and add only this item
     setCart([
       {
         id: `${product.id}-${size}-${color}-${Date.now()}`,
@@ -258,7 +362,6 @@ export default function App() {
     });
   };
 
-  // Coupon apply validation on backend
   const handleApplyCoupon = async (code: string) => {
     try {
       const response = await fetch('/api/coupons/validate', {
@@ -282,7 +385,6 @@ export default function App() {
     setCouponApplied(null);
   };
 
-  // Place secure order via backend REST endpoint
   const handlePlaceOrder = async (orderData: Partial<Order>) => {
     const token = localStorage.getItem('blackfawn_token');
     const response = await fetch('/api/orders', {
@@ -291,16 +393,213 @@ export default function App() {
         'Content-Type': 'application/json',
         ...(token ? { 'Authorization': `Bearer ${token}` } : {})
       },
-      body: JSON.stringify(orderData),
+      body: JSON.stringify({ order: orderData }),
     });
     const data = await response.json();
+    fetchProductsAndSettings();
     return data.order;
   };
 
+  // ----------------------------------------------------
+  // ADMIN WORKFLOW ACTIONS (CRUD)
+  // ----------------------------------------------------
+  const handleAdminCreateProduct = async (productData: Partial<Product>) => {
+    const token = localStorage.getItem('blackfawn_token');
+    const response = await fetch('/api/admin/products', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(productData),
+    });
+    const data = await response.json();
+    fetchProductsAndSettings();
+    fetchDashboardMetrics();
+    return data;
+  };
+
+  const handleAdminUpdateProduct = async (id: string, productData: Partial<Product>) => {
+    const token = localStorage.getItem('blackfawn_token');
+    const response = await fetch(`/api/admin/products/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(productData),
+    });
+    const data = await response.json();
+    fetchProductsAndSettings();
+    fetchDashboardMetrics();
+    return data;
+  };
+
+  const handleAdminDeleteProduct = async (id: string) => {
+    const token = localStorage.getItem('blackfawn_token');
+    const response = await fetch(`/api/admin/products/${id}`, {
+      method: 'DELETE',
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const data = await response.json();
+    fetchProductsAndSettings();
+    fetchDashboardMetrics();
+    return data;
+  };
+
+  const handleAdminCreateCategory = async (categoryData: any) => {
+    const token = localStorage.getItem('blackfawn_token');
+    const response = await fetch('/api/admin/categories', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(categoryData),
+    });
+    const data = await response.json();
+    fetchProductsAndSettings();
+    return data;
+  };
+
+  const handleAdminCreateCollection = async (collectionData: any) => {
+    const token = localStorage.getItem('blackfawn_token');
+    const response = await fetch('/api/admin/collections', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(collectionData),
+    });
+    const data = await response.json();
+    fetchProductsAndSettings();
+    return data;
+  };
+
+  const handleAdminUpdateOrder = async (id: string, updates: Partial<Order>) => {
+    const token = localStorage.getItem('blackfawn_token');
+    const response = await fetch(`/api/admin/orders/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(updates),
+    });
+    const data = await response.json();
+    fetchDashboardMetrics();
+    return data;
+  };
+
+  const handleAdminCreateCoupon = async (couponData: Partial<Coupon>) => {
+    const token = localStorage.getItem('blackfawn_token');
+    const response = await fetch('/api/admin/coupons', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(couponData),
+    });
+    const data = await response.json();
+    fetchDashboardMetrics();
+    return data;
+  };
+
+  const handleAdminDeleteCoupon = async (id: string) => {
+    const token = localStorage.getItem('blackfawn_token');
+    const response = await fetch(`/api/admin/coupons/${id}`, {
+      method: 'DELETE',
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const data = await response.json();
+    fetchDashboardMetrics();
+    return data;
+  };
+
+  const handleAdminDeleteReview = async (id: string) => {
+    const token = localStorage.getItem('blackfawn_token');
+    const response = await fetch(`/api/admin/reviews/${id}`, {
+      method: 'DELETE',
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    return await response.json();
+  };
+
+  // ----------------------------------------------------
+  // ROUTING VIEW RENDERERS
+  // ----------------------------------------------------
+  if (tab === 'admin') {
+    // Check authentication and authorize role
+    if (!currentUser || (currentUser.role !== 'admin' && currentUser.role !== 'staff')) {
+      return (
+        <AdminLogin 
+          onLogin={async (email, password) => {
+            const res = await handleLogin(email, password);
+            if (res.success && (res.user.role === 'admin' || res.user.role === 'staff')) {
+              window.location.hash = '#/admin';
+              setTab('admin');
+              return { success: true };
+            }
+            return { success: false, error: 'Unauthorized credentials.' };
+          }} 
+        />
+      );
+    }
+
+    return (
+      <AdminLayout
+        activeSubTab={activeSubTab}
+        setActiveSubTab={setActiveSubTab}
+        currentUser={currentUser}
+        onLogout={handleLogout}
+        setTab={(newTab) => {
+          setTab(newTab);
+          window.location.hash = '#/';
+        }}
+      >
+        {activeSubTab === 'dashboard' && <DashboardPage metrics={metrics} />}
+        {activeSubTab === 'products' && (
+          <ProductsPage
+            products={products}
+            categories={categories}
+            collections={collections}
+            onCreateProduct={handleAdminCreateProduct}
+            onUpdateProduct={handleAdminUpdateProduct}
+            onDeleteProduct={handleAdminDeleteProduct}
+          />
+        )}
+        {activeSubTab === 'inventory' && <InventoryPage />}
+        {activeSubTab === 'orders' && <OrdersPage orders={metrics.orders} onUpdateOrder={handleAdminUpdateOrder} />}
+        {activeSubTab === 'categories' && (
+          <CategoriesPage
+            categories={categories}
+            collections={collections}
+            onCreateCategory={handleAdminCreateCategory}
+            onCreateCollection={handleAdminCreateCollection}
+          />
+        )}
+        {activeSubTab === 'coupons' && (
+          <CouponsPage
+            coupons={metrics.orders ? coupons : []} // Fallback check
+            onCreateCoupon={handleAdminCreateCoupon}
+            onDeleteCoupon={handleAdminDeleteCoupon}
+          />
+        )}
+        {activeSubTab === 'reviews' && <ReviewsPage onDeleteReview={handleAdminDeleteReview} />}
+        {activeSubTab === 'returns' && <ReturnRequestsPage />}
+        {activeSubTab === 'giftcards' && <GiftCardsPage />}
+        {activeSubTab === 'blogs' && <BlogsPage />}
+      </AdminLayout>
+    );
+  }
+
+  // Else render standard Customer Storefront layout
   return (
-    <div className="min-h-screen bg-white text-black flex flex-col font-sans selection:bg-black selection:text-white antialiased">
+    <div className="min-h-screen bg-[#f1f5f9] text-[#1e293b] flex flex-col font-sans antialiased selection:bg-[#f97316] selection:text-white">
       
-      {/* 1. Header Layout navigation panel */}
+      {/* Customer Header */}
       <Header
         currentTab={tab}
         setTab={(newTab) => {
@@ -319,91 +618,83 @@ export default function App() {
         }}
         toggleCart={() => setCartOpen(!cartOpen)}
         products={products}
+        categoriesList={categories}
       />
 
-      {/* 2. Primary Layout Route Content Router */}
-      <main className="flex-1 pt-20">
-        <Suspense fallback={
-          <div className="py-32 text-center text-xs font-mono uppercase text-neutral-400 tracking-widest flex items-center justify-center gap-2">
-            <span className="w-1.5 h-1.5 bg-[#C9A227] animate-ping rounded-full" /> Loading view drop...
-          </div>
-        }>
-          {selectedProductId ? (
-            <ProductDetailView
-              productId={selectedProductId}
-              products={products}
-              onAddToCart={handleAddToCart}
-              onBuyNow={handleBuyNow}
-              onToggleWishlist={handleToggleWishlist}
-              isWishlisted={wishlist.some((w) => w.id === selectedProductId)}
-              setTab={setTab}
-              setSelectedProductId={setSelectedProductId}
-            />
-          ) : tab === 'home' ? (
-            <HomeView
-              products={products}
-              onProductClick={(p) => setSelectedProductId(p.id)}
-              onAddToCart={handleAddToCart}
-              onToggleWishlist={handleToggleWishlist}
-              wishlist={wishlist}
-              onQuickView={(p) => setQuickViewProduct(p)}
-              setTab={setTab}
-              setCategoryFilter={setCategoryFilter}
-            />
-          ) : tab === 'shop' ? (
-            <ShopView
-              products={products}
-              categoryFilter={categoryFilter}
-              setCategoryFilter={setCategoryFilter}
-              searchQuery={searchQuery}
-              setSearchQuery={setSearchQuery}
-              onProductClick={(p) => setSelectedProductId(p.id)}
-              onAddToCart={handleAddToCart}
-              onToggleWishlist={handleToggleWishlist}
-              wishlist={wishlist}
-              onQuickView={(p) => setQuickViewProduct(p)}
-            />
-          ) : tab === 'checkout' ? (
-            <CheckoutView
-              cart={cart}
-              currentUser={currentUser}
-              couponApplied={couponApplied}
-              onApplyCoupon={handleApplyCoupon}
-              onRemoveCoupon={handleRemoveCoupon}
-              onPlaceOrder={handlePlaceOrder}
-              onClearCart={() => {
-                setCart([]);
-                setCouponApplied(null);
-              }}
-              setTab={setTab}
-            />
-          ) : tab === 'profile' ? (
-            <ProfileView
-              currentUser={currentUser}
-              onLogin={handleLogin}
-              onRegister={handleRegister}
-              onLogout={handleLogout}
-              onAddAddress={handleAddAddress}
-              onRemoveAddress={handleRemoveAddress}
-              coupons={coupons}
-              setTab={setTab}
-            />
-          ) : tab === 'admin' ? (
-            <AdminView
-              products={products}
-              setTab={setTab}
-              currentUser={currentUser}
-            />
-          ) : (
-            <div className="py-20 text-center font-mono">Disrupted Metropolis Route</div>
-          )}
-        </Suspense>
+      {/* Main View Router */}
+      <main className="flex-grow pt-24 min-h-[75vh]">
+        {selectedProductId ? (
+          <ProductDetailView
+            productId={selectedProductId}
+            products={products}
+            onAddToCart={handleAddToCart}
+            onBuyNow={handleBuyNow}
+            onToggleWishlist={handleToggleWishlist}
+            isWishlisted={wishlist.some((w) => w.id === selectedProductId)}
+            setTab={setTab}
+            setSelectedProductId={setSelectedProductId}
+            setCategoryFilter={setCategoryFilter}
+          />
+        ) : tab === 'home' ? (
+          <HomeView
+            products={products}
+            onProductClick={(p) => setSelectedProductId(p.id)}
+            onAddToCart={handleAddToCart}
+            onToggleWishlist={handleToggleWishlist}
+            wishlist={wishlist}
+            onQuickView={(p) => setQuickViewProduct(p)}
+            setTab={setTab}
+            setCategoryFilter={setCategoryFilter}
+            categoriesList={categories}
+          />
+        ) : tab === 'shop' ? (
+          <ShopView
+            products={products}
+            categoryFilter={categoryFilter}
+            setCategoryFilter={setCategoryFilter}
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+            onProductClick={(p) => setSelectedProductId(p.id)}
+            onAddToCart={handleAddToCart}
+            onToggleWishlist={handleToggleWishlist}
+            wishlist={wishlist}
+            onQuickView={(p) => setQuickViewProduct(p)}
+            categoriesList={categories}
+          />
+        ) : tab === 'checkout' ? (
+          <CheckoutView
+            cart={cart}
+            currentUser={currentUser}
+            couponApplied={couponApplied}
+            onApplyCoupon={handleApplyCoupon}
+            onRemoveCoupon={handleRemoveCoupon}
+            onPlaceOrder={handlePlaceOrder}
+            onClearCart={() => {
+              setCart([]);
+              setCouponApplied(null);
+            }}
+            setTab={setTab}
+          />
+        ) : tab === 'profile' ? (
+          <ProfileView
+            currentUser={currentUser}
+            onLogin={handleLogin}
+            onRegister={handleRegister}
+            onLogout={handleLogout}
+            onAddAddress={handleAddAddress}
+            onRemoveAddress={handleRemoveAddress}
+            coupons={coupons}
+            setTab={setTab}
+          />
+        ) : (
+          <div className="py-20 text-center font-mono">Disrupted Storefront Route</div>
+        )}
       </main>
 
-      {/* 3. Footer Informative Brand footer with trust badges and rich structures */}
+      {/* Customer Footer */}
       <Footer setTab={setTab} setCategoryFilter={setCategoryFilter} />
 
-      {/* 4. Sliding Bag Drawer Panel */}
+      {/* Slide-out bag Drawer */}
       <CartDrawer
         isOpen={cartOpen}
         onClose={() => setCartOpen(false)}
@@ -420,23 +711,21 @@ export default function App() {
         onRemoveCoupon={handleRemoveCoupon}
       />
 
-      {/* 5. Quick View Overlay Modal */}
-      <Suspense fallback={null}>
-        {quickViewProduct && (
-          <QuickViewModal
-            product={quickViewProduct}
-            onClose={() => setQuickViewProduct(null)}
-            onAddToCart={(p, sz, clr) => {
-              handleAddToCart(p, sz, clr);
-              setQuickViewProduct(null);
-            }}
-            onBuyNow={(p, sz, clr) => {
-              handleBuyNow(p, sz, clr);
-              setQuickViewProduct(null);
-            }}
-          />
-        )}
-      </Suspense>
+      {/* Quick View overlay Modal */}
+      {quickViewProduct && (
+        <QuickViewModal
+          product={quickViewProduct}
+          onClose={() => setQuickViewProduct(null)}
+          onAddToCart={(p, sz, clr) => {
+            handleAddToCart(p, sz, clr);
+            setQuickViewProduct(null);
+          }}
+          onBuyNow={(p, sz, clr) => {
+            handleBuyNow(p, sz, clr);
+            setQuickViewProduct(null);
+          }}
+        />
+      )}
     </div>
   );
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Heart, ShoppingBag, Eye, Star } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Product } from '../types';
+import { Product } from '../../shared/types';
 
 interface ProductCardProps {
   key?: any;
@@ -22,12 +22,20 @@ export default function ProductCard({
   onCardClick,
 }: ProductCardProps) {
   const [hovered, setHovered] = useState(false);
-  const [selectedColor, setSelectedColor] = useState(product.colors[0]?.name || '');
-  const [selectedColorHex, setSelectedColorHex] = useState(product.colors[0]?.hex || '');
+  
+  const defaultVariant = product.variants?.[0];
+  const price = defaultVariant?.price ?? product.variants?.[0]?.price ?? 999;
+  const discountPrice = defaultVariant?.salePrice ?? product.variants?.[0]?.salePrice;
+  const colors = product.variants ? Array.from(new Set(product.variants.map(v => v.color))).map(cName => ({
+    name: cName,
+    hex: cName.toLowerCase().includes('black') ? '#1A1A1A' : cName.toLowerCase().includes('white') ? '#F3F4F6' : cName.toLowerCase().includes('olive') ? '#4A5D4E' : '#8B8580'
+  })) : [];
+
+  const [selectedColor, setSelectedColor] = useState(colors[0]?.name || '');
   const [sizeSelectorOpen, setSizeSelectorOpen] = useState(false);
 
-  const discountPercent = product.discountPrice
-    ? Math.round(((product.price - product.discountPrice) / product.price) * 100)
+  const discountPercent = discountPrice
+    ? Math.round(((price - discountPrice) / price) * 100)
     : 0;
 
   const handleSizeClick = (size: string, e: React.MouseEvent) => {
@@ -35,6 +43,9 @@ export default function ProductCard({
     onAddToCart(product, size, selectedColor);
     setSizeSelectorOpen(false);
   };
+
+  const sizes = product.variants ? Array.from(new Set(product.variants.map(v => v.size))) : ['S', 'M', 'L'];
+  const images = product.images && product.images.length > 0 ? product.images : ["https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800"];
 
   return (
     <motion.div
@@ -125,11 +136,11 @@ export default function ProductCard({
                 className="space-y-1.5"
               >
                 <div className="flex justify-between items-center text-[9px] font-bold text-gray-500 uppercase tracking-wider">
-                  <span>Select Size Blueprint</span>
+                  <span>Select Size</span>
                   <button onClick={(e) => { e.stopPropagation(); setSizeSelectorOpen(false); }} className="text-gray-400 hover:text-gray-700">Cancel</button>
                 </div>
                 <div className="grid grid-cols-5 gap-1">
-                  {product.sizes.map((s, idx) => (
+                  {sizes.map((s, idx) => (
                     <button
                       key={idx}
                       onClick={(e) => handleSizeClick(s, e)}
@@ -146,17 +157,17 @@ export default function ProductCard({
 
         {/* Product Images */}
         <img
-          src={product.images[0]}
+          src={images[0]}
           alt={product.name}
           loading="lazy"
           className={`absolute inset-0 h-full w-full object-cover object-top transition-all duration-700 ease-out ${
-            hovered && product.images[1] ? 'scale-105 opacity-0' : 'scale-100 opacity-100'
+            hovered && images[1] ? 'scale-105 opacity-0' : 'scale-100 opacity-100'
           }`}
           referrerPolicy="no-referrer"
         />
-        {product.images[1] && (
+        {images[1] && (
           <img
-            src={product.images[1]}
+            src={images[1]}
             alt={`${product.name} Alternate`}
             loading="lazy"
             className={`absolute inset-0 h-full w-full object-cover object-top transition-all duration-700 ease-out ${
@@ -175,10 +186,10 @@ export default function ProductCard({
           </span>
           {/* Color Indicators */}
           <div className="flex items-center gap-1" onClick={(e) => e.stopPropagation()}>
-            {product.colors.map((c, idx) => (
+            {colors.map((c, idx) => (
               <button
                 key={idx}
-                onClick={() => { setSelectedColor(c.name); setSelectedColorHex(c.hex); }}
+                onClick={() => { setSelectedColor(c.name); }}
                 className={`w-2.5 h-2.5 rounded-full border transition-all ${
                   selectedColor === c.name ? 'border-[#f97316] scale-125 ring-1 ring-[#f97316]/50' : 'border-gray-300 opacity-80'
                 }`}
@@ -210,25 +221,19 @@ export default function ProductCard({
         {/* Pricing Info */}
         <div className="mt-3 pt-2.5 flex items-baseline justify-between border-t border-gray-100">
           <div className="flex items-baseline gap-1.5">
-            {product.discountPrice ? (
+            {discountPrice ? (
               <>
-                <span className="text-base font-extrabold text-gray-900">₹{product.discountPrice}</span>
-                <span className="text-xs text-gray-400 line-through">₹{product.price}</span>
+                <span className="text-base font-extrabold text-gray-900">₹{discountPrice}</span>
+                <span className="text-xs text-gray-400 line-through">₹{price}</span>
               </>
             ) : (
-              <span className="text-base font-extrabold text-gray-900">₹{product.price}</span>
+              <span className="text-base font-extrabold text-gray-900">₹{price}</span>
             )}
           </div>
           
-          {product.stock <= 15 ? (
-            <span className="text-[10px] font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded-md">
-              Only {product.stock} left
-            </span>
-          ) : (
-            <span className="text-[10px] font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-md">
-              Assured Quality
-            </span>
-          )}
+          <span className="text-[10px] font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-md">
+            Assured
+          </span>
         </div>
       </div>
     </motion.div>

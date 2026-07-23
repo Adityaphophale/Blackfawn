@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Search, Heart, ShoppingBag, User as UserIcon, Shield, Menu, X, ArrowRight, Sparkles, ChevronDown, HelpCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Product, CartItem } from '../types';
+import { Product, CartItem, Category } from '../../shared/types';
 
 interface HeaderProps {
   currentTab: string;
@@ -14,6 +14,7 @@ interface HeaderProps {
   setSearchQuery: (query: string) => void;
   toggleCart: () => void;
   products: Product[];
+  categoriesList: Category[];
 }
 
 export default function Header({
@@ -27,6 +28,7 @@ export default function Header({
   setSearchQuery,
   toggleCart,
   products,
+  categoriesList,
 }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [localSearch, setLocalSearch] = useState('');
@@ -81,14 +83,10 @@ export default function Header({
 
   const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
 
-  const categories = [
-    { label: 'Oversized Fit', value: 'Oversized' },
-    { label: 'T-Shirts', value: 'T-Shirts' },
-    { label: 'Hoodies & Fleece', value: 'Hoodies' },
-    { label: 'Cargo Pants', value: 'Cargo Pants' },
-    { label: 'Sneakers', value: 'Sneakers' },
-    { label: 'Accessories', value: 'Accessories' }
-  ];
+  const categories = categoriesList.map(c => ({
+    label: c.name,
+    value: c.slug
+  }));
 
   const liveSuggestions = localSearch.trim()
     ? products
@@ -150,7 +148,7 @@ export default function Header({
                 value={localSearch}
                 onFocus={() => setSearchFocused(true)}
                 onChange={(e) => setLocalSearch(e.target.value)}
-                placeholder="Search premium apparel, oversized tees, sneakers, cargos..."
+                placeholder="Search premium printed apparel, caps, towels..."
                 className="w-full bg-transparent px-4 py-2 text-sm text-gray-900 placeholder-gray-500 outline-none border-none"
               />
               {localSearch && (
@@ -213,7 +211,16 @@ export default function Header({
 
           {/* Action Icons */}
           <div className="flex items-center space-x-1 sm:space-x-3">
-
+            {/* Admin Portal Redirect Button */}
+            <a
+              href="#/admin"
+              onClick={() => { setTab('admin'); setSearchFocused(false); }}
+              className="p-2 text-gray-300 hover:text-white hover:bg-white/10 rounded-full transition-colors relative flex items-center gap-1 cursor-pointer"
+              title="Go to Admin Portal"
+            >
+              <Shield size={20} className="text-[#f97316]" />
+              <span className="text-xs font-semibold hidden lg:inline text-white">Admin</span>
+            </a>
 
             {/* Account Profile */}
             <button
@@ -258,19 +265,6 @@ export default function Header({
               </div>
               <span className="text-xs font-bold hidden lg:inline">Cart</span>
             </button>
-
-            {/* Admin Badge */}
-            {currentUser?.role === 'admin' && (
-              <button
-                onClick={() => setTab('admin')}
-                className={`p-2 rounded-full transition-colors cursor-pointer ${
-                  currentTab === 'admin' ? 'bg-[#f97316] text-white' : 'text-gray-300 hover:text-white hover:bg-white/10'
-                }`}
-                title="Admin Control"
-              >
-                <Shield size={20} className={currentTab === 'admin' ? 'text-white' : 'text-amber-400'} />
-              </button>
-            )}
           </div>
         </div>
       </div>

@@ -1,7 +1,7 @@
 import React, { useState, useMemo } from 'react';
-import { SlidersHorizontal, ArrowUpDown, Grid, List, Check, RotateCcw, AlertCircle, Sparkles, ChevronRight, X } from 'lucide-react';
+import { SlidersHorizontal, Grid, List, Check, RotateCcw, AlertCircle, Sparkles } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Product } from '../types';
+import { Product, Category } from '../../shared/types';
 import ProductCard from '../components/ProductCard';
 
 interface ShopViewProps {
@@ -15,6 +15,7 @@ interface ShopViewProps {
   onToggleWishlist: (product: Product) => void;
   wishlist: Product[];
   onQuickView: (product: Product) => void;
+  categoriesList: Category[];
 }
 
 export default function ShopView({
@@ -28,6 +29,7 @@ export default function ShopView({
   onToggleWishlist,
   wishlist,
   onQuickView,
+  categoriesList,
 }: ShopViewProps) {
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [selectedGender, setSelectedGender] = useState<string>('');
@@ -42,7 +44,6 @@ export default function ShopView({
   const sizesList = ['S', 'M', 'L', 'XL', 'XXL', '7', '8', '9', '10', '11', 'One Size'];
   const fitsList = ['Oversized', 'Relaxed', 'Regular', 'Regular Tapered', 'Snug'];
   
-  // Custom Color Map
   const colorsList = [
     { name: 'Charcoal Black', hex: '#1C1C1C' },
     { name: 'Vintage Asphalt', hex: '#3A3A3A' },
@@ -78,42 +79,35 @@ export default function ShopView({
   const filteredProducts = useMemo(() => {
     return products
       .filter((p) => {
-        // Search query filter
         if (searchQuery) {
           const query = searchQuery.toLowerCase();
           const matchesName = p.name.toLowerCase().includes(query);
-          const matchesDesc = p.description.toLowerCase().includes(query);
+          const matchesDesc = (p.description || "").toLowerCase().includes(query);
           const matchesCat = p.category.toLowerCase().includes(query);
           if (!matchesName && !matchesDesc && !matchesCat) return false;
         }
 
-        // Category filter
         if (categoryFilter && p.category.toLowerCase() !== categoryFilter.toLowerCase()) {
           return false;
         }
 
-        // Gender filter
         if (selectedGender && p.gender !== 'unisex' && p.gender !== selectedGender) {
           return false;
         }
 
-        // Fit filter
         if (selectedFit && p.fit !== selectedFit) {
           return false;
         }
 
-        // Size filter
-        if (selectedSize && !p.sizes.includes(selectedSize)) {
+        if (selectedSize && !p.variants?.some(v => v.size === selectedSize)) {
           return false;
         }
 
-        // Color filter
-        if (selectedColor && !p.colors.some((c) => c.name === selectedColor)) {
+        if (selectedColor && !p.variants?.some(v => v.color === selectedColor)) {
           return false;
         }
 
-        // Price filter
-        const activePrice = p.discountPrice || p.price;
+        const activePrice = p.variants?.[0]?.salePrice || p.variants?.[0]?.price || p.discountPrice || p.price;
         if (activePrice > priceMax) {
           return false;
         }
@@ -121,8 +115,8 @@ export default function ShopView({
         return true;
       })
       .sort((a, b) => {
-        const pA = a.discountPrice || a.price;
-        const pB = b.discountPrice || b.price;
+        const pA = a.variants?.[0]?.salePrice || a.variants?.[0]?.price || a.discountPrice || a.price;
+        const pB = b.variants?.[0]?.salePrice || b.variants?.[0]?.price || b.discountPrice || b.price;
 
         if (sortOption === 'price-low') {
           return pA - pB;
@@ -131,9 +125,9 @@ export default function ShopView({
           return pB - pA;
         }
         if (sortOption === 'discount') {
-          const discountA = a.discountPrice ? a.price - a.discountPrice : 0;
-          const discountB = b.discountPrice ? b.price - b.discountPrice : 0;
-          return discountB - discountA;
+          const diffA = a.variants?.[0] ? a.variants[0].price - (a.variants[0].salePrice || a.variants[0].price) : 0;
+          const diffB = b.variants?.[0] ? b.variants[0].price - (b.variants[0].salePrice || b.variants[0].price) : 0;
+          return diffB - diffA;
         }
         if (sortOption === 'popularity') {
           return b.reviewCount - a.reviewCount;
@@ -142,7 +136,7 @@ export default function ShopView({
       });
   }, [products, searchQuery, categoryFilter, selectedGender, selectedFit, selectedSize, selectedColor, priceMax, sortOption]);
 
-  const categories = ['Oversized', 'T-Shirts', 'Hoodies', 'Cargo Pants', 'Sneakers', 'Accessories'];
+  const categories = categoriesList.map(c => c.name);
 
   return (
     <div id="shop-view" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 pt-[120px] min-h-screen bg-[#f1f5f9] text-[#1e293b]">
@@ -151,7 +145,7 @@ export default function ShopView({
       <div className="bg-white p-5 rounded-xl border border-gray-200 shadow-xs mb-6 flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
         <div>
           <span className="text-[10px] font-bold text-gray-400 tracking-wider uppercase">Catalog Release List</span>
-          <h1 className="text-xl sm:text-2xl font-extrabold text-gray-900 tracking-wide mt-1 uppercase">
+          <h1 className="text-xl sm:text-2xl font-extrabold text-gray-900 tracking-wide mt-1 uppercase font-display">
             {categoryFilter || 'Shop All Releases'}
           </h1>
           {searchQuery && (
@@ -264,7 +258,7 @@ export default function ShopView({
                   <option value="popularity">Popularity (Rating Count)</option>
                   <option value="price-low">Price: Low to High</option>
                   <option value="price-high">Price: High to Low</option>
-                  <option value="discount">Act II Special Discount</option>
+                  <option value="discount">Special Discount</option>
                 </select>
               </div>
 
@@ -308,7 +302,7 @@ export default function ShopView({
                 </div>
               </div>
 
-              {/* Color filter visual swatches */}
+              {/* Color filter swatches */}
               <div className="space-y-3.5 border-t border-gray-100 pt-4">
                 <h4 className="text-[10px] font-bold text-gray-400 tracking-wider uppercase">Color Swatches</h4>
                 <div className="flex flex-wrap gap-2">
@@ -328,17 +322,12 @@ export default function ShopView({
                     </button>
                   ))}
                 </div>
-                {selectedColor && (
-                  <p className="text-[9px] font-bold text-[#f97316] uppercase mt-1">
-                    Selected: {selectedColor}
-                  </p>
-                )}
               </div>
             </motion.aside>
           )}
         </AnimatePresence>
 
-        {/* 3. Products List View Container */}
+        {/* 3. Products Grid/List View */}
         <main className="flex-1">
           {filteredProducts.length === 0 ? (
             <div className="text-center py-20 border border-gray-200 bg-white rounded-xl flex flex-col items-center justify-center shadow-xs">
@@ -357,7 +346,6 @@ export default function ShopView({
               </button>
             </div>
           ) : viewMode === 'grid' ? (
-            /* Grid layout */
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
               {filteredProducts.map((product) => (
                 <ProductCard
@@ -372,10 +360,15 @@ export default function ShopView({
               ))}
             </div>
           ) : (
-            /* E-commerce List View layout */
             <div className="space-y-4">
               {filteredProducts.map((product) => {
-                const discount = product.discountPrice ? Math.round(((product.price - product.discountPrice) / product.price) * 100) : 0;
+                const defaultVariant = product.variants?.[0];
+                const price = defaultVariant?.price ?? product.price ?? 999;
+                const salePrice = defaultVariant?.salePrice ?? product.discountPrice;
+                const discount = salePrice ? Math.round(((price - salePrice) / price) * 100) : 0;
+                const itemImage = defaultVariant?.images?.[0] || product.images?.[0];
+                const sizes = product.variants ? Array.from(new Set(product.variants.map(v => v.size))) as string[] : ['S', 'M', 'L'];
+
                 return (
                   <div
                     key={product.id}
@@ -383,7 +376,7 @@ export default function ShopView({
                     onClick={() => onProductClick(product)}
                   >
                     <div className="w-full sm:w-40 aspect-[3/4] bg-gray-50 rounded-lg overflow-hidden shrink-0 relative">
-                      <img src={product.images[0]} alt={product.name} className="w-full h-full object-cover object-top group-hover:scale-103 transition-all duration-500" referrerPolicy="no-referrer" />
+                      <img src={itemImage} alt={product.name} className="w-full h-full object-cover object-top group-hover:scale-103 transition-all duration-500" referrerPolicy="no-referrer" />
                       {discount > 0 && (
                         <span className="absolute top-2.5 left-2.5 bg-red-600 text-white font-bold text-[9px] px-2 py-0.5 rounded shadow-xs">{discount}% OFF</span>
                       )}
@@ -395,16 +388,16 @@ export default function ShopView({
                           {product.category}
                         </span>
                         
-                        <h3 className="text-base font-bold text-gray-900 group-hover:text-[#f97316] transition-colors">
+                        <h3 className="text-base font-bold text-gray-900 group-hover:text-[#f97316] transition-colors capitalize">
                           {product.name}
                         </h3>
 
                         <p className="text-xs text-gray-500 leading-relaxed line-clamp-2 max-w-xl">
-                          {product.description}
+                          {product.shortDescription || "Premium high-quality streetwear design crafted for comfort."}
                         </p>
 
                         <div className="flex flex-wrap gap-1 pt-1.5">
-                          {product.sizes.map((s) => (
+                          {sizes.map((s) => (
                             <span key={s} className="text-[10px] font-semibold border border-gray-200 text-gray-600 px-2 py-0.5 rounded-md bg-gray-50">
                               {s}
                             </span>
@@ -414,13 +407,13 @@ export default function ShopView({
 
                       <div className="flex justify-between items-end border-t border-gray-100 pt-4 mt-6 sm:mt-0">
                         <div className="flex items-baseline gap-2">
-                          {product.discountPrice ? (
+                          {salePrice ? (
                             <>
-                              <span className="text-lg font-black text-gray-900">₹{product.discountPrice}</span>
-                              <span className="text-xs text-gray-400 line-through">₹{product.price}</span>
+                              <span className="text-lg font-black text-gray-900">₹{salePrice}</span>
+                              <span className="text-xs text-gray-400 line-through">₹{price}</span>
                             </>
                           ) : (
-                            <span className="text-lg font-black text-gray-900">₹{product.price}</span>
+                            <span className="text-lg font-black text-gray-900">₹{price}</span>
                           )}
                         </div>
 
@@ -437,7 +430,7 @@ export default function ShopView({
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
-                              onAddToCart(product, product.sizes[0], product.colors[0].name);
+                              onAddToCart(product, sizes[0], product.variants?.[0]?.color || 'Charcoal Black');
                             }}
                             className="px-5 py-2 bg-[#f97316] text-white text-xs font-bold rounded-lg hover:bg-[#e0620d] transition-colors cursor-pointer"
                           >

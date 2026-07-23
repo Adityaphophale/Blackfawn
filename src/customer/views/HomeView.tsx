@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, Flame, Sparkles, TrendingUp, ShieldCheck, ChevronLeft, ChevronRight, Truck, RefreshCw, BadgePercent } from 'lucide-react';
+import { ArrowRight, Flame, Sparkles, TrendingUp, ShieldCheck, Truck, RefreshCw, BadgePercent } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Product } from '../types';
+import { Product, Category } from '../../shared/types';
 import ProductCard from '../components/ProductCard';
 
 interface HomeViewProps {
@@ -13,6 +13,7 @@ interface HomeViewProps {
   onQuickView: (product: Product) => void;
   setTab: (tab: string) => void;
   setCategoryFilter: (cat: string) => void;
+  categoriesList: Category[];
 }
 
 const HERO_SLIDES = [
@@ -20,17 +21,17 @@ const HERO_SLIDES = [
     id: 1,
     image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&q=80&w=1600",
     title: "UP TO 60% OFF: SEASON SALE",
-    subtitle: "Upgrade your casual wardrobe with our premium oversized tees, cargos, and sneakers. Limited stock availability.",
+    subtitle: "Upgrade your casual wardrobe with our premium printed tees, caps, and towels. Limited stock availability.",
     tag: "TODAY'S HOT DEAL",
-    category: "Oversized"
+    category: "Printed T-Shirts"
   },
   {
     id: 2,
-    image: "https://images.unsplash.com/photo-1549298916-b41d501d3772?auto=format&fit=crop&q=80&w=1600",
-    title: "PREMIUM STEALTH RUNNERS",
-    subtitle: "Engineered with dual adjustments and water-resistant layers. Experience extreme comfort & agility.",
+    image: "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&q=80&w=1600",
+    title: "SIGNATURE EMBROIDERY CAPS",
+    subtitle: "Engineered with brass slide adjustments and canvas cotton layers. Experience style & comfort.",
     tag: "NEW LAUNCH SPECIAL",
-    category: "Sneakers"
+    category: "Caps"
   }
 ];
 
@@ -43,6 +44,7 @@ export default function HomeView({
   onQuickView,
   setTab,
   setCategoryFilter,
+  categoriesList,
 }: HomeViewProps) {
   const [activeSlide, setActiveSlide] = useState(0);
   const [countdown, setCountdown] = useState({ hours: 8, minutes: 44, seconds: 12 });
@@ -72,9 +74,9 @@ export default function HomeView({
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const dealsProducts = products.filter(p => p.discountPrice).slice(0, 4);
-  const trendingProducts = products.filter((p) => p.isBestSeller).slice(0, 4);
-  const newArrivals = products.filter((p) => p.isNewArrival).slice(0, 4);
+  // Safe checks since products come dynamically from database
+  const dealsProducts = products.filter(p => p.variants?.some(v => v.salePrice)).slice(0, 4);
+  const trendingProducts = products.filter((p) => p.isBestSeller || p.isTrending).slice(0, 4);
 
   const formatNum = (num: number) => String(num).padStart(2, '0');
 
@@ -207,32 +209,37 @@ export default function HomeView({
         </div>
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {[
-            { name: 'Oversized Fit', code: 'Oversized', img: 'https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&q=80&w=400' },
-            { name: 'Premium T-Shirts', code: 'T-Shirts', img: 'https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=400' },
-            { name: 'Tactical Cargo Pants', code: 'Cargo Pants', img: 'https://images.unsplash.com/photo-1517423568366-8b83523034fd?auto=format&fit=crop&q=80&w=400' },
-            { name: 'Stealth Sneakers', code: 'Sneakers', img: 'https://images.unsplash.com/photo-1576871337622-98d48d4aa53e?auto=format&fit=crop&q=80&w=400' },
-          ].map((cat, idx) => (
-            <div
-              key={idx}
-              onClick={() => handleBannerAction(cat.code)}
-              className="relative h-[220px] rounded-lg overflow-hidden group cursor-pointer shadow-xs border border-gray-100"
-            >
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent z-10 transition-all duration-300 group-hover:bg-slate-900/50" />
-              <img
-                src={cat.img}
-                alt={cat.name}
-                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-500"
-                referrerPolicy="no-referrer"
-              />
-              <div className="absolute bottom-4 left-4 z-20">
-                <h3 className="text-sm font-bold text-white tracking-wide uppercase">{cat.name}</h3>
-                <span className="text-[10px] text-[#f97316] font-semibold flex items-center gap-1 group-hover:underline">
-                  Shop Now <ArrowRight size={10} />
-                </span>
+          {categoriesList.slice(0, 4).map((cat, idx) => {
+            const images: Record<string, string> = {
+              "Printed T-Shirts": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=400",
+              "Caps": "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&q=80&w=400",
+              "Socks": "https://images.unsplash.com/photo-1582966772680-860e372bb558?auto=format&fit=crop&q=80&w=400",
+              "Hand Napkins": "https://images.unsplash.com/photo-1616627561950-9f746e330187?auto=format&fit=crop&q=80&w=400",
+              "Towels": "https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?auto=format&fit=crop&q=80&w=400"
+            };
+            const catImage = images[cat.name] || "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=400";
+            return (
+              <div
+                key={cat.id || idx}
+                onClick={() => handleBannerAction(cat.name)}
+                className="relative h-[220px] rounded-lg overflow-hidden group cursor-pointer shadow-xs border border-gray-100"
+              >
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent z-10 transition-all duration-300 group-hover:bg-slate-900/50" />
+                <img
+                  src={catImage}
+                  alt={cat.name}
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-500"
+                  referrerPolicy="no-referrer"
+                />
+                <div className="absolute bottom-4 left-4 z-20">
+                  <h3 className="text-sm font-bold text-white tracking-wide uppercase">{cat.name}</h3>
+                  <span className="text-[10px] text-[#f97316] font-semibold flex items-center gap-1 group-hover:underline">
+                    Shop Now <ArrowRight size={10} />
+                  </span>
+                </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </section>
 
@@ -313,7 +320,7 @@ export default function HomeView({
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-          {trendingProducts.map((product) => (
+          {trendingProducts.slice(0, 4).map((product) => (
             <ProductCard
               key={product.id}
               product={product}
