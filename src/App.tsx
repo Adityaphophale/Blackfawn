@@ -29,6 +29,8 @@ import BlogsPage from './admin/pages/BlogsPage';
 
 import { Product, CartItem, Coupon, User, Address, Order } from './shared/types';
 
+import { DEFAULT_PRODUCTS, DEFAULT_CATEGORIES, DEFAULT_COLLECTIONS } from './shared/defaultData';
+
 export default function App() {
   const [tab, setTab] = useState<string>(() => {
     const hash = window.location.hash;
@@ -37,9 +39,9 @@ export default function App() {
   });
 
   const [activeSubTab, setActiveSubTab] = useState<string>('dashboard');
-  const [products, setProducts] = useState<Product[]>([]);
-  const [categories, setCategories] = useState<any[]>([]);
-  const [collections, setCollections] = useState<any[]>([]);
+  const [products, setProducts] = useState<Product[]>(DEFAULT_PRODUCTS);
+  const [categories, setCategories] = useState<any[]>(DEFAULT_CATEGORIES);
+  const [collections, setCollections] = useState<any[]>(DEFAULT_COLLECTIONS);
   const [coupons, setCoupons] = useState<Coupon[]>([]);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
 
@@ -128,19 +130,34 @@ export default function App() {
   // Bootstrapping: Load resources from Dynamic JSON Database REST APIs
   const fetchProductsAndSettings = () => {
     fetch('/api/products')
-      .then((res) => res.json())
-      .then((data) => setProducts(data))
-      .catch((err) => console.error('Error loading products:', err));
+      .then((res) => {
+        if (!res.ok) throw new Error('API unavailable');
+        return res.json();
+      })
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) setProducts(data);
+      })
+      .catch(() => setProducts(DEFAULT_PRODUCTS));
 
     fetch('/api/categories')
-      .then((res) => res.json())
-      .then((data) => setCategories(data))
-      .catch((err) => console.error('Error loading categories:', err));
+      .then((res) => {
+        if (!res.ok) throw new Error('API unavailable');
+        return res.json();
+      })
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) setCategories(data);
+      })
+      .catch(() => setCategories(DEFAULT_CATEGORIES));
 
     fetch('/api/collections')
-      .then((res) => res.json())
-      .then((data) => setCollections(data))
-      .catch((err) => console.error('Error loading collections:', err));
+      .then((res) => {
+        if (!res.ok) throw new Error('API unavailable');
+        return res.json();
+      })
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) setCollections(data);
+      })
+      .catch(() => setCollections(DEFAULT_COLLECTIONS));
 
     // Restore login session from localStorage
     try {
