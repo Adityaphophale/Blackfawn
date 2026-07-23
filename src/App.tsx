@@ -45,6 +45,13 @@ export default function App() {
   const [coupons, setCoupons] = useState<Coupon[]>([]);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
 
+  // Toast notification state
+  const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' | 'info' } | null>(null);
+  const showToast = (message: string, type: 'success' | 'error' | 'info' = 'success') => {
+    setToast({ message, type });
+    setTimeout(() => setToast(null), 3000);
+  };
+
   // Dashboard admin metrics
   const [metrics, setMetrics] = useState<any>({
     totalSales: 0,
@@ -395,9 +402,41 @@ export default function App() {
   // Cart Management
   const handleAddToCart = (product: Product, size: string, color: string) => {
     if (!size) {
-      alert("Please choose a size drop before adding to bag.");
+      showToast('Please select a size before adding to bag.', 'error');
       return;
     }
+    setCart((prev) => {
+      const existing = prev.find(
+        (item) => item.productId === product.id && item.size === size && item.color === color
+      );
+      if (existing) {
+        showToast(`Updated quantity for ${product.name} (${size}, ${color}).`, 'success');
+        return prev.map((item) =>
+          item.id === existing.id ? { ...item, quantity: item.quantity + 1 } : item
+        );
+      }
+      showToast(`${product.name} added to cart.`, 'success');
+      return [
+        ...prev,
+        {
+          id: `${product.id}-${size}-${color}-${Date.now()}`,
+          productId: product.id,
+          product,
+          size,
+          color,
+          quantity: 1,
+        },
+      ];
+    });
+    setCartOpen(true);
+  };
+
+  const handleBuyNow = (product: Product, size: string, color: string) => {
+    if (!size) {
+      showToast('Please select a size before buying.', 'error');
+      return;
+    }
+    // Add item to cart (preserving existing items) instead of replacing the entire cart
     setCart((prev) => {
       const existing = prev.find(
         (item) => item.productId === product.id && item.size === size && item.color === color
@@ -419,24 +458,8 @@ export default function App() {
         },
       ];
     });
-    setCartOpen(true);
-  };
-
-  const handleBuyNow = (product: Product, size: string, color: string) => {
-    if (!size) {
-      alert("Please select a size blueprint.");
-      return;
-    }
-    setCart([
-      {
-        id: `${product.id}-${size}-${color}-${Date.now()}`,
-        productId: product.id,
-        product,
-        size,
-        color,
-        quantity: 1,
-      },
-    ]);
+    // CRITICAL: Clear selectedProductId so the view router reaches the checkout branch
+    setSelectedProductId(null);
     setTab('checkout');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -888,6 +911,8 @@ export default function App() {
         onRemoveItem={handleRemoveCartItem}
         onCheckout={() => {
           setCartOpen(false);
+          // CRITICAL: Clear selectedProductId so the view router reaches the checkout branch
+          setSelectedProductId(null);
           setTab('checkout');
           window.scrollTo({ top: 0, behavior: 'smooth' });
         }}
@@ -910,6 +935,25 @@ export default function App() {
             setQuickViewProduct(null);
           }}
         />
+      )}
+
+      {/* Toast Notification */}
+      {toast && (
+        <div
+          className={`fixed top-6 left-1/2 -translate-x-1/2 z-[9999] px-6 py-3 rounded-xl shadow-2xl text-sm font-bold tracking-wide flex items-center gap-2.5 animate-slide-down ${
+            toast.type === 'success'
+              ? 'bg-emerald-600 text-white'
+              : toast.type === 'error'
+              ? 'bg-red-600 text-white'
+              : 'bg-gray-900 text-white'
+          }`}
+          style={{ animation: 'slideDown 0.35s ease-out' }}
+        >
+          {toast.type === 'success' && <span>✓</span>}
+          {toast.type === 'error' && <span>✕</span>}
+          {toast.type === 'info' && <span>ℹ</span>}
+          {toast.message}
+        </div>
       )}
     </div>
   );
