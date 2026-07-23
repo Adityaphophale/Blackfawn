@@ -51,7 +51,7 @@ export default function OrdersPage({ orders, onUpdateOrder }: OrdersPageProps) {
     }
   };
 
-  const filteredOrders = orders.filter((o) => {
+  const filteredOrders = (orders || []).filter((o) => {
     if (statusFilter === 'all') return true;
     return o.orderStatus === statusFilter;
   });
