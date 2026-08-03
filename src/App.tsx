@@ -643,6 +643,46 @@ export default function App() {
     }
   };
 
+  const handleAdminUpdateCategory = async (id: string, categoryData: any) => {
+    try {
+      const token = localStorage.getItem('blackfawn_token');
+      const response = await fetch(`/api/admin/categories/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(categoryData),
+      });
+      if (!response.ok) throw new Error('API unavailable');
+      const data = await response.json();
+      fetchProductsAndSettings();
+      return data;
+    } catch {
+      setCategories((prev) =>
+        prev.map((c) => (c.id === id ? { ...c, ...categoryData, updatedAt: new Date().toISOString() } : c))
+      );
+      return { success: true };
+    }
+  };
+
+  const handleAdminDeleteCategory = async (id: string) => {
+    try {
+      const token = localStorage.getItem('blackfawn_token');
+      const response = await fetch(`/api/admin/categories/${id}`, {
+        method: 'DELETE',
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!response.ok) throw new Error('API unavailable');
+      const data = await response.json();
+      fetchProductsAndSettings();
+      return data;
+    } catch {
+      setCategories((prev) => prev.filter((c) => c.id !== id));
+      return { success: true };
+    }
+  };
+
   const handleAdminCreateCollection = async (collectionData: any) => {
     try {
       const token = localStorage.getItem('blackfawn_token');
@@ -784,7 +824,10 @@ export default function App() {
           <CategoriesPage
             categories={categories}
             collections={collections}
+            products={products}
             onCreateCategory={handleAdminCreateCategory}
+            onUpdateCategory={handleAdminUpdateCategory}
+            onDeleteCategory={handleAdminDeleteCategory}
             onCreateCollection={handleAdminCreateCollection}
           />
         )}
@@ -805,7 +848,7 @@ export default function App() {
 
   // Else render standard Customer Storefront layout
   return (
-    <div className="min-h-screen bg-[#f1f5f9] text-[#1e293b] flex flex-col font-sans antialiased selection:bg-[#f97316] selection:text-white">
+    <div className="min-h-screen bg-[#F8F7F2] text-[#111111] flex flex-col font-sans antialiased selection:bg-[#C9A227] selection:text-black">
       
       {/* Customer Header */}
       <Header

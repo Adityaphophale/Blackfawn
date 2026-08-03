@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowRight, Flame, Sparkles, TrendingUp, ShieldCheck, Truck, RefreshCw, BadgePercent } from 'lucide-react';
+import { ArrowRight, Sparkles, ShieldCheck, Truck, RefreshCw, BadgePercent } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Product, Category } from '../../shared/types';
 import ProductCard from '../components/ProductCard';
@@ -20,17 +20,17 @@ const HERO_SLIDES = [
   {
     id: 1,
     image: "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&q=80&w=1600",
-    title: "UP TO 60% OFF: SEASON SALE",
-    subtitle: "Upgrade your casual wardrobe with our premium printed tees, caps, and towels. Limited stock availability.",
-    tag: "TODAY'S HOT DEAL",
+    title: "SIGNATURE HIGH FASHION DROPS",
+    subtitle: "Architectural silhouettes, raw-edge heavy knits, and tailored minimalist luxury.",
+    tag: "THE ATELIER COLLECTION",
     category: "Printed T-Shirts"
   },
   {
     id: 2,
     image: "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&q=80&w=1600",
-    title: "SIGNATURE EMBROIDERY CAPS",
-    subtitle: "Engineered with brass slide adjustments and canvas cotton layers. Experience style & comfort.",
-    tag: "NEW LAUNCH SPECIAL",
+    title: "CANVAS COTTON ACCESSORIES",
+    subtitle: "Precision brass hardware adjustments and dense weave canvas headwear.",
+    tag: "NEW SEASON CAPS",
     category: "Caps"
   }
 ];
@@ -47,24 +47,11 @@ export default function HomeView({
   categoriesList,
 }: HomeViewProps) {
   const [activeSlide, setActiveSlide] = useState(0);
-  const [countdown, setCountdown] = useState({ hours: 8, minutes: 44, seconds: 12 });
 
   useEffect(() => {
     const timer = setInterval(() => {
       setActiveSlide((prev) => (prev + 1) % HERO_SLIDES.length);
     }, 6000);
-    return () => clearInterval(timer);
-  }, []);
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setCountdown((prev) => {
-        if (prev.seconds > 0) return { ...prev, seconds: prev.seconds - 1 };
-        if (prev.minutes > 0) return { hours: prev.hours, minutes: prev.minutes - 1, seconds: 59 };
-        if (prev.hours > 0) return { hours: prev.hours - 1, minutes: 59, seconds: 59 };
-        return { hours: 8, minutes: 44, seconds: 12 };
-      });
-    }, 1000);
     return () => clearInterval(timer);
   }, []);
 
@@ -74,27 +61,24 @@ export default function HomeView({
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  // Safe checks since products come dynamically from database
   const dealsProducts = products.filter(p => p.variants?.some(v => v.salePrice)).slice(0, 4);
   const trendingProducts = products.filter((p) => p.isBestSeller || p.isTrending).slice(0, 4);
 
-  const formatNum = (num: number) => String(num).padStart(2, '0');
-
   return (
-    <div id="home-view-container" className="space-y-16 pb-20 pt-10 overflow-x-hidden bg-[#f1f5f9] text-[#1e293b]">
+    <div id="home-view-container" className="space-y-20 pb-24 pt-8 overflow-x-hidden bg-[#F8F7F2] text-[#111111]">
       
-      {/* 1. HERO CAROUSEL */}
-      <section id="hero-slider-section" className="relative h-[480px] bg-slate-900 overflow-hidden shadow-sm">
+      {/* 1. EDITORIAL HERO CAROUSEL */}
+      <section id="hero-slider-section" className="relative h-[560px] bg-[#0B0B0B] overflow-hidden border-b border-[#E8E5DD]">
         <AnimatePresence mode="wait">
           <motion.div
             key={activeSlide}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.6 }}
             className="absolute inset-0 w-full h-full"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-slate-950/80 via-slate-900/40 to-transparent z-10" />
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0B0B0B]/90 via-[#0B0B0B]/50 to-transparent z-10" />
             
             <img
               src={HERO_SLIDES[activeSlide].image}
@@ -104,19 +88,19 @@ export default function HomeView({
             />
 
             <div className="absolute inset-0 z-20 max-w-7xl mx-auto px-6 sm:px-12 flex flex-col justify-center items-start">
-              <div className="max-w-2xl space-y-4">
+              <div className="max-w-2xl space-y-5">
                 <motion.span
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="inline-flex items-center gap-1.5 text-xs font-bold tracking-wider text-[#f97316] uppercase bg-white/95 px-3 py-1 rounded-md"
+                  className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest text-[#C9A227] uppercase bg-[#0B0B0B]/80 border border-[#C9A227]/40 px-3.5 py-1"
                 >
-                  <Sparkles size={12} className="animate-pulse text-[#f97316]" /> {HERO_SLIDES[activeSlide].tag}
+                  <Sparkles size={13} className="text-[#C9A227]" /> {HERO_SLIDES[activeSlide].tag}
                 </motion.span>
                 
                 <motion.h1
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="text-4xl sm:text-5xl font-extrabold tracking-wide text-white leading-tight"
+                  className="text-4xl sm:text-6xl font-serif font-bold tracking-tight text-white leading-tight"
                 >
                   {HERO_SLIDES[activeSlide].title}
                 </motion.h1>
@@ -124,7 +108,7 @@ export default function HomeView({
                 <motion.p
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  className="text-sm sm:text-base text-gray-200 leading-relaxed max-w-lg"
+                  className="text-sm sm:text-base text-gray-300 leading-relaxed max-w-lg font-light"
                 >
                   {HERO_SLIDES[activeSlide].subtitle}
                 </motion.p>
@@ -132,13 +116,13 @@ export default function HomeView({
                 <motion.div
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
-                  className="pt-2"
+                  className="pt-4"
                 >
                   <button
                     onClick={() => handleBannerAction(HERO_SLIDES[activeSlide].category)}
-                    className="px-6 py-3 bg-[#f97316] text-white text-xs font-bold tracking-wider uppercase hover:bg-[#e0620d] transition-all flex items-center gap-2 rounded-lg cursor-pointer shadow-lg"
+                    className="px-8 py-3.5 bg-[#0B0B0B] text-white hover:text-[#C9A227] border border-[#C9A227] text-xs font-semibold tracking-widest uppercase transition-all flex items-center gap-3 cursor-pointer shadow-lg hover:shadow-[#C9A227]/10"
                   >
-                    SHOP THIS DEAL <ArrowRight size={14} />
+                    DISCOVER DROP <ArrowRight size={14} className="text-[#C9A227]" />
                   </button>
                 </motion.div>
               </div>
@@ -147,12 +131,12 @@ export default function HomeView({
         </AnimatePresence>
 
         {/* Slide Indicators */}
-        <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-30 flex items-center gap-2">
+        <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-30 flex items-center gap-3">
           {HERO_SLIDES.map((_, idx) => (
             <button
               key={idx}
               onClick={() => setActiveSlide(idx)}
-              className={`h-2 transition-all rounded-full ${activeSlide === idx ? 'w-6 bg-[#f97316]' : 'w-2 bg-gray-400'}`}
+              className={`h-1.5 transition-all ${activeSlide === idx ? 'w-8 bg-[#C9A227]' : 'w-3 bg-gray-600'}`}
               aria-label={`Go to slide ${idx + 1}`}
             />
           ))}
@@ -161,41 +145,41 @@ export default function HomeView({
 
       {/* 2. TRUST / VALUES PILLARS */}
       <section id="trust-pillars-section" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 bg-white p-6 rounded-xl shadow-xs border border-gray-100">
-          <div className="flex items-center gap-3.5 p-2">
-            <div className="p-3 bg-orange-50 text-[#f97316] rounded-full">
-              <Truck size={22} />
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 bg-[#FFFFFF] p-8 border border-[#E8E5DD] shadow-xs">
+          <div className="flex items-center gap-4">
+            <div className="p-3 bg-[#F8F7F2] text-[#C9A227] border border-[#E8E5DD]">
+              <Truck size={20} />
             </div>
             <div>
-              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-wide">Free Air Shipping</h4>
-              <p className="text-[10px] text-gray-500 font-medium">Free express delivery on orders &gt; ₹999</p>
+              <h4 className="text-xs font-serif font-bold text-[#0B0B0B] uppercase tracking-wider">Priority Shipping</h4>
+              <p className="text-[11px] text-[#666666] mt-0.5">Complimentary air delivery over ₹999</p>
             </div>
           </div>
-          <div className="flex items-center gap-3.5 p-2 border-l border-gray-100 lg:border-l lg:pl-6">
-            <div className="p-3 bg-orange-50 text-[#f97316] rounded-full">
-              <RefreshCw size={22} />
+          <div className="flex items-center gap-4 border-l border-[#E8E5DD] pl-4 lg:pl-6">
+            <div className="p-3 bg-[#F8F7F2] text-[#C9A227] border border-[#E8E5DD]">
+              <RefreshCw size={20} />
             </div>
             <div>
-              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-wide">Easy 10-day Returns</h4>
-              <p className="text-[10px] text-gray-500 font-medium">Hassle-free size replacement</p>
+              <h4 className="text-xs font-serif font-bold text-[#0B0B0B] uppercase tracking-wider">10-Day Concierge</h4>
+              <p className="text-[11px] text-[#666666] mt-0.5">Hassle-free size exchanges</p>
             </div>
           </div>
-          <div className="flex items-center gap-3.5 p-2 border-l border-gray-100 lg:border-l lg:pl-6">
-            <div className="p-3 bg-orange-50 text-[#f97316] rounded-full">
-              <ShieldCheck size={22} />
+          <div className="flex items-center gap-4 border-l border-[#E8E5DD] pl-4 lg:pl-6">
+            <div className="p-3 bg-[#F8F7F2] text-[#C9A227] border border-[#E8E5DD]">
+              <ShieldCheck size={20} />
             </div>
             <div>
-              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-wide">Secure Checkout</h4>
-              <p className="text-[10px] text-gray-500 font-medium">100% encrypted online payments</p>
+              <h4 className="text-xs font-serif font-bold text-[#0B0B0B] uppercase tracking-wider">Encrypted Checkout</h4>
+              <p className="text-[11px] text-[#666666] mt-0.5">Protected SSL transactions & COD</p>
             </div>
           </div>
-          <div className="flex items-center gap-3.5 p-2 border-l border-gray-100 lg:border-l lg:pl-6">
-            <div className="p-3 bg-orange-50 text-[#f97316] rounded-full">
-              <BadgePercent size={22} />
+          <div className="flex items-center gap-4 border-l border-[#E8E5DD] pl-4 lg:pl-6">
+            <div className="p-3 bg-[#F8F7F2] text-[#C9A227] border border-[#E8E5DD]">
+              <BadgePercent size={20} />
             </div>
             <div>
-              <h4 className="text-xs font-bold text-gray-900 uppercase tracking-wide">Genuine Products</h4>
-              <p className="text-[10px] text-gray-500 font-medium">Direct brand authentic catalog</p>
+              <h4 className="text-xs font-serif font-bold text-[#0B0B0B] uppercase tracking-wider">Authentic Heritage</h4>
+              <p className="text-[11px] text-[#666666] mt-0.5">Direct atelier craft codes</p>
             </div>
           </div>
         </div>
@@ -203,12 +187,13 @@ export default function HomeView({
 
       {/* 3. CATEGORY CLUSTERS GRID */}
       <section id="featured-categories" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col items-center text-center space-y-1 pb-6">
-          <h2 className="text-xl sm:text-2xl font-bold tracking-wide text-gray-900 uppercase">Browse Categories</h2>
-          <p className="text-xs text-gray-500 font-medium">Find the perfect silhouette for your lifestyle</p>
+        <div className="flex flex-col items-center text-center space-y-2 pb-8">
+          <span className="text-[10px] font-bold tracking-widest text-[#C9A227] uppercase">THE ATELIER DEPARTMENTS</span>
+          <h2 className="text-2xl sm:text-3xl font-serif font-bold tracking-wide text-[#0B0B0B] uppercase">Curated Collections</h2>
+          <div className="w-12 h-0.5 bg-[#C9A227]"></div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {categoriesList.slice(0, 4).map((cat, idx) => {
             const images: Record<string, string> = {
               "Printed T-Shirts": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=400",
@@ -222,20 +207,21 @@ export default function HomeView({
               <div
                 key={cat.id || idx}
                 onClick={() => handleBannerAction(cat.name)}
-                className="relative h-[220px] rounded-lg overflow-hidden group cursor-pointer shadow-xs border border-gray-100"
+                className="relative h-[280px] border border-[#E8E5DD] overflow-hidden group cursor-pointer shadow-xs bg-[#FFFFFF]"
               >
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-transparent to-transparent z-10 transition-all duration-300 group-hover:bg-slate-900/50" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B]/80 via-transparent to-transparent z-10 transition-all duration-300 group-hover:from-[#0B0B0B]/90" />
                 <img
                   src={catImage}
                   alt={cat.name}
-                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-500"
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
                   referrerPolicy="no-referrer"
                 />
-                <div className="absolute bottom-4 left-4 z-20">
-                  <h3 className="text-sm font-bold text-white tracking-wide uppercase">{cat.name}</h3>
-                  <span className="text-[10px] text-[#f97316] font-semibold flex items-center gap-1 group-hover:underline">
-                    Shop Now <ArrowRight size={10} />
-                  </span>
+                <div className="absolute bottom-5 left-5 right-5 z-20 flex justify-between items-end border-b border-[#C9A227]/40 pb-2">
+                  <div>
+                    <h3 className="text-base font-serif font-bold text-white tracking-wider uppercase">{cat.name}</h3>
+                    <span className="text-[10px] text-[#C9A227] font-semibold tracking-widest uppercase">Explore Drop</span>
+                  </div>
+                  <ArrowRight size={14} className="text-[#C9A227] group-hover:translate-x-1 transition-transform" />
                 </div>
               </div>
             );
@@ -243,36 +229,24 @@ export default function HomeView({
         </div>
       </section>
 
-      {/* 4. DEALS OF THE DAY COUNTER */}
+      {/* 4. CURATED ATELIER SELECTION */}
       <section id="deals-of-the-day" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white p-5 rounded-xl border border-gray-100 shadow-xs">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-gray-100 pb-4 mb-6">
-            <div className="flex flex-wrap items-center gap-3">
-              <span className="bg-red-600 text-white font-bold text-[10px] px-2 py-1 rounded-md flex items-center gap-1">
-                <Flame size={12} className="animate-pulse" /> FLASH DEAL
-              </span>
-              <h2 className="text-lg font-bold text-gray-900 uppercase tracking-wide">Deals of the Day</h2>
-              
-              {/* Countdown */}
-              <div className="flex items-center gap-1 text-[#f97316] text-xs font-bold ml-2">
-                <span>Ends in:</span>
-                <span className="bg-orange-50 px-1.5 py-0.5 rounded border border-orange-100">{formatNum(countdown.hours)}h</span>
-                <span>:</span>
-                <span className="bg-orange-50 px-1.5 py-0.5 rounded border border-orange-100">{formatNum(countdown.minutes)}m</span>
-                <span>:</span>
-                <span className="bg-orange-50 px-1.5 py-0.5 rounded border border-orange-100 text-red-500 animate-pulse">{formatNum(countdown.seconds)}s</span>
-              </div>
+        <div className="bg-[#FFFFFF] p-8 border border-[#E8E5DD] shadow-xs">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 border-b border-[#E8E5DD] pb-5 mb-8">
+            <div>
+              <span className="text-[10px] font-semibold text-[#C9A227] tracking-widest uppercase">LIMITED AVAILABILITY</span>
+              <h2 className="text-2xl font-serif font-bold text-[#0B0B0B] uppercase tracking-wide">Featured Atelier Selection</h2>
             </div>
 
             <button
               onClick={() => handleBannerAction('')}
-              className="text-xs font-bold text-[#f97316] hover:underline flex items-center gap-1 cursor-pointer"
+              className="text-xs font-semibold tracking-widest text-[#0B0B0B] hover:text-[#C9A227] uppercase flex items-center gap-1.5 cursor-pointer"
             >
-              View All Offers <ArrowRight size={12} />
+              View Full Collection <ArrowRight size={13} className="text-[#C9A227]" />
             </button>
           </div>
 
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             {dealsProducts.length > 0 ? (
               dealsProducts.map((product) => (
                 <ProductCard
@@ -302,24 +276,22 @@ export default function HomeView({
         </div>
       </section>
 
-      {/* 5. TRENDING / BEST SELLERS */}
+      {/* 5. TRENDING CATALOG */}
       <section id="trending-products" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2 border-b border-gray-200 pb-4 mb-6">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-2 border-b border-[#E8E5DD] pb-5 mb-8">
           <div>
-            <span className="text-[10px] font-bold text-[#f97316] tracking-wider uppercase flex items-center gap-1">
-              <TrendingUp size={12} /> HIGHEST DEMAND CATALOG
-            </span>
-            <h2 className="text-xl font-bold text-gray-900 uppercase tracking-wide mt-1">Trending Styles</h2>
+            <span className="text-[10px] font-bold text-[#C9A227] tracking-widest uppercase">HIGH FASHION DEMAND</span>
+            <h2 className="text-2xl font-serif font-bold text-[#0B0B0B] uppercase tracking-wide mt-1">Metropolitan Essentials</h2>
           </div>
           <button
             onClick={() => handleBannerAction('')}
-            className="text-xs font-bold text-gray-600 hover:text-[#f97316] flex items-center gap-1 cursor-pointer"
+            className="text-xs font-semibold tracking-widest text-[#666666] hover:text-[#0B0B0B] uppercase flex items-center gap-1 cursor-pointer"
           >
-            Explore Catalog <ArrowRight size={12} />
+            Explore Catalog <ArrowRight size={13} />
           </button>
         </div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
           {trendingProducts.slice(0, 4).map((product) => (
             <ProductCard
               key={product.id}
@@ -336,28 +308,25 @@ export default function HomeView({
 
       {/* 6. VIP ACCESS NEWSLETTER */}
       <section id="vip-newsletter" className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center bg-slate-900 text-white border border-slate-800 py-12 px-6 rounded-xl shadow-lg relative overflow-hidden">
-          <div className="absolute -right-16 -bottom-16 text-white/[0.02] font-black text-9xl tracking-wider select-none pointer-events-none uppercase">
-            FAWN
-          </div>
-          <span className="text-[10px] font-bold tracking-wider text-[#f97316] uppercase">JOIN THE CLUB</span>
-          <h2 className="text-xl sm:text-2xl font-bold tracking-wide uppercase mt-1">SUBSCRIBE FOR EARLY OFFERS</h2>
-          <p className="text-xs text-gray-400 max-w-sm mx-auto mt-2 leading-relaxed">
-            Receive exclusive early-access discounts, launch notifications, and premium restock alerts before anyone else.
+        <div className="text-center bg-[#0B0B0B] text-white border border-[#C9A227]/30 py-14 px-8 shadow-2xl relative overflow-hidden">
+          <span className="text-[10px] font-bold tracking-widest text-[#C9A227] uppercase">PRIVATE ATELIER INVITATION</span>
+          <h2 className="text-2xl sm:text-3xl font-serif font-bold tracking-wide uppercase mt-2 text-white">SUBSCRIBE TO EXCLUSIVE DROPS</h2>
+          <p className="text-xs text-gray-300 max-w-md mx-auto mt-2 leading-relaxed font-light">
+            Receive private release access, seasonal lookbook previews, and priority restock notifications directly from our Pune design house.
           </p>
           
-          <form onSubmit={(e) => { e.preventDefault(); alert("Welcome to Blackfawn newsletter! Early access offers have been sent to your email."); }} className="flex flex-col sm:flex-row justify-center gap-2 mt-6 max-w-md mx-auto">
+          <form onSubmit={(e) => { e.preventDefault(); alert("You are now registered for BLACKFAWN private drop invitations."); }} className="flex flex-col sm:flex-row justify-center gap-3 mt-8 max-w-md mx-auto">
             <input
               type="email"
               required
-              placeholder="Enter your active email address"
-              className="bg-slate-800 border border-slate-700 text-white px-4 py-2.5 text-xs focus:ring-1 focus:ring-[#f97316] outline-none w-full text-center rounded-lg"
+              placeholder="Enter your email address"
+              className="bg-[#1A1A1A] border border-[#2A2A2A] text-white px-5 py-3 text-xs focus:border-[#C9A227] outline-none w-full text-center tracking-wider"
             />
             <button
               type="submit"
-              className="px-6 py-2.5 bg-[#f97316] text-white text-xs font-bold uppercase hover:bg-[#e0620d] transition-all cursor-pointer whitespace-nowrap rounded-lg shadow-md"
+              className="px-8 py-3 bg-[#0B0B0B] text-[#C9A227] border border-[#C9A227] hover:bg-[#C9A227] hover:text-[#0B0B0B] text-xs font-semibold tracking-widest uppercase transition-all cursor-pointer whitespace-nowrap"
             >
-              SUBSCRIBE
+              REGISTER
             </button>
           </form>
         </div>
@@ -365,3 +334,4 @@ export default function HomeView({
     </div>
   );
 }
+

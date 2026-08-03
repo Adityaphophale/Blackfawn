@@ -29,49 +29,55 @@ export default function AdminLogin({ onLogin }: AdminLoginProps) {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 flex flex-col justify-center items-center px-4 font-sans text-white">
-      <div className="w-full max-w-md bg-slate-900 border border-slate-800 p-8 rounded-2xl shadow-2xl space-y-6">
-        <div className="text-center space-y-2">
-          <div className="h-12 w-12 bg-orange-600/10 border border-orange-500/30 text-orange-500 rounded-full flex items-center justify-center mx-auto">
-            <Lock size={22} />
+    <div className="min-h-screen bg-[#0B0B0B] flex flex-col justify-center items-center px-4 font-sans text-white">
+      <div className="w-full max-w-md bg-[#1A1A1A] border border-[#2A2A2A] p-8 shadow-2xl space-y-6">
+        <div className="text-center space-y-3">
+          <div className="flex justify-center">
+            <img 
+              src="/logo.jpg" 
+              alt="BLACKFAWN Logo" 
+              className="h-16 w-16 object-contain rounded-full border border-[#C9A227] p-0.5 shadow-lg" 
+            />
           </div>
-          <h1 className="text-2xl font-black tracking-wider uppercase">BLACKFAWN ADMIN</h1>
-          <p className="text-xs text-gray-500 font-semibold uppercase tracking-wider">Enterprise System Access Portal</p>
+          <h1 className="text-2xl font-serif font-bold tracking-wider uppercase text-white">
+            BLACK<span className="text-[#C9A227] italic font-normal">FAWN</span> ATELIER
+          </h1>
+          <p className="text-[10px] text-[#C9A227] font-semibold uppercase tracking-widest">Enterprise Management Portal</p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-5">
           <div>
-            <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Administrative Email</label>
+            <label className="block text-[10px] font-semibold text-gray-400 uppercase tracking-widest mb-1.5">Administrative Email</label>
             <div className="relative">
-              <Mail className="absolute left-3.5 top-3 text-slate-500" size={16} />
+              <Mail className="absolute left-3.5 top-3 text-[#C9A227]" size={16} />
               <input
                 type="email"
                 required
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="admin@blackfawn.in"
-                className="w-full bg-slate-950 border border-slate-800 rounded-lg pl-10 pr-4 py-2.5 text-xs text-white focus:border-orange-500 outline-none"
+                className="w-full bg-[#0B0B0B] border border-[#2A2A2A] pl-10 pr-4 py-2.5 text-xs text-white focus:border-[#C9A227] outline-none"
               />
             </div>
           </div>
 
           <div>
-            <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-wider mb-1">Password Credentials</label>
+            <label className="block text-[10px] font-semibold text-gray-400 uppercase tracking-widest mb-1.5">Password Credentials</label>
             <div className="relative">
-              <Lock className="absolute left-3.5 top-3 text-slate-500" size={16} />
+              <Lock className="absolute left-3.5 top-3 text-[#C9A227]" size={16} />
               <input
                 type="password"
                 required
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
-                className="w-full bg-slate-950 border border-slate-800 rounded-lg pl-10 pr-4 py-2.5 text-xs text-white focus:border-orange-500 outline-none"
+                className="w-full bg-[#0B0B0B] border border-[#2A2A2A] pl-10 pr-4 py-2.5 text-xs text-white focus:border-[#C9A227] outline-none"
               />
             </div>
           </div>
 
           {error && (
-            <div className="bg-red-950/40 border border-red-900 text-red-400 p-3 rounded-lg text-[11px] font-semibold flex items-center gap-2">
+            <div className="bg-red-950/40 border border-red-900 text-red-400 p-3 text-[11px] font-semibold flex items-center gap-2">
               <ShieldAlert size={14} className="shrink-0" />
               <span>{error}</span>
             </div>
@@ -80,14 +86,15 @@ export default function AdminLogin({ onLogin }: AdminLoginProps) {
           <button
             type="submit"
             disabled={loading}
-            className={`w-full py-3 bg-orange-600 hover:bg-orange-700 text-white text-xs font-bold uppercase rounded-lg tracking-wider cursor-pointer shadow-lg transition-colors ${
+            className={`w-full py-3.5 bg-[#0B0B0B] text-white hover:text-[#C9A227] border border-[#C9A227] text-xs font-semibold uppercase tracking-widest cursor-pointer shadow-lg transition-all ${
               loading ? 'opacity-50' : ''
             }`}
           >
-            {loading ? 'AUTHENTICATING CONTROL LOG...' : 'REQUEST SYSTEM ENTRY'}
+            {loading ? 'AUTHENTICATING ATELIER PORTAL...' : 'ACCESS ATELIER CONTROL'}
           </button>
         </form>
       </div>
     </div>
   );
 }
+

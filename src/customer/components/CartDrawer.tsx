@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Trash2, Plus, Minus, ArrowRight, ShieldCheck, Ticket, AlertCircle, ShoppingBag } from 'lucide-react';
+import { X, Trash2, Plus, Minus, ArrowRight, ShieldCheck, ShoppingBag, AlertCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { CartItem, Coupon } from '../../shared/types';
 
@@ -31,7 +31,6 @@ export default function CartDrawer({
   const [couponSuccess, setCouponSuccess] = useState('');
 
   const subtotal = cart.reduce((total, item) => {
-    // Look up price from variant or product
     const price = item.product.variants?.find(v => v.size === item.size && v.color === item.color)?.salePrice 
                   || item.product.variants?.find(v => v.size === item.size && v.color === item.color)?.price 
                   || item.product.discountPrice 
@@ -39,7 +38,6 @@ export default function CartDrawer({
     return total + price * item.quantity;
   }, 0);
 
-  // Free shipping threshold (₹999)
   const shippingThreshold = 999;
   const isFreeShipping = subtotal >= shippingThreshold;
   const progressPercent = Math.min((subtotal / shippingThreshold) * 100, 100);
@@ -66,10 +64,10 @@ export default function CartDrawer({
 
     const result = await onApplyCoupon(couponCode.trim());
     if (result.success) {
-      setCouponSuccess(`Coupon code "${couponCode.toUpperCase()}" applied successfully.`);
+      setCouponSuccess(`Code "${couponCode.toUpperCase()}" applied successfully.`);
       setCouponCode('');
     } else {
-      setCouponError(result.error || 'Invalid or expired coupon.');
+      setCouponError(result.error || 'Invalid or expired promo code.');
     }
   };
 
@@ -77,76 +75,76 @@ export default function CartDrawer({
     <AnimatePresence>
       {isOpen && (
         <>
-          {/* Dark overlay backdrop */}
+          {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
-            animate={{ opacity: 0.5 }}
+            animate={{ opacity: 0.6 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="fixed inset-0 z-50 bg-black/40 backdrop-blur-xs"
+            className="fixed inset-0 z-50 bg-[#0B0B0B]/60 backdrop-blur-xs"
           />
 
-          {/* Sliding Cart Drawer Panel */}
+          {/* Sliding Cart Panel */}
           <motion.div
             initial={{ x: '100%' }}
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 220 }}
-            className="fixed right-0 top-0 bottom-0 z-50 w-full max-w-md bg-white border-l border-gray-250 shadow-2xl flex flex-col h-full text-black"
+            className="fixed right-0 top-0 bottom-0 z-50 w-full max-w-md bg-[#F8F7F2] border-l border-[#E8E5DD] shadow-2xl flex flex-col h-full text-[#111111]"
           >
             {/* Header */}
-            <div className="p-5 border-b border-gray-200 bg-gray-50 flex justify-between items-center">
-              <div className="flex items-center gap-2.5">
-                <ShoppingBag size={18} className="text-gray-900" />
+            <div className="p-6 border-b border-[#E8E5DD] bg-[#FFFFFF] flex justify-between items-center">
+              <div className="flex items-center gap-3">
+                <ShoppingBag size={18} className="text-[#C9A227]" />
                 <div>
-                  <h2 className="text-xs font-bold tracking-wider text-gray-900 uppercase">SHOPPING BAG</h2>
-                  <p className="text-[10px] text-gray-500 font-semibold uppercase">
-                    {cart.length} item{cart.length === 1 ? '' : 's'} added
+                  <h2 className="text-xs font-serif font-bold tracking-widest text-[#0B0B0B] uppercase">SHOPPING BAG</h2>
+                  <p className="text-[10px] text-[#666666] uppercase font-medium">
+                    {cart.length} garment{cart.length === 1 ? '' : 's'}
                   </p>
                 </div>
               </div>
               <button
                 onClick={onClose}
-                className="p-1 text-gray-400 hover:text-black transition-colors rounded-full hover:bg-gray-100 cursor-pointer"
-                aria-label="Close cart"
+                className="p-1 text-gray-400 hover:text-[#0B0B0B] transition-colors cursor-pointer"
+                aria-label="Close bag"
               >
                 <X size={20} />
               </button>
             </div>
 
-            {/* Free Shipping Progress Indicator */}
+            {/* Free Shipping Progress */}
             {subtotal > 0 && (
-              <div className="bg-orange-50 border-b border-orange-100 px-5 py-3">
-                <div className="flex justify-between items-center text-[10px] font-bold text-gray-800 uppercase tracking-wide">
+              <div className="bg-[#F3F1EB] border-b border-[#E8E5DD] px-6 py-3.5">
+                <div className="flex justify-between items-center text-[10px] font-semibold text-[#0B0B0B] uppercase tracking-wider">
                   {isFreeShipping ? (
-                    <span className="text-emerald-700">🎉 Congratulations! You have unlocked Free Express Shipping!</span>
+                    <span className="text-[#C9A227]">Unlocked Complimentary Air Delivery</span>
                   ) : (
-                    <span>Add <span className="text-[#f97316]">₹{remainingForFree}</span> more for FREE EXPRESS SHIPPING</span>
+                    <span>Add <span className="text-[#C9A227] font-bold">₹{remainingForFree}</span> more for free priority shipping</span>
                   )}
                 </div>
-                <div className="w-full bg-gray-200 h-1.5 rounded-full mt-2 overflow-hidden">
+                <div className="w-full bg-[#E8E5DD] h-1.5 mt-2 overflow-hidden">
                   <div 
-                    className="h-full bg-[#f97316] transition-all duration-500 rounded-full" 
+                    className="h-full bg-[#C9A227] transition-all duration-500" 
                     style={{ width: `${progressPercent}%` }}
                   />
                 </div>
               </div>
             )}
 
-            {/* Cart Items List */}
-            <div className="flex-1 overflow-y-auto p-5 space-y-4">
+            {/* Cart List */}
+            <div className="flex-1 overflow-y-auto p-6 space-y-4">
               {cart.length === 0 ? (
-                <div className="h-full flex flex-col items-center justify-center text-center space-y-3.5">
-                  <ShoppingBag size={48} className="text-gray-300" />
-                  <p className="text-sm font-bold text-gray-900 uppercase tracking-wide">Your shopping bag is empty</p>
-                  <p className="text-xs text-gray-500 max-w-xs leading-relaxed">
-                    Explore our curated fashion collection and add items to your cart to checkout.
+                <div className="h-full flex flex-col items-center justify-center text-center space-y-4">
+                  <ShoppingBag size={44} className="text-gray-300" />
+                  <p className="text-sm font-serif font-bold text-[#0B0B0B] uppercase tracking-wider">Your shopping bag is empty</p>
+                  <p className="text-xs text-[#666666] max-w-xs leading-relaxed font-light">
+                    Explore our high-fashion drops and select garments to build your order.
                   </p>
                   <button
                     onClick={onClose}
-                    className="px-6 py-2.5 bg-[#f97316] text-white text-xs font-bold uppercase rounded-lg hover:bg-[#e0620d] transition-colors cursor-pointer"
+                    className="px-6 py-3 bg-[#0B0B0B] text-white hover:text-[#C9A227] border border-[#0B0B0B] hover:border-[#C9A227] text-xs font-semibold tracking-widest uppercase transition-all cursor-pointer"
                   >
-                    Continue Shopping
+                    Explore Drops
                   </button>
                 </div>
               ) : (
@@ -157,50 +155,50 @@ export default function CartDrawer({
                   const itemImage = variant?.images?.[0] || item.product.images?.[0];
 
                   return (
-                    <div key={item.id} className="flex gap-4 p-3 bg-gray-50 rounded-xl border border-gray-100 hover:border-gray-200 transition-colors">
+                    <div key={item.id} className="flex gap-4 p-4 bg-[#FFFFFF] border border-[#E8E5DD]">
                       <img
                         src={itemImage}
                         alt={item.product.name}
-                        className="w-16 h-20 object-cover rounded-md border border-gray-200"
+                        className="w-16 h-20 object-cover border border-[#E8E5DD]"
                         referrerPolicy="no-referrer"
                       />
                       <div className="flex-1 flex flex-col justify-between">
                         <div>
                           <div className="flex justify-between items-start gap-2">
-                            <h3 className="text-xs font-bold text-gray-900 line-clamp-1 capitalize">{item.product.name}</h3>
+                            <h3 className="text-xs font-serif font-bold text-[#0B0B0B] line-clamp-1 uppercase">{item.product.name}</h3>
                             <button
                               onClick={() => onRemoveItem(item.id)}
-                              className="text-gray-400 hover:text-red-500 cursor-pointer"
+                              className="text-gray-400 hover:text-[#C9A227] cursor-pointer"
                               title="Delete Item"
                             >
                               <Trash2 size={13} />
                             </button>
                           </div>
-                          <p className="text-[10px] text-gray-500 font-semibold uppercase mt-0.5">
+                          <p className="text-[10px] text-[#666666] uppercase mt-0.5 font-medium">
                             Size: {item.size} • Color: {item.color}
                           </p>
-                          <div className="flex items-baseline gap-1.5 mt-1">
-                            <span className="text-xs font-bold text-gray-900">₹{price}</span>
+                          <div className="flex items-baseline gap-2 mt-1.5">
+                            <span className="text-xs font-semibold text-[#0B0B0B]">₹{price}</span>
                             {originalPrice && (
                               <span className="text-[10px] text-gray-400 line-through">₹{originalPrice}</span>
                             )}
                           </div>
                         </div>
 
-                        <div className="flex items-center justify-between mt-2 pt-2 border-t border-gray-200/50">
-                          <span className="text-[9px] font-bold text-gray-400 uppercase tracking-wider">Quantity</span>
-                          <div className="flex items-center border border-gray-250 rounded-lg overflow-hidden bg-white">
+                        <div className="flex items-center justify-between mt-3 pt-2 border-t border-[#E8E5DD]">
+                          <span className="text-[9px] font-semibold text-[#666666] uppercase tracking-wider">Quantity</span>
+                          <div className="flex items-center border border-[#E8E5DD] bg-[#F8F7F2]">
                             <button
                               onClick={() => onUpdateQty(item.id, -1)}
-                              className="p-1 text-gray-500 hover:bg-gray-100 cursor-pointer"
+                              className="px-2 py-0.5 text-gray-600 hover:text-[#0B0B0B] cursor-pointer"
                               disabled={item.quantity <= 1}
                             >
                               <Minus size={10} />
                             </button>
-                            <span className="px-2.5 text-xs font-bold text-gray-800">{item.quantity}</span>
+                            <span className="px-2 text-xs font-semibold text-[#0B0B0B]">{item.quantity}</span>
                             <button
                               onClick={() => onUpdateQty(item.id, 1)}
-                              className="p-1 text-gray-500 hover:bg-gray-100 cursor-pointer"
+                              className="px-2 py-0.5 text-gray-600 hover:text-[#0B0B0B] cursor-pointer"
                             >
                               <Plus size={10} />
                             </button>
@@ -215,7 +213,7 @@ export default function CartDrawer({
 
             {/* Footer Summary & Checkout */}
             {cart.length > 0 && (
-              <div className="p-5 border-t border-gray-200 bg-gray-50 space-y-4">
+              <div className="p-6 border-t border-[#E8E5DD] bg-[#FFFFFF] space-y-4">
                 {/* Coupon Form */}
                 {!couponApplied ? (
                   <form onSubmit={handleApplyCouponSubmit} className="flex gap-2">
@@ -224,66 +222,66 @@ export default function CartDrawer({
                       value={couponCode}
                       onChange={(e) => setCouponCode(e.target.value)}
                       placeholder="ENTER PROMO CODE"
-                      className="flex-1 bg-white border border-gray-350 px-3 py-2 text-xs focus:ring-1 focus:ring-[#f97316] outline-none rounded-lg uppercase font-mono tracking-wide"
+                      className="flex-1 bg-[#F8F7F2] border border-[#E8E5DD] px-3 py-2 text-xs focus:border-[#C9A227] outline-none font-mono uppercase tracking-wider"
                     />
                     <button
                       type="submit"
-                      className="px-4 py-2 bg-[#131921] hover:bg-slate-800 text-white text-xs font-bold rounded-lg cursor-pointer transition-colors shrink-0"
+                      className="px-4 py-2 bg-[#0B0B0B] text-white hover:text-[#C9A227] text-xs font-semibold tracking-wider uppercase cursor-pointer border border-[#0B0B0B]"
                     >
                       APPLY
                     </button>
                   </form>
                 ) : (
-                  <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-2.5 flex justify-between items-center text-xs">
+                  <div className="bg-[#F3F1EB] border border-[#C9A227]/40 p-2.5 flex justify-between items-center text-xs">
                     <div>
-                      <span className="font-bold text-emerald-800 uppercase tracking-wider">{couponApplied.code}</span>
-                      <span className="text-emerald-700 font-semibold ml-1.5">applied ({couponApplied.description})</span>
+                      <span className="font-semibold text-[#0B0B0B] uppercase tracking-wider">{couponApplied.code}</span>
+                      <span className="text-[#C9A227] font-medium ml-1.5">applied ({couponApplied.description})</span>
                     </div>
                     <button
                       onClick={onRemoveCoupon}
-                      className="text-red-500 hover:text-red-700 text-[10px] font-bold tracking-wider uppercase cursor-pointer"
+                      className="text-red-500 hover:underline text-[10px] font-bold tracking-wider uppercase cursor-pointer"
                     >
                       Remove
                     </button>
                   </div>
                 )}
                 {couponError && <p className="text-[10px] text-red-600 font-bold uppercase flex items-center gap-1"><AlertCircle size={10} /> {couponError}</p>}
-                {couponSuccess && <p className="text-[10px] text-emerald-600 font-bold uppercase">{couponSuccess}</p>}
+                {couponSuccess && <p className="text-[10px] text-[#C9A227] font-bold uppercase">{couponSuccess}</p>}
 
                 {/* Subtotals */}
-                <div className="space-y-2 border-t border-b border-gray-200 py-3.5 text-xs text-gray-600">
+                <div className="space-y-2.5 border-t border-b border-[#E8E5DD] py-4 text-xs text-[#666666]">
                   <div className="flex justify-between">
                     <span>Bag Subtotal</span>
-                    <span className="font-bold text-gray-900">₹{subtotal}</span>
+                    <span className="font-semibold text-[#0B0B0B]">₹{subtotal}</span>
                   </div>
                   {discount > 0 && (
-                    <div className="flex justify-between text-emerald-700">
-                      <span>Promo Discount</span>
-                      <span className="font-bold">-₹{discount}</span>
+                    <div className="flex justify-between text-[#C9A227]">
+                      <span>Privilege Discount</span>
+                      <span className="font-semibold">-₹{discount}</span>
                     </div>
                   )}
                   <div className="flex justify-between">
                     <span>Shipping Fee</span>
-                    <span className="font-bold text-gray-900">
-                      {shippingFee === 0 ? <span className="text-emerald-700 uppercase font-black">FREE</span> : `₹${shippingFee}`}
+                    <span className="font-semibold text-[#0B0B0B]">
+                      {shippingFee === 0 ? <span className="text-[#C9A227] font-bold uppercase">COMPLIMENTARY</span> : `₹${shippingFee}`}
                     </span>
                   </div>
-                  <div className="flex justify-between text-sm font-black text-gray-900 border-t border-dashed border-gray-200 pt-3">
-                    <span>Order Total</span>
-                    <span className="text-base text-[#f97316]">₹{finalTotal}</span>
+                  <div className="flex justify-between text-sm font-bold text-[#0B0B0B] border-t border-[#E8E5DD] pt-3">
+                    <span className="font-serif uppercase">Total Due</span>
+                    <span className="text-base text-[#0B0B0B]">₹{finalTotal}</span>
                   </div>
                 </div>
 
                 <button
                   onClick={onCheckout}
-                  className="w-full py-3 bg-[#f97316] hover:bg-[#e0620d] text-white text-xs font-black tracking-wider uppercase rounded-lg transition-colors flex items-center justify-center gap-2 cursor-pointer shadow-md"
+                  className="w-full py-3.5 bg-[#0B0B0B] text-white hover:text-[#C9A227] border border-[#0B0B0B] hover:border-[#C9A227] text-xs font-semibold tracking-widest uppercase transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md"
                 >
-                  SECURE CHECKOUT <ArrowRight size={13} />
+                  PROCEED TO CHECKOUT <ArrowRight size={14} className="text-[#C9A227]" />
                 </button>
                 
-                <div className="flex items-center justify-center gap-1.5 text-[9px] text-gray-400 font-bold uppercase tracking-wider">
-                  <ShieldCheck size={11} className="text-emerald-600" />
-                  <span>256-bit SSL Encrypted Transaction Gateway</span>
+                <div className="flex items-center justify-center gap-2 text-[9px] text-gray-400 uppercase tracking-widest">
+                  <ShieldCheck size={12} className="text-[#C9A227]" />
+                  <span>256-bit Encrypted SSL Concierge Checkout</span>
                 </div>
               </div>
             )}
@@ -293,3 +291,4 @@ export default function CartDrawer({
     </AnimatePresence>
   );
 }
+

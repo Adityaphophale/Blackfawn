@@ -758,6 +758,29 @@ app.post("/api/admin/categories", adminMiddleware, (req: Request, res: Response)
   res.status(201).json({ success: true, category: newCat });
 });
 
+app.put("/api/admin/categories/:id", adminMiddleware, (req: Request, res: Response) => {
+  const store = loadStore();
+  const idx = store.categories.findIndex((c: any) => c.id === req.params.id);
+  if (idx === -1) return res.status(404).json({ success: false, error: "Category not found" });
+  store.categories[idx] = {
+    ...store.categories[idx],
+    ...req.body,
+    slug: (req.body.name || store.categories[idx].name || "").toLowerCase().replace(/ /g, "-"),
+    updatedAt: new Date().toISOString(),
+  };
+  saveStore(store);
+  res.json({ success: true, category: store.categories[idx] });
+});
+
+app.delete("/api/admin/categories/:id", adminMiddleware, (req: Request, res: Response) => {
+  const store = loadStore();
+  const idx = store.categories.findIndex((c: any) => c.id === req.params.id);
+  if (idx === -1) return res.status(404).json({ success: false, error: "Category not found" });
+  store.categories.splice(idx, 1);
+  saveStore(store);
+  res.json({ success: true });
+});
+
 app.post("/api/admin/collections", adminMiddleware, (req: Request, res: Response) => {
   const store = loadStore();
   const newColl = {

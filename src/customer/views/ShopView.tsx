@@ -150,7 +150,7 @@ export default function ShopView({
           </h1>
           {searchQuery && (
             <p className="text-xs text-gray-500 font-medium mt-1.5 flex items-center gap-1">
-              <Sparkles size={12} className="text-[#f97316]" /> Search results for: <span className="text-gray-900 font-bold">"{searchQuery}"</span> ({filteredProducts.length} items)
+              <Sparkles size={12} className="text-[#C9A227]" /> Search results for: <span className="text-[#0B0B0B] font-bold">"{searchQuery}"</span> ({filteredProducts.length} items)
             </p>
           )}
         </div>

@@ -453,11 +453,11 @@ export default function CheckoutView({
               <button
                 onClick={handlePlaceOrderSubmit}
                 disabled={loading || (paymentMethod === 'upi' && !upiVerified) || (paymentMethod === 'stripe' && (!cardNumber || !cardCvv))}
-                className={`w-full py-3.5 bg-[#f97316] hover:bg-[#e0620d] text-white text-xs font-black tracking-wider uppercase rounded-lg flex items-center justify-center gap-2 cursor-pointer shadow-sm transition-all ${
+                className={`w-full py-4 bg-[#0B0B0B] text-white hover:text-[#C9A227] border border-[#0B0B0B] hover:border-[#C9A227] text-xs font-semibold tracking-widest uppercase flex items-center justify-center gap-2 cursor-pointer shadow-md transition-all ${
                   loading ? 'opacity-50 cursor-not-allowed' : ''
                 }`}
               >
-                {loading ? 'PROCESSING SECURE ORDER...' : 'PLACE SECURE ORDER'}
+                {loading ? 'PROCESSING ATELIER ORDER...' : 'CONFIRM SECURE ORDER'}
               </button>
 
               <div className="flex items-center justify-center gap-1.5 text-[9px] text-gray-400 font-bold uppercase tracking-wider pt-2 border-t border-gray-100">

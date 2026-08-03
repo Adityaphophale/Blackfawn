@@ -193,7 +193,7 @@ export default function ProfileView({
 
             <button
               type="submit"
-              className="w-full py-3 bg-[#f97316] hover:bg-[#e0620d] text-white text-xs font-black tracking-wider uppercase rounded-lg transition-colors cursor-pointer"
+              className="w-full py-3.5 bg-[#0B0B0B] text-white hover:text-[#C9A227] border border-[#0B0B0B] hover:border-[#C9A227] text-xs font-semibold tracking-widest uppercase transition-all cursor-pointer shadow-md"
             >
               {isRegisterMode ? 'REGISTER NOW' : 'AUTHENTICATE'}
             </button>

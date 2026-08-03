@@ -1,86 +1,122 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,600&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-display: "Plus Jakarta Sans", sans-serif;
-  --font-mono: "Plus Jakarta Sans", monospace;
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
   
-  --color-brand-primary: #131921; /* Amazon-like slate */
-  --color-brand-background: #f1f5f9; /* Slate 100 base */
-  --color-brand-accent: #f97316; /* Vibrant orange accent */
-  --color-brand-success: #15803d; /* Safe green */
-  --color-brand-error: #b91c1c; /* Safe red */
-  --color-brand-highlight: #ffffff; /* Card/Container white */
-  --color-brand-hover: #1f2937; /* Gray 800 */
+  --color-brand-bg: #F8F7F2;
+  --color-brand-black: #0B0B0B;
+  --color-brand-black-sec: #1A1A1A;
+  --color-brand-gold: #C9A227;
+  --color-brand-gold-hover: #D4AF37;
+  --color-brand-text: #111111;
+  --color-brand-muted: #666666;
+  --color-brand-border: #E8E5DD;
+  --color-brand-card: #FFFFFF;
+  --color-brand-section: #F3F1EB;
 }
 
-/* Custom premium scrollbar */
+/* Custom luxury scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: #F8F7F2;
 }
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: #C9A227;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: #D4AF37;
 }
 
 body {
-  background-color: #f1f5f9;
-  color: #1e293b;
+  background-color: #F8F7F2;
+  color: #111111;
   font-family: var(--font-sans);
   overflow-x: hidden;
+  letter-spacing: 0.01em;
 }
 
-.font-display {
-  font-family: var(--font-display);
+h1, h2, h3, h4, .font-serif {
+  font-family: var(--font-serif);
 }
 
-/* Modern Card Shadows and Panels */
-.glass-panel {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 8px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+/* Luxury Utility Classes */
+.bg-brand-bg { background-color: #F8F7F2; }
+.bg-brand-section { background-color: #F3F1EB; }
+.bg-brand-black { background-color: #0B0B0B; }
+.bg-brand-black-sec { background-color: #1A1A1A; }
+.text-brand-gold { color: #C9A227; }
+.text-brand-gold-hover:hover { color: #D4AF37; }
+.border-brand-border { border-color: #E8E5DD; }
+.border-brand-gold { border-color: #C9A227; }
+
+/* Buttons */
+.btn-primary {
+  background-color: #0B0B0B;
+  color: #FFFFFF;
+  border: 1px solid #0B0B0B;
+  transition: all 0.3s ease;
+}
+.btn-primary:hover {
+  border-color: #C9A227;
+  color: #FFFFFF;
+  box-shadow: 0 4px 15px rgba(201, 162, 39, 0.15);
 }
 
-.glass-panel-heavy {
-  background: #131921;
-  border: 1px solid #374151;
-  color: #ffffff;
-  border-radius: 8px;
+.btn-secondary {
+  background-color: #FFFFFF;
+  color: #0B0B0B;
+  border: 1px solid #0B0B0B;
+  transition: all 0.3s ease;
+}
+.btn-secondary:hover {
+  border-color: #C9A227;
+  color: #C9A227;
+  background-color: #F8F7F2;
+}
+
+/* Luxury card container */
+.luxury-card {
+  background-color: #FFFFFF;
+  border: 1px solid #E8E5DD;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.luxury-card:hover {
+  border-color: #C9A227;
+  box-shadow: 0 10px 25px -5px rgba(11, 11, 11, 0.05), 0 8px 10px -6px rgba(201, 162, 39, 0.05);
 }
 
 /* Shimmer skeleton animation */
 @keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
 }
 
 .shimmer {
-  background: linear-gradient(90deg, #f1f5f9 25%, #e2e8f0 50%, #f1f5f9 75%);
+  background: linear-gradient(90deg, #F8F7F2 25%, #E8E5DD 50%, #F8F7F2 75%);
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
 }
 
-/* Toast slide-down animation */
-@keyframes slideDown {
-  0% {
-    opacity: 0;
-    transform: translate(-50%, -20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translate(-50%, 0);
-  }
+/* Luxury links with gold hover underline */
+.hover-gold-underline {
+  position: relative;
+}
+.hover-gold-underline::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1.5px;
+  bottom: -2px;
+  left: 0;
+  background-color: #C9A227;
+  transition: width 0.3s ease;
+}
+.hover-gold-underline:hover::after {
+  width: 100%;
 }

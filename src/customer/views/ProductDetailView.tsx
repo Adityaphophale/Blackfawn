@@ -367,17 +367,17 @@ export default function ProductDetailView({
           <div className="flex gap-4 pt-6">
             <button
               onClick={() => onAddToCart(product, selectedSize, selectedColor)}
-              className="flex-1 py-3.5 bg-white border border-[#f97316] text-[#f97316] text-xs font-bold rounded-lg hover:bg-orange-50 transition-all flex items-center justify-center gap-2 cursor-pointer uppercase tracking-wider"
+              className="flex-1 py-4 bg-[#FFFFFF] border border-[#0B0B0B] text-[#0B0B0B] hover:text-[#C9A227] hover:border-[#C9A227] text-xs font-semibold uppercase tracking-widest transition-all flex items-center justify-center gap-2 cursor-pointer"
               disabled={stock === 0}
             >
-              <ShoppingBag size={14} /> Add to Cart
+              <ShoppingBag size={14} className="text-[#C9A227]" /> Add to Bag
             </button>
             <button
               onClick={() => onBuyNow(product, selectedSize, selectedColor)}
-              className="flex-1 py-3.5 bg-[#f97316] hover:bg-[#e0620d] text-white text-xs font-black rounded-lg transition-all flex items-center justify-center gap-2 cursor-pointer uppercase tracking-wider shadow-md"
+              className="flex-1 py-4 bg-[#0B0B0B] text-white hover:text-[#C9A227] border border-[#0B0B0B] hover:border-[#C9A227] text-xs font-semibold uppercase tracking-widest transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md"
               disabled={stock === 0}
             >
-              Buy It Now <ArrowRight size={14} />
+              Express Buy <ArrowRight size={14} className="text-[#C9A227]" />
             </button>
           </div>
         </div>
