@@ -4,6 +4,7 @@ import { Bold, Italic, Underline, List, ListOrdered, Heading1, Heading2, Link, A
 interface RichTextEditorProps {
   value: string;
   onChange: (value: string) => void;
+  placeholder?: string;
 }
 
 export default function RichTextEditor({ value, onChange }: RichTextEditorProps) {

@@ -160,7 +160,7 @@ export default function ProductCard({
           src={images[0]}
           alt={product.name}
           loading="lazy"
-          className={`absolute inset-0 h-full w-full object-cover object-top transition-all duration-700 ease-out ${
+          className={`absolute inset-0 h-full w-full object-cover object-center transition-all duration-700 ease-out ${
             hovered && images[1] ? 'scale-105 opacity-0' : 'scale-100 opacity-100'
           }`}
           referrerPolicy="no-referrer"
@@ -170,7 +170,7 @@ export default function ProductCard({
             src={images[1]}
             alt={`${product.name} Alternate`}
             loading="lazy"
-            className={`absolute inset-0 h-full w-full object-cover object-top transition-all duration-700 ease-out ${
+            className={`absolute inset-0 h-full w-full object-cover object-center transition-all duration-700 ease-out ${
               hovered ? 'scale-100 opacity-100' : 'scale-95 opacity-0'
             }`}
             referrerPolicy="no-referrer"

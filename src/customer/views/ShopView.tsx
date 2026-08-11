@@ -80,11 +80,17 @@ export default function ShopView({
     return products
       .filter((p) => {
         if (searchQuery) {
-          const query = searchQuery.toLowerCase();
-          const matchesName = p.name.toLowerCase().includes(query);
-          const matchesDesc = (p.description || "").toLowerCase().includes(query);
-          const matchesCat = p.category.toLowerCase().includes(query);
-          if (!matchesName && !matchesDesc && !matchesCat) return false;
+          if (searchQuery.startsWith('coll:')) {
+            const collTarget = searchQuery.replace('coll:', '').toLowerCase();
+            if ((p.collection || '').toLowerCase() !== collTarget) return false;
+          } else {
+            const query = searchQuery.toLowerCase();
+            const matchesName = p.name.toLowerCase().includes(query);
+            const matchesDesc = (p.description || "").toLowerCase().includes(query);
+            const matchesCat = p.category.toLowerCase().includes(query);
+            const matchesColl = (p.collection || "").toLowerCase().includes(query);
+            if (!matchesName && !matchesDesc && !matchesCat && !matchesColl) return false;
+          }
         }
 
         if (categoryFilter && p.category.toLowerCase() !== categoryFilter.toLowerCase()) {
@@ -184,6 +190,37 @@ export default function ShopView({
           </button>
         </div>
       </div>
+
+      {/* Hamper Collections Sub-Filter Bar */}
+      {categoryFilter === 'Hampers & Gifting' && (
+        <div className="bg-[#FFFFFF] p-4 rounded-xl border border-[#E8E5DD] shadow-xs mb-6 space-y-2">
+          <span className="text-[10px] font-bold text-[#C9A227] tracking-widest uppercase">HAMPER COLLECTIONS</span>
+          <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+            {['All Hampers', 'Premium Gift Hampers', 'Personalized Hampers', 'Corporate Hampers', 'Festival Hampers', 'Couple Hampers', 'Kids Hampers'].map((collName) => {
+              const isSelected = collName === 'All Hampers' ? !searchQuery.startsWith('coll:') : searchQuery === `coll:${collName}`;
+              return (
+                <button
+                  key={collName}
+                  onClick={() => {
+                    if (collName === 'All Hampers') {
+                      setSearchQuery('');
+                    } else {
+                      setSearchQuery(`coll:${collName}`);
+                    }
+                  }}
+                  className={`px-3.5 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider whitespace-nowrap cursor-pointer transition-all ${
+                    isSelected 
+                      ? 'bg-[#0B0B0B] text-[#C9A227] border border-[#C9A227] shadow-xs' 
+                      : 'bg-[#F8F7F2] text-[#666666] border border-[#E8E5DD] hover:border-[#0B0B0B] hover:text-[#0B0B0B]'
+                  }`}
+                >
+                  {collName}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      )}
 
       <div className="flex flex-col lg:flex-row gap-6">
         

@@ -132,24 +132,29 @@ function loadStore(): DbStore {
       if (!store.products || store.products.length === 0) {
         store.products = seedProducts();
       }
-      if (!store.categories) {
-        store.categories = seedCategories();
+      // Ensure Hampers & Gifting category exists in loaded store
+      if (store.categories && !store.categories.some((c: any) => c.name === 'Hampers & Gifting')) {
+        store.categories.push({ id: "cat-6", name: "Hampers & Gifting", description: "Curated luxury gift hampers and artisanal boxes", slug: "Hampers & Gifting" });
       }
-      if (!store.collections) {
-        store.collections = seedCollections();
+      // Ensure hamper collections exist
+      if (store.collections) {
+        const defaultColls = seedCollections();
+        defaultColls.forEach(c => {
+          if (!store.collections.some((sc: any) => sc.name === c.name)) {
+            store.collections.push(c);
+          }
+        });
       }
-      if (!store.coupons) {
-        store.coupons = seedCoupons();
+      // Ensure seed hamper products exist in store.products
+      if (store.products) {
+        const seedProds = seedProducts();
+        seedProds.forEach(sp => {
+          if (sp.category === 'Hampers & Gifting' && !store.products.some((p: any) => p.id === sp.id)) {
+            store.products.push(sp);
+          }
+        });
       }
-      if (!store.blogs) {
-        store.blogs = BLOGS as any[];
-      }
-      if (!store.returnRequests) {
-        store.returnRequests = [];
-      }
-      if (!store.giftCards) {
-        store.giftCards = [];
-      }
+      saveStore(store);
       return store;
     }
   } catch (err) {
@@ -618,6 +623,7 @@ function seedCategories(): Category[] {
     { id: "cat-3", name: "Socks", slug: "Socks", description: "Crew, ankle and athletic sports socks" },
     { id: "cat-4", name: "Hand Napkins", description: " absorbent pocket hand napkins", slug: "Hand Napkins" },
     { id: "cat-5", name: "Towels", description: "Bath, face, hand and beach towels", slug: "Towels" },
+    { id: "cat-6", name: "Hampers & Gifting", description: "Curated luxury gift hampers and artisanal boxes", slug: "Hampers & Gifting" },
   ];
 }
 
@@ -626,6 +632,12 @@ function seedCollections(): Collection[] {
     { id: "coll-1", name: "Core Collection", slug: "core-collection" },
     { id: "coll-2", name: "Home Utilities", slug: "home-utilities" },
     { id: "coll-3", name: "Utility Gear", slug: "utility-gear" },
+    { id: "coll-4", name: "Premium Gift Hampers", slug: "Premium Gift Hampers" },
+    { id: "coll-5", name: "Personalized Hampers", slug: "Personalized Hampers" },
+    { id: "coll-6", name: "Corporate Hampers", slug: "Corporate Hampers" },
+    { id: "coll-7", name: "Festival Hampers", slug: "Festival Hampers" },
+    { id: "coll-8", name: "Couple Hampers", slug: "Couple Hampers" },
+    { id: "coll-9", name: "Kids Hampers", slug: "Kids Hampers" },
   ];
 }
 

@@ -168,7 +168,7 @@ export default function ProductDetailView({
             <img
               src={images[activeImgIdx]}
               alt={product.name}
-              className="w-full h-full object-cover object-top"
+              className="w-full h-full object-cover object-center"
               referrerPolicy="no-referrer"
             />
           </div>
@@ -183,7 +183,7 @@ export default function ProductDetailView({
                   activeImgIdx === idx ? 'border-[#f97316] scale-102 shadow-xs' : 'border-transparent opacity-50 hover:opacity-100'
                 }`}
               >
-                <img src={img} alt="" className="w-full h-full object-cover object-top" referrerPolicy="no-referrer" />
+                <img src={img} alt="" className="w-full h-full object-cover object-center" referrerPolicy="no-referrer" />
               </button>
             ))}
           </div>
@@ -307,37 +307,62 @@ export default function ProductDetailView({
               </div>
             </div>
 
-            {/* Size Advisor Tool */}
-            <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 space-y-3.5">
-              <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1">
-                <Sparkles size={11} className="text-[#f97316]" /> Interactive Size Advisor
-              </span>
-              <div className="grid grid-cols-2 gap-3 text-xs">
-                <div>
-                  <label className="block text-gray-500 font-semibold mb-1">Your Height</label>
-                  <input
-                    type="text"
-                    value={advisorHeight}
-                    onChange={(e) => setAdvisorHeight(e.target.value)}
-                    className="w-full bg-white border border-gray-300 rounded px-2.5 py-1 text-gray-700"
+            {/* Gift Message & Customization for Hampers */}
+            {product.category === 'Hampers & Gifting' ? (
+              <div className="bg-[#F8F7F2] border border-[#E8E5DD] rounded-lg p-4 space-y-3">
+                <span className="text-[10px] font-bold text-[#C9A227] uppercase tracking-wider flex items-center gap-1">
+                  <Sparkles size={12} className="text-[#C9A227]" /> Complimentary Gift Messaging & Customization
+                </span>
+                <div className="space-y-2">
+                  <label className="block text-[11px] text-[#111111] font-semibold">Personalized Gift Card Message</label>
+                  <textarea
+                    rows={2}
+                    placeholder="Enter your personal gift message to be printed on a gold-embossed card..."
+                    className="w-full bg-white border border-[#E8E5DD] rounded p-2 text-xs text-[#111111] outline-none focus:border-[#C9A227]"
                   />
                 </div>
-                <div>
-                  <label className="block text-gray-500 font-semibold mb-1">Your Weight</label>
+                <div className="space-y-2">
+                  <label className="block text-[11px] text-[#111111] font-semibold">Custom Monogram / Name Engraving (Optional)</label>
                   <input
                     type="text"
-                    value={advisorWeight}
-                    onChange={(e) => setAdvisorWeight(e.target.value)}
-                    className="w-full bg-white border border-gray-300 rounded px-2.5 py-1 text-gray-700"
+                    placeholder="e.g. Initials 'A.K.' or Name for engraving"
+                    className="w-full bg-white border border-[#E8E5DD] rounded px-3 py-1.5 text-xs text-[#111111] outline-none focus:border-[#C9A227]"
                   />
                 </div>
               </div>
-              {advisorResult && (
-                <p className="text-[10.5px] text-emerald-800 font-bold bg-emerald-50 p-2 rounded border border-emerald-100 flex items-center gap-1">
-                  <CheckCircle size={12} /> {advisorResult}
-                </p>
-              )}
-            </div>
+            ) : (
+              /* Size Advisor Tool for Apparel */
+              <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 space-y-3.5">
+                <span className="text-[10px] font-bold text-gray-400 uppercase tracking-wider flex items-center gap-1">
+                  <Sparkles size={11} className="text-[#C9A227]" /> Interactive Size Advisor
+                </span>
+                <div className="grid grid-cols-2 gap-3 text-xs">
+                  <div>
+                    <label className="block text-gray-500 font-semibold mb-1">Your Height</label>
+                    <input
+                      type="text"
+                      value={advisorHeight}
+                      onChange={(e) => setAdvisorHeight(e.target.value)}
+                      className="w-full bg-white border border-gray-300 rounded px-2.5 py-1 text-gray-700"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-gray-500 font-semibold mb-1">Your Weight</label>
+                    <input
+                      type="text"
+                      value={advisorWeight}
+                      onChange={(e) => setAdvisorWeight(e.target.value)}
+                      className="w-full bg-white border border-gray-300 rounded px-2.5 py-1 text-gray-700"
+                    />
+                  </div>
+                </div>
+                {advisorResult && (
+                  <p className="text-[10.5px] text-emerald-800 font-bold bg-emerald-50 p-2 rounded border border-emerald-100 flex items-center gap-1">
+                    <CheckCircle size={12} /> {advisorResult}
+                  </p>
+                )}
+              </div>
+            )}
 
             {/* Check Pincode */}
             <div className="space-y-2 border-t border-gray-100 pt-4">

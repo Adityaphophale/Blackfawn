@@ -304,7 +304,11 @@ export default function Header({
               <button
                 key={idx}
                 onClick={() => handleCategoryClick(cat.value)}
-                className="text-[#666666] hover:text-[#0B0B0B] hover-gold-underline cursor-pointer font-medium"
+                className={`cursor-pointer font-medium hover-gold-underline ${
+                  cat.label === 'Hampers & Gifting' 
+                    ? 'text-[#C9A227] font-semibold flex items-center gap-1.5' 
+                    : 'text-[#666666] hover:text-[#0B0B0B]'
+                }`}
               >
                 {cat.label}
               </button>
@@ -334,13 +338,15 @@ export default function Header({
                 onClick={() => { setMobileMenuOpen(false); setCategoryFilter(''); setTab('shop'); }}
                 className="text-sm font-serif font-semibold text-left text-[#0B0B0B] hover:text-[#C9A227] py-1.5 border-b border-[#E8E5DD]"
               >
-                All Garments
+                All Products
               </button>
               {categories.map((cat, idx) => (
                 <button
                   key={idx}
                   onClick={() => handleCategoryClick(cat.value)}
-                  className="text-sm font-serif font-semibold text-left text-[#0B0B0B] hover:text-[#C9A227] py-1.5 border-b border-[#E8E5DD]"
+                  className={`text-sm font-serif font-semibold text-left py-1.5 border-b border-[#E8E5DD] ${
+                    cat.label === 'Hampers & Gifting' ? 'text-[#C9A227]' : 'text-[#0B0B0B] hover:text-[#C9A227]'
+                  }`}
                 >
                   {cat.label}
                 </button>

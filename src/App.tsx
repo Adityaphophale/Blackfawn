@@ -18,6 +18,7 @@ import AdminLayout from './admin/layouts/AdminLayout';
 import AdminLogin from './admin/pages/AdminLogin';
 import DashboardPage from './admin/pages/DashboardPage';
 import ProductsPage from './admin/pages/ProductsPage';
+import HampersPage from './admin/pages/HampersPage';
 import InventoryPage from './admin/pages/InventoryPage';
 import OrdersPage from './admin/pages/OrdersPage';
 import CategoriesPage from './admin/pages/CategoriesPage';
@@ -810,6 +811,16 @@ export default function App() {
         {activeSubTab === 'dashboard' && <DashboardPage metrics={metrics} />}
         {activeSubTab === 'products' && (
           <ProductsPage
+            products={products}
+            categories={categories}
+            collections={collections}
+            onCreateProduct={handleAdminCreateProduct}
+            onUpdateProduct={handleAdminUpdateProduct}
+            onDeleteProduct={handleAdminDeleteProduct}
+          />
+        )}
+        {activeSubTab === 'hampers' && (
+          <HampersPage
             products={products}
             categories={categories}
             collections={collections}

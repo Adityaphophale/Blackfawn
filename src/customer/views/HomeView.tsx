@@ -193,21 +193,22 @@ export default function HomeView({
           <div className="w-12 h-0.5 bg-[#C9A227]"></div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-          {categoriesList.slice(0, 4).map((cat, idx) => {
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+          {categoriesList.map((cat, idx) => {
             const images: Record<string, string> = {
+              "Hampers & Gifting": "/1.jpeg",
               "Printed T-Shirts": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=400",
               "Caps": "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&q=80&w=400",
               "Socks": "https://images.unsplash.com/photo-1582966772680-860e372bb558?auto=format&fit=crop&q=80&w=400",
               "Hand Napkins": "https://images.unsplash.com/photo-1616627561950-9f746e330187?auto=format&fit=crop&q=80&w=400",
               "Towels": "https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?auto=format&fit=crop&q=80&w=400"
             };
-            const catImage = images[cat.name] || "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=400";
+            const catImage = images[cat.name] || "/1.jpeg";
             return (
               <div
                 key={cat.id || idx}
                 onClick={() => handleBannerAction(cat.name)}
-                className="relative h-[280px] border border-[#E8E5DD] overflow-hidden group cursor-pointer shadow-xs bg-[#FFFFFF]"
+                className="relative h-[240px] border border-[#E8E5DD] overflow-hidden group cursor-pointer shadow-xs bg-[#FFFFFF]"
               >
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0B0B0B]/80 via-transparent to-transparent z-10 transition-all duration-300 group-hover:from-[#0B0B0B]/90" />
                 <img
@@ -216,12 +217,12 @@ export default function HomeView({
                   className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-all duration-700"
                   referrerPolicy="no-referrer"
                 />
-                <div className="absolute bottom-5 left-5 right-5 z-20 flex justify-between items-end border-b border-[#C9A227]/40 pb-2">
+                <div className="absolute bottom-4 left-3 right-3 z-20 flex justify-between items-end border-b border-[#C9A227]/40 pb-2">
                   <div>
-                    <h3 className="text-base font-serif font-bold text-white tracking-wider uppercase">{cat.name}</h3>
-                    <span className="text-[10px] text-[#C9A227] font-semibold tracking-widest uppercase">Explore Drop</span>
+                    <h3 className="text-xs font-serif font-bold text-white tracking-wider uppercase leading-tight">{cat.name}</h3>
+                    <span className="text-[9px] text-[#C9A227] font-semibold tracking-widest uppercase">Explore Drop</span>
                   </div>
-                  <ArrowRight size={14} className="text-[#C9A227] group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight size={13} className="text-[#C9A227] group-hover:translate-x-1 transition-transform shrink-0" />
                 </div>
               </div>
             );

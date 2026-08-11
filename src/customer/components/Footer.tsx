@@ -91,7 +91,8 @@ export default function Footer({ setTab, setCategoryFilter }: FooterProps) {
         <div className="space-y-4">
           <h4 className="text-xs font-serif font-bold text-white tracking-widest uppercase">COLLECTIONS</h4>
           <ul className="space-y-2.5 text-xs font-medium tracking-wide">
-            <li><button onClick={() => handleDeptClick('')} className="text-gray-400 hover:text-[#C9A227] transition-colors">All Garments</button></li>
+            <li><button onClick={() => handleDeptClick('')} className="text-gray-400 hover:text-[#C9A227] transition-colors">All Collections</button></li>
+            <li><button onClick={() => handleDeptClick('Hampers & Gifting')} className="text-[#C9A227] font-semibold hover:underline transition-colors flex items-center gap-1">Hampers & Gifting</button></li>
             <li><button onClick={() => handleDeptClick('Printed T-Shirts')} className="text-gray-400 hover:text-[#C9A227] transition-colors">Printed T-Shirts</button></li>
             <li><button onClick={() => handleDeptClick('Caps')} className="text-gray-400 hover:text-[#C9A227] transition-colors">Caps</button></li>
             <li><button onClick={() => handleDeptClick('Socks')} className="text-gray-400 hover:text-[#C9A227] transition-colors">Printed Socks</button></li>
