@@ -1369,4 +1369,10 @@ async function startServer() {
   });
 }
 
-startServer();
+if (!process.env.VERCEL) {
+  startServer();
+} else {
+  loadStore();
+}
+
+export default app;
