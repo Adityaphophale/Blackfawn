@@ -128,6 +128,7 @@ export default function CheckoutView({
           price,
           quantity: item.quantity,
           sku: variant?.sku || item.product.baseSku || 'MAIN-SKU',
+          customization: item.customization,
         };
       });
 
@@ -178,8 +179,24 @@ export default function CheckoutView({
         <div className="bg-white border border-gray-200 rounded-xl p-5 text-left w-full max-w-md shadow-xs text-xs space-y-2">
           <p className="font-bold text-gray-800 uppercase tracking-wider border-b border-gray-100 pb-2">Tracking Parameters</p>
           <p className="font-semibold text-gray-600">Logistic Courier ID: <span className="text-gray-900">{placedOrder.trackingNumber}</span></p>
-          <p className="font-semibold text-gray-600">Current Status: <span className="text-[#f97316] font-bold">{placedOrder.trackingStatus}</span></p>
+          <p className="font-semibold text-gray-600">Current Status: <span className="text-[#C9A227] font-bold">{placedOrder.trackingStatus}</span></p>
           <p className="font-semibold text-gray-600">Shipping To: <span className="text-gray-900">{placedOrder.shippingAddress.name}</span></p>
+        </div>
+
+        {/* Customer Support Assistance Section */}
+        <div className="bg-[#F8F7F2] border border-[#E8E5DD] rounded-xl p-5 text-left w-full max-w-md shadow-xs text-xs space-y-2">
+          <p className="font-bold text-[#0B0B0B] uppercase tracking-wider border-b border-[#E8E5DD] pb-2 flex items-center justify-between">
+            <span>Customer Assistance Support</span>
+            <span className="text-[#C9A227] font-semibold text-[10px]">BLACKFAWN Concierge</span>
+          </p>
+          <p className="font-medium text-gray-700 flex items-center justify-between">
+            <span>Customer Support Number:</span>
+            <a href="tel:+919274821162" className="text-[#0B0B0B] font-bold hover:text-[#C9A227] font-mono">+91 9274821162</a>
+          </p>
+          <p className="font-medium text-gray-700 flex items-center justify-between">
+            <span>Customer Enquiries Email:</span>
+            <a href="mailto:info@blackfawn.in" className="text-[#0B0B0B] font-bold hover:text-[#C9A227] font-mono">info@blackfawn.in</a>
+          </p>
         </div>
 
         <button
@@ -514,7 +531,26 @@ export default function CheckoutView({
             </div>
             <div className="flex justify-between text-sm font-black text-gray-900 border-t border-dashed border-gray-200 pt-3">
               <span>Total Payable</span>
-              <span className="text-base text-[#f97316]">₹{total}</span>
+              <span className="text-base text-[#0B0B0B]">₹{total}</span>
+            </div>
+          </div>
+
+          {/* Customer Assistance Box */}
+          <div className="p-4 bg-[#F8F7F2] border border-[#E8E5DD] rounded-xl text-xs space-y-1.5 mt-4">
+            <p className="font-bold text-[#0B0B0B] uppercase tracking-wider text-[10px] flex items-center justify-between">
+              <span>Customer Assistance</span>
+              <span className="text-[#C9A227]">Concierge</span>
+            </p>
+            <p className="text-[11px] text-gray-600">Have questions about your checkout or delivery?</p>
+            <div className="flex flex-col gap-1 pt-1 font-mono font-semibold text-xs text-[#0B0B0B]">
+              <a href="tel:+919274821162" className="hover:text-[#C9A227] flex items-center justify-between">
+                <span className="text-[10px] text-gray-500 uppercase font-sans">Phone:</span>
+                <span>+91 9274821162</span>
+              </a>
+              <a href="mailto:info@blackfawn.in" className="hover:text-[#C9A227] flex items-center justify-between">
+                <span className="text-[10px] text-gray-500 uppercase font-sans">Email:</span>
+                <span>info@blackfawn.in</span>
+              </a>
             </div>
           </div>
         </div>

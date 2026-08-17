@@ -39,14 +39,21 @@ export interface Product {
   shortDescription: string;
   description: string; // HTML Rich Text description
   category: string;
+  subCategory?: string;
   collection?: string;
+  collections?: string[];
   brand: string;
   baseSku: string;
   barcode?: string;
   material: string;
   fabric: string;
   fit: string;
-  gender: 'unisex' | 'men' | 'women';
+  gender: 'Men' | 'Women' | 'Kids' | 'Unisex' | 'unisex' | 'men' | 'women';
+  ageGroup?: 'Adults' | 'Kids';
+  productType?: string;
+  isPersonalized?: boolean;
+  printType?: string;
+  availability?: 'In Stock' | 'Low Stock' | 'Out of Stock';
   season?: string;
   countryOfOrigin?: string;
   gstRate: number; // e.g. 5, 12, 18
@@ -70,6 +77,7 @@ export interface Product {
   discountPrice?: number; // Base discount price fallback
   createdAt: string;
   updatedAt: string;
+  hamperItems?: any[];
 }
 
 export interface Category {
@@ -108,6 +116,7 @@ export interface CartItem {
   color: string;
   variantId?: string;
   quantity: number;
+  customization?: Record<string, string>;
 }
 
 export interface OrderItem {
@@ -119,6 +128,7 @@ export interface OrderItem {
   price: number;
   quantity: number;
   sku: string;
+  customization?: Record<string, string>;
 }
 
 export interface Order {

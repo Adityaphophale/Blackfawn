@@ -97,6 +97,73 @@
   ],
   "products": [
     {
+      "id": "hamp-custom-gift-hamper",
+      "name": "BLACKFAWN Custom Gift Hamper",
+      "slug": "blackfawn-custom-gift-hamper",
+      "shortDescription": "The ultimate bespoke gifting experience. An ultra-exclusive 14-piece luxury hamper featuring personalized printed apparel, metal drinkware, desk accessories, and artisanal gourmet treats.",
+      "description": "<p>Elevate personal and corporate celebrations with the signature <strong>BLACKFAWN Custom Gift Hamper</strong>. Encased in an architectural matte black velvet chest with champagne gold satin lining, this 14-piece set combines bespoke personal accessories with handcrafted delicacies.</p><h3>Why Choose the BLACKFAWN Atelier Hamper?</h3><ul><li><strong>14 Signature Items:</strong> Customized T-Shirt, Mug, Water Bottle, Pillow, Cap, Towel, Hand Napkin, Keychain, Magnet, Badge, Wish Card, Candle, Handmade Chocolates & Cookies.</li><li><strong>Bespoke Customization:</strong> Personalize text, names, sizes, and design options step-by-step.</li><li><strong>Luxury Packaging:</strong> Delivered in a gold-embossed matte black wooden gift trunk.</li></ul>",
+      "category": "Hampers & Gifting",
+      "collection": "Premium Gift Hampers",
+      "brand": "BLACKFAWN",
+      "baseSku": "HAMP-CUSTOM-01",
+      "barcode": "890100000099",
+      "material": "Matte Velvet Trunk & Gold Metal Hardware",
+      "fabric": "Champagne Gold Satin Lining",
+      "fit": "Full 14-Piece Bespoke Gift Box",
+      "gender": "unisex",
+      "gstRate": 18,
+      "tags": [
+        "Hamper",
+        "Gift Box",
+        "Customized",
+        "Premium",
+        "Gifting"
+      ],
+      "seo": {
+        "title": "BLACKFAWN Custom Gift Hamper | Bespoke Luxury Gifting",
+        "description": "Personalized premium 14-piece customizable gift hamper featuring custom printed t-shirt, mug, bottle, accessories and gourmet treats.",
+        "keywords": "custom gift hamper, luxury gifting, personalized gift box, corporate hamper"
+      },
+      "status": "active",
+      "isFeatured": true,
+      "isBestSeller": true,
+      "isTrending": true,
+      "isNewArrival": true,
+      "images": [
+        "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&q=80&w=1000",
+        "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&q=80&w=1000",
+        "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=1000",
+        "https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&q=80&w=1000"
+      ],
+      "rating": 5,
+      "reviewCount": 42,
+      "codAvailable": true,
+      "deliveryDaysEst": 3,
+      "price": 3999,
+      "discountPrice": 3999,
+      "createdAt": "2026-08-17T18:30:00.000Z",
+      "updatedAt": "2026-08-17T18:30:00.000Z",
+      "variants": [
+        {
+          "id": "var-hamp-custom-std",
+          "sku": "HAMP-CUSTOM-STD",
+          "size": "Bespoke 14-Piece Box",
+          "color": "Matte Black & Champagne Gold",
+          "price": 3999,
+          "salePrice": 3999,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "images": [
+            "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&q=80&w=1000",
+            "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&q=80&w=1000",
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=1000",
+            "https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&q=80&w=1000"
+          ]
+        }
+      ]
+    },
+    {
       "id": "round-neck-men",
       "name": "Printed Round Neck T-Shirt - Men",
       "slug": "printed-round-neck-tshirt-men",
@@ -2612,6 +2679,36 @@
       "id": "coll-3",
       "name": "Utility Gear",
       "slug": "utility-gear"
+    },
+    {
+      "id": "coll-4",
+      "name": "Premium Gift Hampers",
+      "slug": "Premium Gift Hampers"
+    },
+    {
+      "id": "coll-5",
+      "name": "Personalized Hampers",
+      "slug": "Personalized Hampers"
+    },
+    {
+      "id": "coll-6",
+      "name": "Corporate Hampers",
+      "slug": "Corporate Hampers"
+    },
+    {
+      "id": "coll-7",
+      "name": "Festival Hampers",
+      "slug": "Festival Hampers"
+    },
+    {
+      "id": "coll-8",
+      "name": "Couple Hampers",
+      "slug": "Couple Hampers"
+    },
+    {
+      "id": "coll-9",
+      "name": "Kids Hampers",
+      "slug": "Kids Hampers"
     }
   ],
   "coupons": [
@@ -2668,5 +2765,16 @@
       "subtitle": "Heavy loop Terry structures designed for ultimate moisture absorption.",
       "link": "Towels"
     }
-  ]
+  ],
+  "businessInfo": {
+    "name": "BLACKFAWN",
+    "addressLine1": "Office No. 413, 4th Floor,",
+    "addressLine2": "Siddhivinayak Arcus,",
+    "addressLine3": "Bhayli Road,",
+    "cityState": "Bhayli, Vadodara.",
+    "fullAddress": "Office No. 413, 4th Floor,\nSiddhivinayak Arcus,\nBhayli Road,\nBhayli, Vadodara.",
+    "email": "info@blackfawn.in",
+    "phone": "+91 9274821162",
+    "mapsUrl": "https://maps.google.com/?q=Office+No.+413,+4th+Floor,+Siddhivinayak+Arcus,+Bhayli+Road,+Bhayli,+Vadodara"
+  }
 }

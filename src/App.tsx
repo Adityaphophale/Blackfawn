@@ -27,8 +27,12 @@ import ReviewsPage from './admin/pages/ReviewsPage';
 import ReturnRequestsPage from './admin/pages/ReturnRequestsPage';
 import GiftCardsPage from './admin/pages/GiftCardsPage';
 import BlogsPage from './admin/pages/BlogsPage';
+import SettingsPage from './admin/pages/SettingsPage';
+import NavigationPage from './admin/pages/NavigationPage';
 
 import { Product, CartItem, Coupon, User, Address, Order } from './shared/types';
+import { BusinessInfo, DEFAULT_BUSINESS_INFO } from './shared/businessConfig';
+import { NavItemConfig, DEFAULT_NAVIGATION_CONFIG } from './shared/navConfig';
 
 import { DEFAULT_PRODUCTS, DEFAULT_CATEGORIES, DEFAULT_COLLECTIONS } from './shared/defaultData';
 
@@ -45,6 +49,7 @@ export default function App() {
   const [collections, setCollections] = useState<any[]>(DEFAULT_COLLECTIONS);
   const [coupons, setCoupons] = useState<Coupon[]>([]);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
+  const [navConfig, setNavConfig] = useState<NavItemConfig[]>(DEFAULT_NAVIGATION_CONFIG);
 
   // Toast notification state
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' | 'info' } | null>(null);
@@ -102,16 +107,51 @@ export default function App() {
     }
   });
 
-  // Keep hash location updated for simple SPA routing
+  // Keep hash location updated for simple SPA routing & SEO URLs
   useEffect(() => {
     const handleHashChange = () => {
-      const hash = window.location.hash;
+      const hash = window.location.hash.toLowerCase();
       if (hash.startsWith('#/admin')) {
         setTab('admin');
-      } else {
+      } else if (hash.startsWith('#/shop')) {
+        setTab('shop');
+      } else if (hash.startsWith('#/t-shirts')) {
+        setCategoryFilter('T-Shirts');
+        setTab('shop');
+      } else if (hash.startsWith('#/polo-t-shirts')) {
+        setCategoryFilter('Polo T-Shirts');
+        setTab('shop');
+      } else if (hash.startsWith('#/caps')) {
+        setCategoryFilter('Caps');
+        setTab('shop');
+      } else if (hash.startsWith('#/socks')) {
+        setCategoryFilter('Socks');
+        setTab('shop');
+      } else if (hash.startsWith('#/towels')) {
+        setCategoryFilter('Towels');
+        setTab('shop');
+      } else if (hash.startsWith('#/hand-napkins')) {
+        setCategoryFilter('Hand Napkins');
+        setTab('shop');
+      } else if (hash.startsWith('#/mugs')) {
+        setCategoryFilter('Mugs');
+        setTab('shop');
+      } else if (hash.startsWith('#/bottles')) {
+        setCategoryFilter('Bottles');
+        setTab('shop');
+      } else if (hash.startsWith('#/hampers')) {
+        setCategoryFilter('Hampers & Gifting');
+        setTab('shop');
+      } else if (hash.startsWith('#/collections/')) {
+        const rawColl = window.location.hash.replace('#/collections/', '').replace(/-/g, ' ');
+        setCategoryFilter('');
+        setSearchQuery(`coll:${rawColl}`);
+        setTab('shop');
+      } else if (hash === '#/' || hash === '') {
         setTab('home');
       }
     };
+    handleHashChange();
     window.addEventListener('hashchange', handleHashChange);
     return () => window.removeEventListener('hashchange', handleHashChange);
   }, []);
@@ -135,8 +175,17 @@ export default function App() {
     }
   }, [couponApplied]);
 
+  const [businessInfo, setBusinessInfo] = useState<BusinessInfo>(DEFAULT_BUSINESS_INFO);
+
   // Bootstrapping: Load resources from Dynamic JSON Database REST APIs
   const fetchProductsAndSettings = () => {
+    fetch('/api/business-info')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.name) setBusinessInfo(data);
+      })
+      .catch(() => setBusinessInfo(DEFAULT_BUSINESS_INFO));
+
     fetch('/api/products')
       .then((res) => {
         if (!res.ok) throw new Error('API unavailable');
@@ -167,6 +216,13 @@ export default function App() {
       })
       .catch(() => setCollections(DEFAULT_COLLECTIONS));
 
+    fetch('/api/navigation')
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) setNavConfig(data);
+      })
+      .catch(() => setNavConfig(DEFAULT_NAVIGATION_CONFIG));
+
     // Restore login session from localStorage
     try {
       const savedUser = localStorage.getItem('blackfawn_user');
@@ -186,6 +242,21 @@ export default function App() {
   useEffect(() => {
     fetchProductsAndSettings();
   }, []);
+
+  const handleSaveNavConfig = async (newConfig: NavItemConfig[]) => {
+    setNavConfig(newConfig);
+    const token = localStorage.getItem('blackfawn_token') || localStorage.getItem('token');
+    const res = await fetch('/api/admin/navigation', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        ...(token ? { Authorization: `Bearer ${token}` } : {}),
+      },
+      body: JSON.stringify(newConfig),
+    });
+    if (!res.ok) throw new Error('Failed to update navigation configuration');
+    showToast('Navigation configuration saved successfully', 'success');
+  };
 
   // Fetch admin dashboard details when user is authenticated
   const fetchDashboardMetrics = () => {
@@ -401,14 +472,14 @@ export default function App() {
   };
 
   // Cart Management
-  const handleAddToCart = (product: Product, size: string, color: string) => {
+  const handleAddToCart = (product: Product, size: string, color: string, customization?: Record<string, string>) => {
     if (!size) {
       showToast('Please select a size before adding to bag.', 'error');
       return;
     }
     setCart((prev) => {
       const existing = prev.find(
-        (item) => item.productId === product.id && item.size === size && item.color === color
+        (item) => item.productId === product.id && item.size === size && item.color === color && JSON.stringify(item.customization || {}) === JSON.stringify(customization || {})
       );
       if (existing) {
         showToast(`Updated quantity for ${product.name} (${size}, ${color}).`, 'success');
@@ -426,13 +497,14 @@ export default function App() {
           size,
           color,
           quantity: 1,
+          customization,
         },
       ];
     });
     setCartOpen(true);
   };
 
-  const handleBuyNow = (product: Product, size: string, color: string) => {
+  const handleBuyNow = (product: Product, size: string, color: string, customization?: Record<string, string>) => {
     if (!size) {
       showToast('Please select a size before buying.', 'error');
       return;
@@ -440,7 +512,7 @@ export default function App() {
     // Add item to cart (preserving existing items) instead of replacing the entire cart
     setCart((prev) => {
       const existing = prev.find(
-        (item) => item.productId === product.id && item.size === size && item.color === color
+        (item) => item.productId === product.id && item.size === size && item.color === color && JSON.stringify(item.customization || {}) === JSON.stringify(customization || {})
       );
       if (existing) {
         return prev.map((item) =>
@@ -456,6 +528,7 @@ export default function App() {
           size,
           color,
           quantity: 1,
+          customization,
         },
       ];
     });
@@ -463,6 +536,22 @@ export default function App() {
     setSelectedProductId(null);
     setTab('checkout');
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleUpdateCartCustomization = (cartItemId: string, newCustomization: Record<string, string>, newSize?: string) => {
+    setCart((prev) =>
+      prev.map((item) => {
+        if (item.id === cartItemId) {
+          return {
+            ...item,
+            size: newSize || item.size,
+            customization: newCustomization,
+          };
+        }
+        return item;
+      })
+    );
+    showToast('Customization details updated.', 'success');
   };
 
   const handleUpdateCartQty = (itemId: string, delta: number) => {
@@ -776,6 +865,29 @@ export default function App() {
     }
   };
 
+  const handleUpdateBusinessInfo = async (info: Partial<BusinessInfo>) => {
+    try {
+      const token = localStorage.getItem('blackfawn_token');
+      const response = await fetch('/api/admin/business-info', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(info),
+      });
+      if (!response.ok) throw new Error('API unavailable');
+      const data = await response.json();
+      if (data.businessInfo) {
+        setBusinessInfo(data.businessInfo);
+      }
+      return data;
+    } catch {
+      setBusinessInfo((prev) => ({ ...prev, ...info }));
+      return { success: true };
+    }
+  };
+
   // ----------------------------------------------------
   // ROUTING VIEW RENDERERS
   // ----------------------------------------------------
@@ -819,6 +931,12 @@ export default function App() {
             onDeleteProduct={handleAdminDeleteProduct}
           />
         )}
+        {activeSubTab === 'navigation' && (
+          <NavigationPage
+            navConfig={navConfig}
+            onSaveNavConfig={handleSaveNavConfig}
+          />
+        )}
         {activeSubTab === 'hampers' && (
           <HampersPage
             products={products}
@@ -853,6 +971,12 @@ export default function App() {
         {activeSubTab === 'returns' && <ReturnRequestsPage />}
         {activeSubTab === 'giftcards' && <GiftCardsPage />}
         {activeSubTab === 'blogs' && <BlogsPage />}
+        {activeSubTab === 'settings' && (
+          <SettingsPage
+            businessInfo={businessInfo}
+            onUpdateBusinessInfo={handleUpdateBusinessInfo}
+          />
+        )}
       </AdminLayout>
     );
   }
@@ -881,6 +1005,7 @@ export default function App() {
         toggleCart={() => setCartOpen(!cartOpen)}
         products={products}
         categoriesList={categories}
+        navConfig={navConfig}
       />
 
       {/* Main View Router */}
@@ -954,7 +1079,7 @@ export default function App() {
       </main>
 
       {/* Customer Footer */}
-      <Footer setTab={setTab} setCategoryFilter={setCategoryFilter} />
+      <Footer setTab={setTab} setCategoryFilter={setCategoryFilter} businessInfo={businessInfo} />
 
       {/* Slide-out bag Drawer */}
       <CartDrawer
@@ -963,6 +1088,7 @@ export default function App() {
         cart={cart}
         onUpdateQty={handleUpdateCartQty}
         onRemoveItem={handleRemoveCartItem}
+        onUpdateCustomization={handleUpdateCartCustomization}
         onCheckout={() => {
           setCartOpen(false);
           // CRITICAL: Clear selectedProductId so the view router reaches the checkout branch

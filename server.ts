@@ -25,6 +25,9 @@ import {
 
 // Default Data for Seeding
 import { PRODUCTS, BLOGS, COUPONS, FAQS, INITIAL_REVIEWS } from "./src/data";
+import { DEFAULT_BUSINESS_INFO } from "./src/shared/businessConfig";
+import { TOP_LEVEL_CATEGORIES, CROSS_CUTTING_COLLECTIONS } from "./src/shared/taxonomy";
+import { DEFAULT_NAVIGATION_CONFIG } from "./src/shared/navConfig";
 
 dotenv.config();
 
@@ -120,6 +123,8 @@ interface DbStore {
   giftCards: GiftCard[];
   blogs: Blog[];
   banners: { id: string; imageUrl: string; title: string; subtitle: string; link: string }[];
+  businessInfo?: any;
+  navigationConfig?: any;
 }
 
 function loadStore(): DbStore {
@@ -127,29 +132,25 @@ function loadStore(): DbStore {
     if (fs.existsSync(STORE_PATH)) {
       const data = fs.readFileSync(STORE_PATH, "utf-8");
       const store = JSON.parse(data);
+      if (!store.businessInfo) {
+        store.businessInfo = DEFAULT_BUSINESS_INFO;
+      }
+      if (!store.navigationConfig) {
+        store.navigationConfig = DEFAULT_NAVIGATION_CONFIG;
+      }
       
-      // Ensure all standard entities exist in the loaded store
+      // Always sync categories and collections with official BLACKFAWN taxonomy
+      store.categories = seedCategories();
+      store.collections = seedCollections();
+
+      // Ensure standard products exist in store
       if (!store.products || store.products.length === 0) {
         store.products = seedProducts();
-      }
-      // Ensure Hampers & Gifting category exists in loaded store
-      if (store.categories && !store.categories.some((c: any) => c.name === 'Hampers & Gifting')) {
-        store.categories.push({ id: "cat-6", name: "Hampers & Gifting", description: "Curated luxury gift hampers and artisanal boxes", slug: "Hampers & Gifting" });
-      }
-      // Ensure hamper collections exist
-      if (store.collections) {
-        const defaultColls = seedCollections();
-        defaultColls.forEach(c => {
-          if (!store.collections.some((sc: any) => sc.name === c.name)) {
-            store.collections.push(c);
-          }
-        });
-      }
-      // Ensure seed hamper products exist in store.products
-      if (store.products) {
+      } else {
+        // Sync seed products to ensure all 9 taxonomy categories have items
         const seedProds = seedProducts();
         seedProds.forEach(sp => {
-          if (sp.category === 'Hampers & Gifting' && !store.products.some((p: any) => p.id === sp.id)) {
+          if (!store.products.some((p: any) => p.id === sp.id)) {
             store.products.push(sp);
           }
         });
@@ -703,6 +704,25 @@ app.get("/api/categories", (req: Request, res: Response) => {
 app.get("/api/collections", (req: Request, res: Response) => {
   const store = loadStore();
   res.json(store.collections || []);
+});
+
+app.get("/api/taxonomy", (req: Request, res: Response) => {
+  res.json({
+    categories: TOP_LEVEL_CATEGORIES,
+    collections: CROSS_CUTTING_COLLECTIONS,
+  });
+});
+
+app.get("/api/navigation", (req: Request, res: Response) => {
+  const store = loadStore();
+  res.json(store.navigationConfig || DEFAULT_NAVIGATION_CONFIG);
+});
+
+app.post("/api/admin/navigation", adminMiddleware, (req: Request, res: Response) => {
+  const store = loadStore();
+  store.navigationConfig = req.body;
+  saveStore(store);
+  res.json({ success: true, navigationConfig: store.navigationConfig });
 });
 
 // 3. ADMIN PRODUCT MANAGEMENT (CRUD)
@@ -1259,6 +1279,35 @@ app.post("/api/reviews", (req: Request, res: Response) => {
 
 app.get("/api/faqs", (req: Request, res: Response) => {
   res.json(FAQS);
+});
+
+// Business Information Settings APIs
+app.get("/api/business-info", (req: Request, res: Response) => {
+  const store = loadStore();
+  res.json(store.businessInfo || DEFAULT_BUSINESS_INFO);
+});
+
+app.post("/api/admin/business-info", adminMiddleware, (req: Request, res: Response) => {
+  const store = loadStore();
+  const { name, addressLine1, addressLine2, addressLine3, cityState, email, phone } = req.body;
+
+  const fullAddr = [addressLine1, addressLine2, addressLine3, cityState].filter(Boolean).join('\n');
+  const mapsQuery = encodeURIComponent([addressLine1, addressLine2, addressLine3, cityState].filter(Boolean).join(' '));
+
+  store.businessInfo = {
+    name: name || store.businessInfo?.name || "BLACKFAWN",
+    addressLine1: addressLine1 || store.businessInfo?.addressLine1 || "",
+    addressLine2: addressLine2 || store.businessInfo?.addressLine2 || "",
+    addressLine3: addressLine3 || store.businessInfo?.addressLine3 || "",
+    cityState: cityState || store.businessInfo?.cityState || "",
+    fullAddress: fullAddr || store.businessInfo?.fullAddress || DEFAULT_BUSINESS_INFO.fullAddress,
+    email: email || store.businessInfo?.email || DEFAULT_BUSINESS_INFO.email,
+    phone: phone || store.businessInfo?.phone || DEFAULT_BUSINESS_INFO.phone,
+    mapsUrl: `https://maps.google.com/?q=${mapsQuery}` || DEFAULT_BUSINESS_INFO.mapsUrl
+  };
+
+  saveStore(store);
+  res.json({ message: "Business information updated successfully", businessInfo: store.businessInfo });
 });
 
 // 9. ADMIN ANALYTICS & DASHBOARD METRICS

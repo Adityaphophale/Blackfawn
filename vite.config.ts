@@ -19,7 +19,7 @@ export default defineConfig(() => {
       watch: process.env.DISABLE_HMR === 'true' ? null : {
         usePolling: true,
         interval: 1000,
-        ignored: ['**/public/**']
+        ignored: ['**/public/**', '**/db_store.json', '**/.system_generated/**']
       },
     },
   };

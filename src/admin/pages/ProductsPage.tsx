@@ -1,7 +1,8 @@
 import React, { useState, useRef } from 'react';
-import { Plus, Edit2, Trash2, Image, Sparkles, X, Settings, Upload } from 'lucide-react';
+import { Plus, Edit2, Trash2, Image, Sparkles, X, Settings, Upload, Check } from 'lucide-react';
 import { Product, ProductVariant } from '../../shared/types';
 import RichTextEditor from '../components/RichTextEditor';
+import { TOP_LEVEL_CATEGORIES, CROSS_CUTTING_COLLECTIONS } from '../../shared/taxonomy';
 
 interface ProductsPageProps {
   products: Product[];
@@ -26,30 +27,40 @@ export default function ProductsPage({
 
   // Form Fields
   const [name, setName] = useState('');
-  const [category, setCategory] = useState('Oversized');
-  const [collection, setCollection] = useState('Core classics');
-  const [price, setPrice] = useState(1499);
-  const [salePrice, setSalePrice] = useState<number | undefined>(undefined);
+  const [category, setCategory] = useState('T-Shirts');
+  const [subCategory, setSubCategory] = useState('');
+  const [collection, setCollection] = useState('New Arrivals');
+  const [selectedCollections, setSelectedCollections] = useState<string[]>(['New Arrivals']);
+  const [gender, setGender] = useState<'Men' | 'Women' | 'Kids' | 'Unisex'>('Men');
+  const [isPersonalized, setIsPersonalized] = useState(false);
+  const [price, setPrice] = useState(999);
+  const [salePrice, setSalePrice] = useState<number | undefined>(799);
   const [description, setDescription] = useState('');
-  const [fit, setFit] = useState('Oversized');
+  const [fit, setFit] = useState('Regular');
+  const [material, setMaterial] = useState('100% Cotton');
   const [isFeatured, setIsFeatured] = useState(false);
   const [isLimited, setIsLimited] = useState(false);
   const [images, setImages] = useState<string[]>([]);
   const [imageUrlInput, setImageUrlInput] = useState('');
 
-  // Variant generator builder helper fields
+  // Variant builder helper fields
   const [variantSizes, setVariantSizes] = useState<string[]>(['S', 'M', 'L', 'XL']);
-  const [variantColors, setVariantColors] = useState<string[]>(['Charcoal Black', 'Chalk White']);
-  const [variantWeight, setVariantWeight] = useState(350);
+  const [variantColors, setVariantColors] = useState<string[]>(['Black', 'White']);
+  const [variantWeight, setVariantWeight] = useState(250);
 
   const resetForm = () => {
     setName('');
-    setCategory('Oversized');
-    setCollection('Core classics');
-    setPrice(1499);
-    setSalePrice(undefined);
+    setCategory('T-Shirts');
+    setSubCategory('');
+    setCollection('New Arrivals');
+    setSelectedCollections(['New Arrivals']);
+    setGender('Men');
+    setIsPersonalized(false);
+    setPrice(999);
+    setSalePrice(799);
     setDescription('');
-    setFit('Oversized');
+    setFit('Regular');
+    setMaterial('100% Cotton');
     setIsFeatured(false);
     setIsLimited(false);
     setImages([]);
@@ -63,11 +74,16 @@ export default function ProductsPage({
     setCurrentId(p.id);
     setName(p.name);
     setCategory(p.category);
-    setCollection(p.collection || '');
+    setSubCategory(p.subCategory || '');
+    setCollection(p.collection || 'New Arrivals');
+    setSelectedCollections(p.collections || [p.collection || 'New Arrivals']);
+    setGender((p.gender as any) || 'Men');
+    setIsPersonalized(!!p.isPersonalized);
     setPrice(p.variants?.[0]?.price || p.price);
     setSalePrice(p.variants?.[0]?.salePrice || p.discountPrice);
     setDescription(p.description);
     setFit(p.fit);
+    setMaterial(p.material || '100% Cotton');
     setIsFeatured(!!p.isFeatured);
     setIsLimited(!!p.isLimited);
     setImages(p.images || []);
@@ -102,8 +118,7 @@ export default function ProductsPage({
             } else {
               setImages((prev) => [...prev, resultUrl]);
             }
-          } catch (err) {
-            // Fallback: use base64 data URL directly
+          } catch {
             setImages((prev) => [...prev, resultUrl]);
           }
         }
@@ -132,8 +147,7 @@ export default function ProductsPage({
         setImages((prev) => [...prev, data.url]);
         setImageUrlInput('');
       }
-    } catch (err) {
-      // Fallback: use the URL directly
+    } catch {
       setImages((prev) => [...prev, imageUrlInput]);
       setImageUrlInput('');
     }
@@ -162,6 +176,12 @@ export default function ProductsPage({
     return variants;
   };
 
+  const toggleCollectionSelection = (collName: string) => {
+    setSelectedCollections((prev) =>
+      prev.includes(collName) ? prev.filter((c) => c !== collName) : [...prev, collName]
+    );
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name || !description) {
@@ -172,7 +192,12 @@ export default function ProductsPage({
     const payload: Partial<Product> = {
       name,
       category,
-      collection,
+      subCategory,
+      collection: selectedCollections[0] || collection,
+      collections: selectedCollections,
+      gender,
+      isPersonalized,
+      material,
       description,
       fit,
       isFeatured,
@@ -195,16 +220,19 @@ export default function ProductsPage({
     resetForm();
   };
 
+  // Get active subcategories for chosen category
+  const currentCategoryObj = TOP_LEVEL_CATEGORIES.find((c) => c.name === category);
+
   return (
     <div className="space-y-8 text-white">
       <div className="flex justify-between items-center border-b border-slate-800 pb-4">
         <div>
-          <span className="text-[10px] font-bold text-gray-500 tracking-wider uppercase">Variant Catalog control</span>
-          <h1 className="text-xl sm:text-2xl font-extrabold text-white tracking-wide uppercase mt-1">Apparel Catalog</h1>
+          <span className="text-[10px] font-bold text-[#C9A227] tracking-wider uppercase">Official BLACKFAWN Taxonomy Catalog</span>
+          <h1 className="text-xl sm:text-2xl font-extrabold text-white tracking-wide uppercase mt-1">Catalog Management</h1>
         </div>
         <button
           onClick={() => { resetForm(); setShowModal(true); }}
-          className="px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white text-xs font-bold uppercase rounded-lg flex items-center gap-1.5 cursor-pointer shadow-lg"
+          className="px-4 py-2 bg-[#C9A227] hover:bg-yellow-600 text-black text-xs font-bold uppercase rounded-lg flex items-center gap-1.5 cursor-pointer shadow-lg transition-all"
         >
           <Plus size={14} /> Add Product
         </button>
@@ -216,11 +244,10 @@ export default function ProductsPage({
           <table className="w-full text-left text-xs font-medium text-gray-300 border-collapse">
             <thead>
               <tr className="border-b border-slate-800 text-[10px] font-bold text-gray-500 uppercase tracking-wider bg-slate-950/20">
-                <th className="py-3 px-4">Item Details</th>
-                <th className="py-3 px-4">Department</th>
-                <th className="py-3 px-4">Base Pricing</th>
-                <th className="py-3 px-4">Active Variants</th>
-                <th className="py-3 px-4">Tags</th>
+                <th className="py-3 px-4">Product Details</th>
+                <th className="py-3 px-4">Category & Subcategory</th>
+                <th className="py-3 px-4">Gender & Customization</th>
+                <th className="py-3 px-4">Pricing & Variants</th>
                 <th className="py-3 px-4 text-right">Actions</th>
               </tr>
             </thead>
@@ -233,25 +260,27 @@ export default function ProductsPage({
                       <img src={p.images?.[0]} alt="" className="w-9 h-11 object-cover rounded border border-slate-800 shrink-0" referrerPolicy="no-referrer" />
                       <div>
                         <p className="font-bold text-white uppercase">{p.name}</p>
-                        <p className="text-[10px] text-gray-500 uppercase font-mono">ID: {p.id}</p>
+                        <p className="text-[10px] text-gray-500 font-mono">SKU: {p.baseSku || p.id}</p>
                       </div>
                     </td>
                     <td className="py-3.5 px-4">
-                      <p className="font-semibold text-slate-200">{p.category}</p>
-                      <p className="text-[10px] text-gray-500 capitalize">{p.fit} Fit</p>
+                      <p className="font-semibold text-[#C9A227]">{p.category}</p>
+                      <p className="text-[10px] text-gray-400 font-medium">{p.subCategory || 'Standard'}</p>
                     </td>
-                    <td className="py-3.5 px-4 font-bold text-orange-500">
-                      ₹{p.discountPrice || p.price}
-                      {p.discountPrice && <span className="text-[10px] text-gray-500 line-through ml-1.5 font-semibold">₹{p.price}</span>}
+                    <td className="py-3.5 px-4 space-y-1">
+                      <span className="bg-slate-800 text-slate-300 text-[9.5px] px-2 py-0.5 rounded font-bold uppercase">
+                        {p.gender || 'Unisex'}
+                      </span>
+                      {p.isPersonalized && (
+                        <span className="block text-[9px] text-[#C9A227] font-extrabold uppercase">
+                          Personalized
+                        </span>
+                      )}
                     </td>
                     <td className="py-3.5 px-4">
-                      <span className="bg-slate-800 text-slate-300 text-[10px] px-2 py-0.5 rounded font-bold">
-                        {p.variants?.length || 0} Variants ({totalStock} Stock)
-                      </span>
-                    </td>
-                    <td className="py-3.5 px-4 space-x-1">
-                      {p.isFeatured && <span className="text-[9px] bg-orange-600/10 text-orange-400 border border-orange-500/20 px-1.5 py-0.5 rounded font-bold">Featured</span>}
-                      {p.isLimited && <span className="text-[9px] bg-purple-600/10 text-purple-400 border border-purple-500/20 px-1.5 py-0.5 rounded font-bold">Limited</span>}
+                      <span className="font-bold text-white">₹{p.discountPrice || p.price}</span>
+                      {p.discountPrice && <span className="text-[10px] text-gray-500 line-through ml-1.5">₹{p.price}</span>}
+                      <p className="text-[9.5px] text-gray-500 mt-0.5">{p.variants?.length || 0} Variants ({totalStock} Stock)</p>
                     </td>
                     <td className="py-3.5 px-4 text-right space-x-2">
                       <button
@@ -262,7 +291,7 @@ export default function ProductsPage({
                         <Edit2 size={12} />
                       </button>
                       <button
-                        onClick={() => { if(confirm('Delete product?')) onDeleteProduct(p.id); }}
+                        onClick={() => { if (confirm('Delete product from taxonomy?')) onDeleteProduct(p.id); }}
                         className="p-1.5 bg-red-950/40 hover:bg-red-900 border border-red-900/30 text-red-400 rounded cursor-pointer"
                         title="Delete product"
                       >
@@ -279,7 +308,7 @@ export default function ProductsPage({
 
       {/* Modal Add/Edit Form */}
       {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-xs">
           <div className="bg-slate-900 border border-slate-800 rounded-xl overflow-y-auto max-h-[90vh] w-full max-w-3xl text-white shadow-2xl p-6 sm:p-8 space-y-6 relative">
             <button
               onClick={() => setShowModal(false)}
@@ -289,44 +318,107 @@ export default function ProductsPage({
             </button>
 
             <h2 className="text-sm font-bold uppercase tracking-wider border-b border-slate-800 pb-3 flex items-center gap-2">
-              <Settings size={16} className="text-orange-500" /> {isEditMode ? 'Modify Apparel Drop Info' : 'Create New Apparel Drop'}
+              <Settings size={16} className="text-[#C9A227]" /> {isEditMode ? 'Modify Catalog Product' : 'Deploy Product To Taxonomy'}
             </h2>
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-2 gap-4 text-xs">
                 <div>
-                  <label className="block text-gray-400 font-bold mb-1 uppercase text-[10px]">Product Name</label>
+                  <label className="block text-gray-400 font-bold mb-1 uppercase text-[10px]">Product Title</label>
                   <input
                     type="text"
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
-                    className="w-full bg-slate-950 border border-slate-850 rounded px-2.5 py-1.5 text-white"
+                    className="w-full bg-slate-950 border border-slate-800 rounded px-2.5 py-1.5 text-white outline-none focus:border-[#C9A227]"
                   />
                 </div>
                 <div>
-                  <label className="block text-gray-400 font-bold mb-1 uppercase text-[10px]">Fit Type</label>
+                  <label className="block text-gray-400 font-bold mb-1 uppercase text-[10px]">Material / Fabric</label>
                   <input
                     type="text"
-                    required
-                    value={fit}
-                    onChange={(e) => setFit(e.target.value)}
-                    className="w-full bg-slate-950 border border-slate-850 rounded px-2.5 py-1.5 text-white"
+                    value={material}
+                    onChange={(e) => setMaterial(e.target.value)}
+                    className="w-full bg-slate-950 border border-slate-800 rounded px-2.5 py-1.5 text-white outline-none focus:border-[#C9A227]"
                   />
+                </div>
+              </div>
+
+              {/* Taxonomy Primary Category & Subcategory */}
+              <div className="grid grid-cols-3 gap-4 text-xs">
+                <div>
+                  <label className="block text-gray-400 font-bold mb-1 uppercase text-[10px]">Primary Category (1 of 9)</label>
+                  <select
+                    value={category}
+                    onChange={(e) => {
+                      setCategory(e.target.value);
+                      setSubCategory('');
+                    }}
+                    className="w-full bg-slate-950 border border-slate-800 rounded px-2.5 py-1.5 text-white outline-none focus:border-[#C9A227]"
+                  >
+                    {TOP_LEVEL_CATEGORIES.map((cat) => (
+                      <option key={cat.id} value={cat.name}>{cat.name}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-gray-400 font-bold mb-1 uppercase text-[10px]">Subcategory Selection</label>
+                  <select
+                    value={subCategory}
+                    onChange={(e) => setSubCategory(e.target.value)}
+                    className="w-full bg-slate-950 border border-slate-800 rounded px-2.5 py-1.5 text-white outline-none focus:border-[#C9A227]"
+                  >
+                    <option value="">None / Standard</option>
+                    {currentCategoryObj?.subcategories.map((sc) => (
+                      <option key={sc.id} value={sc.name}>{sc.name}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-gray-400 font-bold mb-1 uppercase text-[10px]">Target Gender</label>
+                  <select
+                    value={gender}
+                    onChange={(e) => setGender(e.target.value as any)}
+                    className="w-full bg-slate-950 border border-slate-800 rounded px-2.5 py-1.5 text-white outline-none focus:border-[#C9A227]"
+                  >
+                    <option value="Men">Men</option>
+                    <option value="Women">Women</option>
+                    <option value="Kids">Kids</option>
+                    <option value="Unisex">Unisex</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Collections Multi-Select Checkboxes */}
+              <div className="space-y-1.5 border-t border-slate-800 pt-3">
+                <label className="block text-gray-400 font-bold uppercase text-[10px]">Assign Cross-Cutting Collections (Multiple)</label>
+                <div className="grid grid-cols-3 gap-2 bg-slate-950 p-3 border border-slate-800 rounded-lg max-h-36 overflow-y-auto text-[11px]">
+                  {CROSS_CUTTING_COLLECTIONS.map((coll) => (
+                    <label key={coll.id} className="flex items-center gap-1.5 cursor-pointer text-gray-300 hover:text-white">
+                      <input
+                        type="checkbox"
+                        checked={selectedCollections.includes(coll.name)}
+                        onChange={() => toggleCollectionSelection(coll.name)}
+                        className="rounded border-slate-800 text-[#C9A227]"
+                      />
+                      <span>{coll.name}</span>
+                    </label>
+                  ))}
                 </div>
               </div>
 
               <div className="grid grid-cols-3 gap-4 text-xs">
                 <div>
-                  <label className="block text-gray-400 font-bold mb-1 uppercase text-[10px]">Category Selection</label>
+                  <label className="block text-gray-400 font-bold mb-1 uppercase text-[10px]">Personalized Custom Product?</label>
                   <select
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
-                    className="w-full bg-slate-950 border border-slate-850 rounded px-2.5 py-1.5 text-white"
+                    value={isPersonalized ? 'yes' : 'no'}
+                    onChange={(e) => setIsPersonalized(e.target.value === 'yes')}
+                    className="w-full bg-slate-950 border border-slate-800 rounded px-2.5 py-1.5 text-white outline-none focus:border-[#C9A227]"
                   >
-                    {categories.map((c) => (
-                      <option key={c.id} value={c.name}>{c.name}</option>
-                    ))}
+                    <option value="no">No (Standard Product)</option>
+                    <option value="yes">Yes (Personalized / Custom)</option>
                   </select>
                 </div>
                 <div>
@@ -336,7 +428,7 @@ export default function ProductsPage({
                     required
                     value={price}
                     onChange={(e) => setPrice(Number(e.target.value))}
-                    className="w-full bg-slate-950 border border-slate-850 rounded px-2.5 py-1.5 text-white"
+                    className="w-full bg-slate-950 border border-slate-800 rounded px-2.5 py-1.5 text-white outline-none focus:border-[#C9A227]"
                   />
                 </div>
                 <div>
@@ -345,7 +437,7 @@ export default function ProductsPage({
                     type="number"
                     value={salePrice || ''}
                     onChange={(e) => setSalePrice(e.target.value ? Number(e.target.value) : undefined)}
-                    className="w-full bg-slate-950 border border-slate-850 rounded px-2.5 py-1.5 text-white"
+                    className="w-full bg-slate-950 border border-slate-800 rounded px-2.5 py-1.5 text-white outline-none focus:border-[#C9A227]"
                   />
                 </div>
               </div>
@@ -371,7 +463,7 @@ export default function ProductsPage({
                   <button
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
-                    className="px-4 py-2 bg-orange-600 hover:bg-orange-700 text-white text-xs font-bold rounded flex items-center justify-center gap-1.5 cursor-pointer shadow-md"
+                    className="px-4 py-2 bg-[#C9A227] hover:bg-yellow-600 text-black text-xs font-bold rounded flex items-center justify-center gap-1.5 cursor-pointer shadow-md"
                   >
                     <Upload size={14} /> Upload Image File
                   </button>
@@ -382,7 +474,7 @@ export default function ProductsPage({
                       value={imageUrlInput}
                       onChange={(e) => setImageUrlInput(e.target.value)}
                       placeholder="Or paste image URL"
-                      className="bg-slate-950 border border-slate-850 px-3 py-1.5 text-xs text-white rounded flex-1 outline-none"
+                      className="bg-slate-950 border border-slate-800 px-3 py-1.5 text-xs text-white rounded flex-1 outline-none"
                     />
                     <button
                       type="button"
@@ -413,7 +505,7 @@ export default function ProductsPage({
               {/* Variant Auto Generation configs */}
               {!isEditMode && (
                 <div className="p-4 bg-slate-950/50 border border-slate-800 rounded-xl space-y-3.5 text-xs text-gray-400">
-                  <span className="text-[10px] font-bold text-orange-500 uppercase tracking-wider flex items-center gap-1">
+                  <span className="text-[10px] font-bold text-[#C9A227] uppercase tracking-wider flex items-center gap-1">
                     <Sparkles size={12} /> Variant Configuration Builder
                   </span>
                   <div className="grid grid-cols-2 gap-4">
@@ -423,7 +515,7 @@ export default function ProductsPage({
                         type="text"
                         value={variantSizes.join(',')}
                         onChange={(e) => setVariantSizes(e.target.value.split(',').map((x) => x.trim()))}
-                        className="w-full bg-slate-900 border border-slate-850 rounded px-2 py-1 text-white"
+                        className="w-full bg-slate-900 border border-slate-800 rounded px-2 py-1 text-white"
                       />
                     </div>
                     <div>
@@ -432,39 +524,18 @@ export default function ProductsPage({
                         type="text"
                         value={variantColors.join(',')}
                         onChange={(e) => setVariantColors(e.target.value.split(',').map((x) => x.trim()))}
-                        className="w-full bg-slate-900 border border-slate-850 rounded px-2 py-1 text-white"
+                        className="w-full bg-slate-900 border border-slate-800 rounded px-2 py-1 text-white"
                       />
                     </div>
                   </div>
                 </div>
               )}
 
-              <div className="flex items-center gap-4 text-xs font-bold pt-4 border-t border-slate-800">
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={isFeatured}
-                    onChange={(e) => setIsFeatured(e.target.checked)}
-                    className="rounded border-slate-800 text-orange-500"
-                  />
-                  <span>Feature on Homepage Slider</span>
-                </label>
-                <label className="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={isLimited}
-                    onChange={(e) => setIsLimited(e.target.checked)}
-                    className="rounded border-slate-800 text-orange-500"
-                  />
-                  <span>Limited Drop Collection</span>
-                </label>
-              </div>
-
               <button
                 type="submit"
-                className="w-full py-3 bg-orange-600 hover:bg-orange-700 text-white text-xs font-bold uppercase rounded-lg tracking-wider cursor-pointer shadow-lg mt-6"
+                className="w-full py-3 bg-[#C9A227] hover:bg-yellow-600 text-black text-xs font-bold uppercase rounded-lg tracking-wider cursor-pointer shadow-lg mt-6 transition-all"
               >
-                {isEditMode ? 'Modify Apparel Drop Record' : 'Deploy Apparel Drop'}
+                {isEditMode ? 'Modify Product Record' : 'Deploy Product To Taxonomy'}
               </button>
             </form>
           </div>

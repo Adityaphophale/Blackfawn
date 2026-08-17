@@ -508,6 +508,49 @@ export default function ProfileView({
               </div>
             </div>
 
+            {/* Concierge & Support Assistance */}
+            <div className="bg-white border border-[#E8E5DD] p-6 rounded-xl space-y-4 shadow-xs">
+              <div className="flex items-center justify-between border-b border-gray-100 pb-3">
+                <div className="flex items-center gap-2">
+                  <ShieldCheck size={18} className="text-[#C9A227]" />
+                  <h3 className="text-xs font-serif font-bold text-gray-900 uppercase tracking-wider">CONCIERGE & CLIENT SUPPORT</h3>
+                </div>
+                <span className="text-[9px] font-bold text-[#C9A227] bg-slate-900 px-2 py-0.5 uppercase tracking-widest">
+                  Direct Assistance
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                <div className="p-4 bg-[#F8F7F2] border border-[#E8E5DD] rounded-lg space-y-1">
+                  <span className="text-[10px] font-bold text-[#666666] uppercase tracking-wider block">SUPPORT PHONE</span>
+                  <a href="tel:+919274821162" className="text-sm font-bold text-[#0B0B0B] hover:text-[#C9A227] font-mono block">
+                    +91 9274821162
+                  </a>
+                  <p className="text-[10px] text-gray-500 font-medium">Available Mon-Sat for order & sizing help</p>
+                </div>
+
+                <div className="p-4 bg-[#F8F7F2] border border-[#E8E5DD] rounded-lg space-y-1">
+                  <span className="text-[10px] font-bold text-[#666666] uppercase tracking-wider block">CUSTOMER ENQUIRIES</span>
+                  <a href="mailto:info@blackfawn.in" className="text-xs font-bold text-[#0B0B0B] hover:text-[#C9A227] font-mono block">
+                    info@blackfawn.in
+                  </a>
+                  <p className="text-[10px] text-gray-500 font-medium">Guaranteed priority response within 24h</p>
+                </div>
+
+                <div className="p-4 bg-[#F8F7F2] border border-[#E8E5DD] rounded-lg space-y-1">
+                  <span className="text-[10px] font-bold text-[#666666] uppercase tracking-wider block">REGISTERED ATELIER</span>
+                  <a
+                    href="https://maps.google.com/?q=Office+No.+413,+4th+Floor,+Siddhivinayak+Arcus,+Bhayli+Road,+Bhayli,+Vadodara"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs font-medium text-[#0B0B0B] hover:text-[#C9A227] block leading-tight"
+                  >
+                    Office No. 413, 4th Floor, Siddhivinayak Arcus, Bhayli Road, Bhayli, Vadodara.
+                  </a>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       )}

@@ -197,11 +197,14 @@ export default function HomeView({
           {categoriesList.map((cat, idx) => {
             const images: Record<string, string> = {
               "Hampers & Gifting": "/1.jpeg",
-              "Printed T-Shirts": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=400",
+              "T-Shirts": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=400",
+              "Polo T-Shirts": "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&q=80&w=400",
               "Caps": "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&q=80&w=400",
               "Socks": "https://images.unsplash.com/photo-1582966772680-860e372bb558?auto=format&fit=crop&q=80&w=400",
               "Hand Napkins": "https://images.unsplash.com/photo-1616627561950-9f746e330187?auto=format&fit=crop&q=80&w=400",
-              "Towels": "https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?auto=format&fit=crop&q=80&w=400"
+              "Towels": "https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?auto=format&fit=crop&q=80&w=400",
+              "Mugs": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&q=80&w=400",
+              "Bottles": "https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&q=80&w=400"
             };
             const catImage = images[cat.name] || "/1.jpeg";
             return (
@@ -227,6 +230,53 @@ export default function HomeView({
               </div>
             );
           })}
+        </div>
+      </section>
+
+      {/* 3.5 PREMIUM GIFT HAMPER HERO SECTION */}
+      <section id="custom-gifts-section" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative bg-[#0B0B0B] text-white border border-[#C9A227]/40 rounded-xl overflow-hidden shadow-2xl min-h-[360px] flex flex-col justify-center p-8 sm:p-12">
+          <div className="absolute inset-0 z-0">
+            <div className="absolute inset-0 bg-gradient-to-r from-[#0B0B0B] via-[#0B0B0B]/80 to-transparent z-10" />
+            <img
+              src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&q=80&w=1600"
+              alt="BLACKFAWN Custom Gift Hamper"
+              className="w-full h-full object-cover object-center filter brightness-90"
+              referrerPolicy="no-referrer"
+            />
+          </div>
+
+          <div className="relative z-10 max-w-xl space-y-4">
+            <span className="inline-flex items-center gap-1.5 text-[10px] font-bold text-[#C9A227] tracking-widest uppercase bg-[#0B0B0B]/90 border border-[#C9A227]/50 px-3 py-1 rounded">
+              <Sparkles size={12} className="text-[#C9A227]" /> BESPOKE ATELIER GIFTING
+            </span>
+
+            <h2 className="text-2xl sm:text-4xl font-serif font-extrabold text-white tracking-wide uppercase leading-tight">
+              CUSTOM GIFTS, MADE PERSONAL
+            </h2>
+
+            <p className="text-xs sm:text-sm text-gray-300 font-light leading-relaxed">
+              Create a thoughtful BLACKFAWN hamper with personalized pieces, handcrafted treats and memorable details.
+            </p>
+
+            <div className="pt-2">
+              <button
+                type="button"
+                onClick={() => {
+                  const hamperProd = products.find((p) => p.id === 'hamp-custom-gift-hamper') || products.find((p) => p.category === 'Hampers & Gifting');
+                  if (hamperProd) {
+                    onProductClick(hamperProd);
+                  } else {
+                    setCategoryFilter('Hampers & Gifting');
+                    setTab('shop');
+                  }
+                }}
+                className="px-7 py-3.5 bg-[#C9A227] hover:bg-yellow-600 text-[#0B0B0B] text-xs font-bold uppercase tracking-widest rounded transition-all cursor-pointer shadow-lg inline-flex items-center gap-2"
+              >
+                BUILD YOUR HAMPER <ArrowRight size={14} />
+              </button>
+            </div>
+          </div>
         </div>
       </section>
 

@@ -452,6 +452,55 @@ export default function HampersPage({
                     );
                   })}
                 </div>
+
+                <div className="pt-3 border-t border-slate-800 space-y-1">
+                  <label className="text-[10px] font-bold text-gray-400 uppercase">Or Add Custom Image URL (Paste URL to replace temporary imagery)</label>
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      placeholder="https://images.unsplash.com/... or /custom_photo.jpg"
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter') {
+                          e.preventDefault();
+                          const val = (e.target as HTMLInputElement).value.trim();
+                          if (val && !images.includes(val)) {
+                            setImages([val, ...images]);
+                            (e.target as HTMLInputElement).value = '';
+                          }
+                        }
+                      }}
+                      className="flex-1 bg-slate-950 border border-slate-800 rounded px-3 py-1.5 text-xs text-white outline-none focus:border-[#C9A227]"
+                    />
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        const inputEl = (e.currentTarget.previousElementSibling as HTMLInputElement);
+                        const val = inputEl?.value?.trim();
+                        if (val && !images.includes(val)) {
+                          setImages([val, ...images]);
+                          inputEl.value = '';
+                        }
+                      }}
+                      className="px-3 py-1.5 bg-[#C9A227] text-black text-xs font-bold uppercase rounded hover:bg-yellow-500 cursor-pointer"
+                    >
+                      Add Image URL
+                    </button>
+                  </div>
+                  <div className="flex flex-wrap gap-2 pt-2">
+                    {images.map((img, idx) => (
+                      <div key={idx} className="flex items-center gap-1.5 bg-slate-900 border border-slate-800 px-2 py-1 rounded text-[10px] text-gray-300">
+                        <span className="truncate max-w-[150px] font-mono">{img}</span>
+                        <button
+                          type="button"
+                          onClick={() => setImages(images.filter((_, i) => i !== idx))}
+                          className="text-red-400 hover:text-red-300 ml-1 font-bold"
+                        >
+                          ✕
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </div>
 
               {/* Descriptions */}

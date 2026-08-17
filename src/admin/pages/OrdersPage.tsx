@@ -171,15 +171,31 @@ export default function OrdersPage({ orders, onUpdateOrder }: OrdersPageProps) {
                   <p className="font-bold text-white uppercase tracking-wider">Items in Order Package</p>
                   <div className="space-y-2.5">
                     {selectedOrder.items.map((item, idx) => (
-                      <div key={idx} className="flex justify-between items-center gap-3 text-[11px]">
-                        <div className="flex items-center gap-2">
-                          <img src={item.productImage} alt="" className="w-8 h-10 object-cover rounded border border-slate-800" referrerPolicy="no-referrer" />
-                          <div>
-                            <p className="font-bold text-slate-200 capitalize">{item.productName}</p>
-                            <p className="text-[9.5px] text-gray-500 font-mono">SKU: {item.sku} • {item.size}/{item.color} • Qty: {item.quantity}</p>
+                      <div key={idx} className="bg-slate-900 border border-slate-800 rounded p-3 space-y-2">
+                        <div className="flex justify-between items-center gap-3 text-[11px]">
+                          <div className="flex items-center gap-2">
+                            <img src={item.productImage} alt="" className="w-9 h-11 object-cover rounded border border-slate-800" referrerPolicy="no-referrer" />
+                            <div>
+                              <p className="font-bold text-slate-200 capitalize">{item.productName}</p>
+                              <p className="text-[9.5px] text-gray-500 font-mono">SKU: {item.sku} • {item.size}/{item.color} • Qty: {item.quantity}</p>
+                            </div>
                           </div>
+                          <span className="font-bold text-[#C9A227]">₹{item.price * item.quantity}</span>
                         </div>
-                        <span className="font-bold text-white">₹{item.price * item.quantity}</span>
+
+                        {/* Customization Ledger Details */}
+                        {item.customization && Object.keys(item.customization).length > 0 && (
+                          <div className="bg-slate-950 p-2.5 rounded border border-amber-900/40 text-[10px] space-y-1">
+                            <p className="font-bold text-[#C9A227] uppercase tracking-wider text-[9px]">Personalization Ledger Specs:</p>
+                            <div className="grid grid-cols-2 gap-x-3 gap-y-1 text-gray-300">
+                              {Object.entries(item.customization).map(([k, v]) => (
+                                <div key={k} className="truncate">
+                                  <span className="text-gray-500 font-semibold">{k}:</span> <span className="font-bold text-white">{v || 'N/A'}</span>
+                                </div>
+                              ))}
+                            </div>
+                          </div>
+                        )}
                       </div>
                     ))}
                   </div>

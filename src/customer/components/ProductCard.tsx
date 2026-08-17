@@ -110,20 +110,28 @@ export default function ProductCard({
                   id={`quickadd-trigger-${product.id}`}
                   onClick={(e) => {
                     e.stopPropagation();
-                    setSizeSelectorOpen(true);
+                    if (product.category === 'Hampers & Gifting') {
+                      onCardClick();
+                    } else {
+                      setSizeSelectorOpen(true);
+                    }
                   }}
                   className="flex-1 py-2.5 bg-[#0B0B0B] text-white hover:text-[#C9A227] border border-[#0B0B0B] hover:border-[#C9A227] text-[10px] font-semibold tracking-widest uppercase transition-all flex items-center justify-center gap-1.5 cursor-pointer"
                 >
-                  <ShoppingBag size={12} className="text-[#C9A227]" /> Select Size
+                  <ShoppingBag size={12} className="text-[#C9A227]" /> {product.category === 'Hampers & Gifting' ? 'Customize Hamper' : 'Select Size'}
                 </button>
                 <button
                   id={`quickview-btn-${product.id}`}
                   onClick={(e) => {
                     e.stopPropagation();
-                    onQuickView(product);
+                    if (product.category === 'Hampers & Gifting') {
+                      onCardClick();
+                    } else {
+                      onQuickView(product);
+                    }
                   }}
                   className="p-2.5 bg-[#F8F7F2] hover:bg-[#FFFFFF] border border-[#E8E5DD] text-[#0B0B0B] transition-colors cursor-pointer"
-                  title="Quick View Details"
+                  title="View Hamper Details"
                 >
                   <Eye size={13} />
                 </button>

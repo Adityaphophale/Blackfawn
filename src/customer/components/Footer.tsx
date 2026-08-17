@@ -1,12 +1,16 @@
 import React from 'react';
-import { ShieldCheck, Truck, RotateCcw, Sparkles, Mail, Phone, MapPin } from 'lucide-react';
+import { ShieldCheck, Truck, RotateCcw, Sparkles, Mail, Phone, MapPin, ExternalLink } from 'lucide-react';
+import { BusinessInfo, DEFAULT_BUSINESS_INFO } from '../../shared/businessConfig';
 
 interface FooterProps {
   setTab: (tab: string) => void;
   setCategoryFilter: (cat: string) => void;
+  businessInfo?: BusinessInfo;
 }
 
-export default function Footer({ setTab, setCategoryFilter }: FooterProps) {
+export default function Footer({ setTab, setCategoryFilter, businessInfo }: FooterProps) {
+  const info = businessInfo || DEFAULT_BUSINESS_INFO;
+
   const handleDeptClick = (cat: string) => {
     setCategoryFilter(cat);
     setTab('shop');
@@ -75,14 +79,11 @@ export default function Footer({ setTab, setCategoryFilter }: FooterProps) {
             </h3>
           </div>
           <p className="text-xs text-gray-400 leading-relaxed max-w-sm">
-            Curated in India. We construct slouchy heavyweight drops, drop-shoulder silhouettes, and tactical technical garments for modern high-fashion aficionados.
+            Curated in India. We construct slouchy heavyweight drops, drop-shoulder silhouettes, bespoke hampers, and luxury apparel for modern high-fashion aficionados.
           </p>
-          <div className="flex gap-3 pt-2">
+          <div className="pt-2">
             <span className="text-[9px] font-semibold text-[#C9A227] bg-[#1A1A1A] border border-[#2A2A2A] px-3 py-1 uppercase tracking-widest">
-              GST Registered
-            </span>
-            <span className="text-[9px] font-semibold text-white bg-[#1A1A1A] border border-[#2A2A2A] px-3 py-1 uppercase tracking-widest">
-              Made In India
+              Official Registered Business
             </span>
           </div>
         </div>
@@ -91,13 +92,13 @@ export default function Footer({ setTab, setCategoryFilter }: FooterProps) {
         <div className="space-y-4">
           <h4 className="text-xs font-serif font-bold text-white tracking-widest uppercase">COLLECTIONS</h4>
           <ul className="space-y-2.5 text-xs font-medium tracking-wide">
-            <li><button onClick={() => handleDeptClick('')} className="text-gray-400 hover:text-[#C9A227] transition-colors">All Collections</button></li>
-            <li><button onClick={() => handleDeptClick('Hampers & Gifting')} className="text-[#C9A227] font-semibold hover:underline transition-colors flex items-center gap-1">Hampers & Gifting</button></li>
-            <li><button onClick={() => handleDeptClick('Printed T-Shirts')} className="text-gray-400 hover:text-[#C9A227] transition-colors">Printed T-Shirts</button></li>
-            <li><button onClick={() => handleDeptClick('Caps')} className="text-gray-400 hover:text-[#C9A227] transition-colors">Caps</button></li>
-            <li><button onClick={() => handleDeptClick('Socks')} className="text-gray-400 hover:text-[#C9A227] transition-colors">Printed Socks</button></li>
-            <li><button onClick={() => handleDeptClick('Hand Napkins')} className="text-gray-400 hover:text-[#C9A227] transition-colors">Hand Napkins</button></li>
-            <li><button onClick={() => handleDeptClick('Towels')} className="text-gray-400 hover:text-[#C9A227] transition-colors">Printed Towels</button></li>
+            <li><button onClick={() => handleDeptClick('')} className="text-gray-400 hover:text-[#C9A227] transition-colors cursor-pointer">All Collections</button></li>
+            <li><button onClick={() => handleDeptClick('Hampers & Gifting')} className="text-[#C9A227] font-semibold hover:underline transition-colors flex items-center gap-1 cursor-pointer">Hampers & Gifting</button></li>
+            <li><button onClick={() => handleDeptClick('Printed T-Shirts')} className="text-gray-400 hover:text-[#C9A227] transition-colors cursor-pointer">Printed T-Shirts</button></li>
+            <li><button onClick={() => handleDeptClick('Caps')} className="text-gray-400 hover:text-[#C9A227] transition-colors cursor-pointer">Caps</button></li>
+            <li><button onClick={() => handleDeptClick('Socks')} className="text-gray-400 hover:text-[#C9A227] transition-colors cursor-pointer">Printed Socks</button></li>
+            <li><button onClick={() => handleDeptClick('Hand Napkins')} className="text-gray-400 hover:text-[#C9A227] transition-colors cursor-pointer">Hand Napkins</button></li>
+            <li><button onClick={() => handleDeptClick('Towels')} className="text-gray-400 hover:text-[#C9A227] transition-colors cursor-pointer">Printed Towels</button></li>
           </ul>
         </div>
 
@@ -105,36 +106,67 @@ export default function Footer({ setTab, setCategoryFilter }: FooterProps) {
         <div className="space-y-4">
           <h4 className="text-xs font-serif font-bold text-white tracking-widest uppercase">CONCIERGE</h4>
           <ul className="space-y-2.5 text-xs font-medium tracking-wide">
-            <li><button onClick={() => setTab('profile')} className="text-gray-400 hover:text-[#C9A227] transition-colors">Order Tracking</button></li>
-            <li><button onClick={() => setTab('profile')} className="text-gray-400 hover:text-[#C9A227] transition-colors">Exchanges & Care</button></li>
-            <li><button onClick={() => setTab('shop')} className="text-gray-400 hover:text-[#C9A227] transition-colors">Size & Fitting Guide</button></li>
+            <li><button onClick={() => setTab('profile')} className="text-gray-400 hover:text-[#C9A227] transition-colors cursor-pointer">Order Tracking</button></li>
+            <li><button onClick={() => setTab('profile')} className="text-gray-400 hover:text-[#C9A227] transition-colors cursor-pointer">Exchanges & Care</button></li>
+            <li><button onClick={() => setTab('shop')} className="text-gray-400 hover:text-[#C9A227] transition-colors cursor-pointer">Size & Fitting Guide</button></li>
           </ul>
         </div>
 
-        {/* Col 4: Corporate Contact */}
+        {/* Col 4: Official Contact / Visit Us Section */}
         <div className="space-y-4">
-          <h4 className="text-xs font-serif font-bold text-white tracking-widest uppercase">ATELIER</h4>
-          <ul className="space-y-3 text-[11px] text-gray-400 uppercase tracking-wide">
-            <li className="flex items-center gap-2">
-              <MapPin size={13} className="text-[#C9A227] shrink-0" />
-              <span>Senapati Bapat Road, Pune, MH, India</span>
-            </li>
-            <li className="flex items-center gap-2">
-              <Mail size={13} className="text-[#C9A227] shrink-0" />
-              <span>concierge@blackfawn.in</span>
-            </li>
-            <li className="flex items-center gap-2">
-              <Phone size={13} className="text-[#C9A227] shrink-0" />
-              <span>+91 98765 43210</span>
-            </li>
-          </ul>
+          <h4 className="text-xs font-serif font-bold text-white tracking-widest uppercase flex items-center gap-1.5">
+            CONTACT / VISIT US
+          </h4>
+
+          <div className="space-y-3 text-[11px] text-gray-300">
+            {/* Clickable Address opening Google Maps */}
+            <div className="flex items-start gap-2.5">
+              <MapPin size={15} className="text-[#C9A227] shrink-0 mt-0.5" />
+              <a
+                href={info.mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[#C9A227] transition-colors block font-normal leading-relaxed group"
+              >
+                <span className="block font-semibold text-white">Office No. 413, 4th Floor,</span>
+                <span className="block">Siddhivinayak Arcus,</span>
+                <span className="block">Bhayli Road,</span>
+                <span className="block">Bhayli, Vadodara.</span>
+                <span className="text-[9.5px] text-[#C9A227] font-semibold tracking-wider flex items-center gap-1 mt-1 group-hover:underline uppercase">
+                  Open Google Maps <ExternalLink size={9} />
+                </span>
+              </a>
+            </div>
+
+            {/* Clickable Email */}
+            <div className="flex items-center gap-2.5 pt-1 border-t border-[#1A1A1A]">
+              <Mail size={14} className="text-[#C9A227] shrink-0" />
+              <a
+                href={`mailto:${info.email}`}
+                className="hover:text-[#C9A227] transition-colors font-medium text-gray-300 hover:underline"
+              >
+                {info.email}
+              </a>
+            </div>
+
+            {/* Clickable Phone for mobile */}
+            <div className="flex items-center gap-2.5 pt-1 border-t border-[#1A1A1A]">
+              <Phone size={14} className="text-[#C9A227] shrink-0" />
+              <a
+                href={`tel:${info.phone.replace(/\s+/g, '')}`}
+                className="hover:text-[#C9A227] transition-colors font-semibold text-white hover:underline font-mono"
+              >
+                {info.phone}
+              </a>
+            </div>
+          </div>
         </div>
       </div>
 
       {/* Bottom Legal Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 border-t border-[#1A1A1A] flex flex-col sm:flex-row justify-between items-center gap-4 text-[10px] tracking-widest uppercase">
         <p className="text-gray-500 text-center sm:text-left">
-          © {currentYear} BLACKFAWN HIGH FASHION ATELIER INC. ALL RIGHTS RESERVED.
+          © {currentYear} BLACKFAWN HIGH FASHION ATELIER. ALL RIGHTS RESERVED.
         </p>
         <div className="flex gap-6 text-gray-400">
           <span className="hover:text-[#C9A227] cursor-pointer">Terms & Conditions</span>
