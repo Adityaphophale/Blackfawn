@@ -1,6 +1,6 @@
 import React from 'react';
 import { ShieldCheck, Truck, RotateCcw, Sparkles, Mail, Phone, MapPin, ExternalLink } from 'lucide-react';
-import { BusinessInfo, DEFAULT_BUSINESS_INFO } from '../../shared/businessConfig';
+import { BusinessInfo, DEFAULT_BUSINESS_INFO, BRAND_LOGO } from '../../shared/businessConfig';
 
 interface FooterProps {
   setTab: (tab: string) => void;
@@ -70,13 +70,10 @@ export default function Footer({ setTab, setCategoryFilter, businessInfo }: Foot
         <div className="md:col-span-2 space-y-4">
           <div className="flex items-center gap-3">
             <img 
-              src="/logo.jpg" 
-              alt="BLACKFAWN Logo" 
-              className="h-10 w-10 object-contain rounded-full border border-[#C9A227] p-0.5" 
+              src={BRAND_LOGO} 
+              alt="BLACKFAWN" 
+              className="h-10 sm:h-12 w-auto object-contain bg-white p-1 rounded-sm" 
             />
-            <h3 className="text-xl font-serif font-bold tracking-wider text-white uppercase">
-              BLACK<span className="text-[#C9A227] italic font-normal">FAWN</span>
-            </h3>
           </div>
           <p className="text-xs text-gray-400 leading-relaxed max-w-sm">
             Curated in India. We construct slouchy heavyweight drops, drop-shoulder silhouettes, bespoke hampers, and luxury apparel for modern high-fashion aficionados.

@@ -3,6 +3,7 @@ import { Search, Heart, ShoppingBag, User as UserIcon, Shield, Menu, X, HelpCirc
 import { motion, AnimatePresence } from 'motion/react';
 import { Product, CartItem, Category } from '../../shared/types';
 import { NavItemConfig, DEFAULT_NAVIGATION_CONFIG } from '../../shared/navConfig';
+import { BRAND_LOGO } from '../../shared/businessConfig';
 
 interface HeaderProps {
   currentTab: string;
@@ -189,16 +190,13 @@ export default function Header({
             <button
               id="brand-logo"
               onClick={() => { setTab('home'); setSelectedProductId(null); setSearchFocused(false); }}
-              className="flex items-center gap-3 cursor-pointer hover:opacity-90 transition-opacity group"
+              className="flex items-center gap-2 cursor-pointer hover:opacity-90 transition-opacity"
             >
               <img 
-                src="/logo.jpg" 
-                alt="BLACKFAWN Logo" 
-                className="h-9 w-9 sm:h-11 sm:w-11 object-contain rounded-full border border-[#C9A227] p-0.5 shadow-xs group-hover:scale-105 transition-transform" 
+                src={BRAND_LOGO} 
+                alt="BLACKFAWN" 
+                className="h-10 sm:h-12 w-auto object-contain" 
               />
-              <span className="text-xl sm:text-2xl font-serif font-bold tracking-wider text-[#0B0B0B] uppercase">
-                BLACK<span className="text-[#C9A227] italic font-normal">FAWN</span>
-              </span>
             </button>
           </div>
 

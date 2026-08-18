@@ -10,6 +10,9 @@ export interface BusinessInfo {
   mapsUrl: string;
 }
 
+export const BRAND_LOGO = "/logo.jpg";
+export const BRAND_FAVICON = "/favicon.jpg";
+
 export const DEFAULT_BUSINESS_INFO: BusinessInfo = {
   name: "BLACKFAWN",
   addressLine1: "Office No. 413, 4th Floor,",
@@ -21,3 +24,4 @@ export const DEFAULT_BUSINESS_INFO: BusinessInfo = {
   phone: "+91 9274821162",
   mapsUrl: "https://maps.google.com/?q=Office+No.+413,+4th+Floor,+Siddhivinayak+Arcus,+Bhayli+Road,+Bhayli,+Vadodara"
 };
+

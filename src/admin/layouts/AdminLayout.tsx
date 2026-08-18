@@ -16,6 +16,8 @@ import {
   Settings
 } from 'lucide-react';
 
+import { BRAND_LOGO } from '../../shared/businessConfig';
+
 interface AdminLayoutProps {
   children: React.ReactNode;
   activeSubTab: string;
@@ -59,10 +61,10 @@ export default function AdminLayout({
           <div className="px-6 pb-6 border-b border-slate-800">
             <button
               onClick={() => setTab('home')}
-              className="flex items-center gap-1.5 text-lg font-black tracking-widest text-white uppercase text-left hover:opacity-90 cursor-pointer"
+              className="flex items-center gap-2 cursor-pointer hover:opacity-90"
             >
-              <span>BLACK<span className="text-[#C9A227]">FAWN</span></span>
-              <span className="text-[8px] bg-[#C9A227]/10 text-[#C9A227] border border-[#C9A227]/30 px-1 py-0.5 rounded font-black tracking-wider uppercase ml-1">SYSTEM</span>
+              <img src={BRAND_LOGO} alt="BLACKFAWN" className="h-9 w-auto object-contain bg-white p-1 rounded-sm" />
+              <span className="text-[9px] bg-[#C9A227]/10 text-[#C9A227] border border-[#C9A227]/30 px-1.5 py-0.5 rounded font-black tracking-wider uppercase">SYSTEM</span>
             </button>
           </div>
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Lock, Mail, ShieldAlert } from 'lucide-react';
+import { BRAND_LOGO } from '../../shared/businessConfig';
 
 interface AdminLoginProps {
   onLogin: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
@@ -34,15 +35,12 @@ export default function AdminLogin({ onLogin }: AdminLoginProps) {
         <div className="text-center space-y-3">
           <div className="flex justify-center">
             <img 
-              src="/logo.jpg" 
-              alt="BLACKFAWN Logo" 
-              className="h-16 w-16 object-contain rounded-full border border-[#C9A227] p-0.5 shadow-lg" 
+              src={BRAND_LOGO} 
+              alt="BLACKFAWN" 
+              className="h-16 w-auto object-contain bg-white p-1 rounded-sm shadow-lg" 
             />
           </div>
-          <h1 className="text-2xl font-serif font-bold tracking-wider uppercase text-white">
-            BLACK<span className="text-[#C9A227] italic font-normal">FAWN</span> ATELIER
-          </h1>
-          <p className="text-[10px] text-[#C9A227] font-semibold uppercase tracking-widest">Enterprise Management Portal</p>
+          <p className="text-[10px] text-[#C9A227] font-semibold uppercase tracking-widest pt-2">Enterprise Management Portal</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-5">

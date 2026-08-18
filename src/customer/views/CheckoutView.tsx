@@ -359,30 +359,30 @@ export default function CheckoutView({
                 <button
                   onClick={() => setPaymentMethod('cod')}
                   className={`p-4 border rounded-xl flex items-center gap-3 transition-all cursor-pointer ${
-                    paymentMethod === 'cod' ? 'border-[#f97316] bg-orange-50/10' : 'border-gray-200 hover:border-gray-300'
+                    paymentMethod === 'cod' ? 'border-[#C9A227] bg-[#C9A227]/5' : 'border-gray-200 hover:border-gray-300'
                   }`}
                 >
-                  <Truck size={18} className={paymentMethod === 'cod' ? 'text-[#f97316]' : 'text-gray-400'} />
+                  <Truck size={18} className={paymentMethod === 'cod' ? 'text-[#C9A227]' : 'text-gray-400'} />
                   <span>Cash on Delivery (COD)</span>
                 </button>
 
                 <button
                   onClick={() => setPaymentMethod('upi')}
                   className={`p-4 border rounded-xl flex items-center gap-3 transition-all cursor-pointer ${
-                    paymentMethod === 'upi' ? 'border-[#f97316] bg-orange-50/10' : 'border-gray-200 hover:border-gray-300'
+                    paymentMethod === 'upi' ? 'border-[#C9A227] bg-[#C9A227]/5' : 'border-gray-200 hover:border-gray-300'
                   }`}
                 >
-                  <Smartphone size={18} className={paymentMethod === 'upi' ? 'text-[#f97316]' : 'text-gray-400'} />
+                  <Smartphone size={18} className={paymentMethod === 'upi' ? 'text-[#C9A227]' : 'text-gray-400'} />
                   <span>UPI Payment (Instant QR/App)</span>
                 </button>
 
                 <button
                   onClick={() => setPaymentMethod('stripe')}
                   className={`p-4 border rounded-xl flex items-center gap-3 transition-all cursor-pointer ${
-                    paymentMethod === 'stripe' ? 'border-[#f97316] bg-orange-50/10' : 'border-gray-200 hover:border-gray-300'
+                    paymentMethod === 'stripe' ? 'border-[#C9A227] bg-[#C9A227]/5' : 'border-gray-200 hover:border-gray-300'
                   }`}
                 >
-                  <CreditCard size={18} className={paymentMethod === 'stripe' ? 'text-[#f97316]' : 'text-gray-400'} />
+                  <CreditCard size={18} className={paymentMethod === 'stripe' ? 'text-[#C9A227]' : 'text-gray-400'} />
                   <span>Credit/Debit Card</span>
                 </button>
               </div>
