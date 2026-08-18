@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { ArrowRight, Sparkles, ShieldCheck, Truck, RefreshCw, BadgePercent } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Product, Category } from '../../shared/types';
+import { Product, Category, FestivalCampaign } from '../../shared/types';
 import ProductCard from '../components/ProductCard';
+import FestivalCampaignBanner from '../components/FestivalCampaignBanner';
 
 interface HomeViewProps {
   products: Product[];
@@ -14,6 +15,7 @@ interface HomeViewProps {
   setTab: (tab: string) => void;
   setCategoryFilter: (cat: string) => void;
   categoriesList: Category[];
+  festivalCampaigns?: FestivalCampaign[];
 }
 
 const HERO_SLIDES = [
@@ -45,6 +47,7 @@ export default function HomeView({
   setTab,
   setCategoryFilter,
   categoriesList,
+  festivalCampaigns = [],
 }: HomeViewProps) {
   const [activeSlide, setActiveSlide] = useState(0);
 
@@ -65,7 +68,7 @@ export default function HomeView({
   const trendingProducts = products.filter((p) => p.isBestSeller || p.isTrending).slice(0, 4);
 
   return (
-    <div id="home-view-container" className="space-y-20 pb-24 pt-8 overflow-x-hidden bg-[#F8F7F2] text-[#111111]">
+    <div id="home-view-container" className="space-y-16 pb-24 pt-8 overflow-x-hidden bg-[#F8F7F2] text-[#111111]">
       
       {/* 1. EDITORIAL HERO CAROUSEL */}
       <section id="hero-slider-section" className="relative h-[560px] bg-[#0B0B0B] overflow-hidden border-b border-[#E8E5DD]">
@@ -143,7 +146,21 @@ export default function HomeView({
         </div>
       </section>
 
-      {/* 2. TRUST / VALUES PILLARS */}
+      {/* 2. DYNAMIC FESTIVAL CAMPAIGN ENGINE BANNER */}
+      <FestivalCampaignBanner
+        campaigns={festivalCampaigns}
+        onCtaClick={(ctaUrl) => {
+          if (ctaUrl.startsWith('#/collections/')) {
+            const rawColl = ctaUrl.replace('#/collections/', '').replace(/-/g, ' ');
+            setCategoryFilter('');
+            window.location.hash = ctaUrl;
+          } else {
+            window.location.hash = ctaUrl;
+          }
+        }}
+      />
+
+      {/* 3. TRUST / VALUES PILLARS */}
       <section id="trust-pillars-section" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 bg-[#FFFFFF] p-8 border border-[#E8E5DD] shadow-xs">
           <div className="flex items-center gap-4">

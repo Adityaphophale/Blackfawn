@@ -36,6 +36,7 @@ export default function AdminLayout({
   const menuItems = [
     { id: 'dashboard', label: 'Analytics Hub', icon: <LayoutDashboard size={14} /> },
     { id: 'products', label: 'Apparel Drop List', icon: <Package size={14} /> },
+    { id: 'campaigns', label: 'Festival Campaigns', icon: <Gift size={14} /> },
     { id: 'navigation', label: 'Mega Navigation', icon: <Tags size={14} /> },
     { id: 'hampers', label: 'Hampers & Gifting', icon: <Gift size={14} /> },
     { id: 'inventory', label: 'Stock Ledger', icon: <ShoppingCart size={14} /> },

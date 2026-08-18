@@ -28,6 +28,7 @@ import { PRODUCTS, BLOGS, COUPONS, FAQS, INITIAL_REVIEWS } from "./src/data";
 import { DEFAULT_BUSINESS_INFO } from "./src/shared/businessConfig";
 import { TOP_LEVEL_CATEGORIES, CROSS_CUTTING_COLLECTIONS } from "./src/shared/taxonomy";
 import { DEFAULT_NAVIGATION_CONFIG } from "./src/shared/navConfig";
+import { DEFAULT_FESTIVAL_CAMPAIGNS } from "./src/shared/campaignConfig";
 
 dotenv.config();
 
@@ -1187,6 +1188,51 @@ app.post("/api/admin/banners", adminMiddleware, (req: Request, res: Response) =>
 app.delete("/api/admin/banners/:id", adminMiddleware, (req: Request, res: Response) => {
   const store = loadStore();
   store.banners = store.banners.filter(b => b.id !== req.params.id);
+  saveStore(store);
+  res.json({ success: true });
+});
+
+// Festival Campaigns API Endpoints
+app.get("/api/campaigns", (req: Request, res: Response) => {
+  const store = loadStore();
+  res.json(store.festivalCampaigns || DEFAULT_FESTIVAL_CAMPAIGNS);
+});
+
+app.post("/api/admin/campaigns", adminMiddleware, (req: Request, res: Response) => {
+  const store = loadStore();
+  if (!store.festivalCampaigns) store.festivalCampaigns = [...DEFAULT_FESTIVAL_CAMPAIGNS];
+  const newCamp = {
+    id: `camp-${Math.random().toString(36).substring(2, 9)}`,
+    ...req.body,
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  };
+  store.festivalCampaigns.push(newCamp);
+  saveStore(store);
+  res.status(201).json({ success: true, campaign: newCamp });
+});
+
+app.put("/api/admin/campaigns/:id", adminMiddleware, (req: Request, res: Response) => {
+  const store = loadStore();
+  if (!store.festivalCampaigns) store.festivalCampaigns = [...DEFAULT_FESTIVAL_CAMPAIGNS];
+  const idx = store.festivalCampaigns.findIndex(c => c.id === req.params.id);
+  if (idx !== -1) {
+    store.festivalCampaigns[idx] = {
+      ...store.festivalCampaigns[idx],
+      ...req.body,
+      updatedAt: new Date().toISOString(),
+    };
+    saveStore(store);
+    res.json({ success: true, campaign: store.festivalCampaigns[idx] });
+  } else {
+    res.status(404).json({ error: "Campaign not found" });
+  }
+});
+
+app.delete("/api/admin/campaigns/:id", adminMiddleware, (req: Request, res: Response) => {
+  const store = loadStore();
+  if (!store.festivalCampaigns) store.festivalCampaigns = [...DEFAULT_FESTIVAL_CAMPAIGNS];
+  store.festivalCampaigns = store.festivalCampaigns.filter(c => c.id !== req.params.id);
   saveStore(store);
   res.json({ success: true });
 });

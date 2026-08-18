@@ -102,7 +102,7 @@ export const DEFAULT_NAVIGATION_CONFIG: NavItemConfig[] = [
     order: 2,
     columns: [
       {
-        id: "col-[#ts-men]",
+        id: "col-ts-men",
         title: "MEN",
         links: [
           { id: "l-ts-1", label: "Printed Round Neck T-Shirts", url: "#/t-shirts", categoryFilter: "T-Shirts", subCategoryFilter: "Printed Round Neck T-Shirts - Men" },
@@ -130,7 +130,7 @@ export const DEFAULT_NAVIGATION_CONFIG: NavItemConfig[] = [
           { id: "l-ts-5", label: "Printed", url: "#/t-shirts", categoryFilter: "T-Shirts" },
           { id: "l-ts-6", label: "Customized", url: "#/t-shirts", categoryFilter: "T-Shirts", personalizedFilter: true },
           { id: "l-ts-7", label: "New Arrivals", url: "#/t-shirts", categoryFilter: "T-Shirts", collectionFilter: "New Arrivals" },
-          { id: "l-ts-[#8]", label: "Best Sellers", url: "#/t-shirts", categoryFilter: "T-Shirts", collectionFilter: "Best Sellers" },
+          { id: "l-ts-8", label: "Best Sellers", url: "#/t-shirts", categoryFilter: "T-Shirts", collectionFilter: "Best Sellers" },
         ],
       },
     ],

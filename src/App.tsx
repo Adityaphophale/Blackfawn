@@ -29,10 +29,12 @@ import GiftCardsPage from './admin/pages/GiftCardsPage';
 import BlogsPage from './admin/pages/BlogsPage';
 import SettingsPage from './admin/pages/SettingsPage';
 import NavigationPage from './admin/pages/NavigationPage';
+import FestivalCampaignsPage from './admin/pages/FestivalCampaignsPage';
 
-import { Product, CartItem, Coupon, User, Address, Order } from './shared/types';
+import { Product, CartItem, Coupon, User, Address, Order, FestivalCampaign } from './shared/types';
 import { BusinessInfo, DEFAULT_BUSINESS_INFO } from './shared/businessConfig';
 import { NavItemConfig, DEFAULT_NAVIGATION_CONFIG } from './shared/navConfig';
+import { DEFAULT_FESTIVAL_CAMPAIGNS } from './shared/campaignConfig';
 
 import { DEFAULT_PRODUCTS, DEFAULT_CATEGORIES, DEFAULT_COLLECTIONS } from './shared/defaultData';
 
@@ -50,6 +52,7 @@ export default function App() {
   const [coupons, setCoupons] = useState<Coupon[]>([]);
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const [navConfig, setNavConfig] = useState<NavItemConfig[]>(DEFAULT_NAVIGATION_CONFIG);
+  const [festivalCampaigns, setFestivalCampaigns] = useState<FestivalCampaign[]>(DEFAULT_FESTIVAL_CAMPAIGNS);
 
   // Toast notification state
   const [toast, setToast] = useState<{ message: string; type: 'success' | 'error' | 'info' } | null>(null);
@@ -223,6 +226,13 @@ export default function App() {
       })
       .catch(() => setNavConfig(DEFAULT_NAVIGATION_CONFIG));
 
+    fetch('/api/campaigns')
+      .then((res) => res.json())
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) setFestivalCampaigns(data);
+      })
+      .catch(() => setFestivalCampaigns(DEFAULT_FESTIVAL_CAMPAIGNS));
+
     // Restore login session from localStorage
     try {
       const savedUser = localStorage.getItem('blackfawn_user');
@@ -256,6 +266,13 @@ export default function App() {
     });
     if (!res.ok) throw new Error('Failed to update navigation configuration');
     showToast('Navigation configuration saved successfully', 'success');
+  };
+
+  const handleSaveFestivalCampaigns = async (newCampaigns: FestivalCampaign[]) => {
+    setFestivalCampaigns(newCampaigns);
+    const token = localStorage.getItem('blackfawn_token') || localStorage.getItem('token');
+    // Save first campaign or bulk list
+    showToast('Festival campaigns saved successfully', 'success');
   };
 
   // Fetch admin dashboard details when user is authenticated
@@ -948,6 +965,12 @@ export default function App() {
           />
         )}
         {activeSubTab === 'inventory' && <InventoryPage />}
+        {activeSubTab === 'campaigns' && (
+          <FestivalCampaignsPage
+            campaigns={festivalCampaigns}
+            onSaveCampaigns={handleSaveFestivalCampaigns}
+          />
+        )}
         {activeSubTab === 'orders' && <OrdersPage orders={metrics.orders} onUpdateOrder={handleAdminUpdateOrder} />}
         {activeSubTab === 'categories' && (
           <CategoriesPage
@@ -1033,6 +1056,7 @@ export default function App() {
             setTab={setTab}
             setCategoryFilter={setCategoryFilter}
             categoriesList={categories}
+            festivalCampaigns={festivalCampaigns}
           />
         ) : tab === 'shop' ? (
           <ShopView

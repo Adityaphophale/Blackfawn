@@ -210,3 +210,29 @@ export interface GiftCard {
   expiryDate: string;
   isActive: boolean;
 }
+
+export interface FestivalCampaign {
+  id: string;
+  festivalName: string;
+  campaignName: string;
+  startDate: string; // ISO String (e.g. 2026-08-01T00:00:00+05:30)
+  endDate: string; // ISO String (e.g. 2026-08-31T23:59:59+05:30)
+  orderByDate: string; // ISO String for delivery deadline (e.g. 2026-08-25)
+  headline: string;
+  subheadline: string;
+  ctaText: string;
+  ctaUrl: string;
+  bannerImage: string;
+  mobileBannerImage?: string;
+  collection: string;
+  campaignMessage?: string;
+  priority: number; // Higher number = higher priority when dates overlap
+  status: 'draft' | 'scheduled' | 'active' | 'expired' | 'disabled';
+  seoTitle?: string;
+  seoDescription?: string;
+  ogImage?: string;
+  canonicalUrl?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
