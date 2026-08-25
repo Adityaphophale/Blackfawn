@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
+  
+  --color-brand-bg: #F8F7F2;
+  --color-brand-black: #0B0B0B;
+  --color-brand-black-sec: #1A1A1A;
+  --color-brand-gold: #C9A227;
+  --color-brand-gold-hover: #D4AF37;
+  --color-brand-text: #111111;
+  --color-brand-muted: #666666;
+  --color-brand-border: #E8E5DD;
+  --color-brand-card: #FFFFFF;
+  --color-brand-section: #F3F1EB;
+}
+
+/* Custom luxury scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F8F7F2;
+}
+::-webkit-scrollbar-thumb {
+  background: #C9A227;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #D4AF37;
+}
+
+body {
+  background-color: #F8F7F2;
+  color: #111111;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  letter-spacing: 0.01em;
+}
+
+h1, h2, h3, h4, .font-serif {
+  font-family: var(--font-serif);
+}
+
+/* Luxury Utility Classes */
+.bg-brand-bg { background-color: #F8F7F2; }
+.bg-brand-section { background-color: #F3F1EB; }
+.bg-brand-black { background-color: #0B0B0B; }
+.bg-brand-black-sec { background-color: #1A1A1A; }
+.text-brand-gold { color: #C9A227; }
+.text-brand-gold-hover:hover { color: #D4AF37; }
+.border-brand-border { border-color: #E8E5DD; }
+.border-brand-gold { border-color: #C9A227; }
+
+/* Buttons */
+.btn-primary {
+  background-color: #0B0B0B;
+  color: #FFFFFF;
+  border: 1px solid #0B0B0B;
+  transition: all 0.3s ease;
+}
+.btn-primary:hover {
+  border-color: #C9A227;
+  color: #FFFFFF;
+  box-shadow: 0 4px 15px rgba(201, 162, 39, 0.15);
+}
+
+.btn-secondary {
+  background-color: #FFFFFF;
+  color: #0B0B0B;
+  border: 1px solid #0B0B0B;
+  transition: all 0.3s ease;
+}
+.btn-secondary:hover {
+  border-color: #C9A227;
+  color: #C9A227;
+  background-color: #F8F7F2;
+}
+
+/* Luxury card container */
+.luxury-card {
+  background-color: #FFFFFF;
+  border: 1px solid #E8E5DD;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.luxury-card:hover {
+  border-color: #C9A227;
+  box-shadow: 0 10px 25px -5px rgba(11, 11, 11, 0.05), 0 8px 10px -6px rgba(201, 162, 39, 0.05);
+}
+
+/* Shimmer skeleton animation */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.shimmer {
+  background: linear-gradient(90deg, #F8F7F2 25%, #E8E5DD 50%, #F8F7F2 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Luxury links with gold hover underline */
+.hover-gold-underline {
+  position: relative;
+}
+.hover-gold-underline::after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 1.5px;
+  bottom: -2px;
+  left: 0;
+  background-color: #C9A227;
+  transition: width 0.3s ease;
+}
+.hover-gold-underline:hover::after {
+  width: 100%;
+}

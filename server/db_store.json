@@ -1,0 +1,3482 @@
+{
+  "users": [
+    {
+      "id": "usr-guest-1",
+      "email": "admin@abc.com",
+      "name": "Abhishek Kumar",
+      "phone": "+91 98765 43210",
+      "points": 450,
+      "addresses": [
+        {
+          "id": "addr-1",
+          "type": "home",
+          "name": "Abhishek Kumar",
+          "addressLine1": "Flat 402, Building A, Sky Heights",
+          "addressLine2": "Senapati Bapat Road",
+          "city": "Pune",
+          "state": "Maharashtra",
+          "postalCode": "411016",
+          "phone": "+91 98765 43210",
+          "isDefault": true
+        }
+      ],
+      "couponsUsed": [],
+      "role": "admin",
+      "createdAt": "2026-08-11T12:19:44.119Z"
+    }
+  ],
+  "orders": [
+    {
+      "id": "BF-82931-IN",
+      "userId": "usr-guest-1",
+      "customerName": "Abhishek Kumar",
+      "customerEmail": "admin@abc.com",
+      "items": [
+        {
+          "productId": "round-neck-men",
+          "productName": "Printed Round Neck T-Shirt - Men",
+          "productImage": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=1000",
+          "size": "L",
+          "color": "Charcoal Black",
+          "price": 999,
+          "quantity": 1,
+          "sku": "RN-MEN-L-CHA"
+        },
+        {
+          "productId": "printed-cap",
+          "productName": "Printed Cap (Unisex)",
+          "productImage": "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&q=80&w=1000",
+          "size": "Free Size",
+          "color": "Black",
+          "price": 599,
+          "quantity": 1,
+          "sku": "CAP-UNI-OS-BLK"
+        }
+      ],
+      "shippingAddress": {
+        "id": "addr-1",
+        "type": "home",
+        "name": "Abhishek Kumar",
+        "addressLine1": "Flat 402, Building A, Sky Heights",
+        "addressLine2": "Senapati Bapat Road",
+        "city": "Pune",
+        "state": "Maharashtra",
+        "postalCode": "411016",
+        "phone": "+91 98765 43210",
+        "isDefault": true
+      },
+      "discount": 0,
+      "subtotal": 2198,
+      "shippingFee": 0,
+      "gstAmount": 110,
+      "total": 2198,
+      "paymentMethod": "stripe",
+      "paymentStatus": "paid",
+      "orderStatus": "delivered",
+      "trackingNumber": "IN-FAWN-772911",
+      "trackingStatus": "Delivered to Customer Gate",
+      "createdAt": "2026-08-06T12:19:44.119Z",
+      "updatedAt": "2026-08-06T12:19:44.119Z",
+      "gstInvoiceRequested": true,
+      "gstNumber": "27AAAAA1111A1Z1"
+    }
+  ],
+  "reviews": [
+    {
+      "id": "r1",
+      "productId": "round-neck-men",
+      "userName": "Aarav Sharma",
+      "userEmail": "aarav.sharma@gmail.com",
+      "rating": 5,
+      "comment": "This is easily the highest quality printed round neck tee I have ever bought in India. The print finish is premium and sits perfectly. High quality organic cotton weave.",
+      "date": "July 10, 2026",
+      "verified": true,
+      "helpfulCount": 24,
+      "reply": "Appreciate the support, Aarav! Stay tuned for more drops!"
+    }
+  ],
+  "products": [
+    {
+      "id": "hamp-custom-gift-hamper",
+      "name": "BLACKFAWN Custom Gift Hamper",
+      "slug": "blackfawn-custom-gift-hamper",
+      "shortDescription": "The ultimate bespoke gifting experience. An ultra-exclusive 14-piece luxury hamper featuring personalized printed apparel, metal drinkware, desk accessories, and artisanal gourmet treats.",
+      "description": "<p>Elevate personal and corporate celebrations with the signature <strong>BLACKFAWN Custom Gift Hamper</strong>. Encased in an architectural matte black velvet chest with champagne gold satin lining, this 14-piece set combines bespoke personal accessories with handcrafted delicacies.</p><h3>Why Choose the BLACKFAWN Atelier Hamper?</h3><ul><li><strong>14 Signature Items:</strong> Customized T-Shirt, Mug, Water Bottle, Pillow, Cap, Towel, Hand Napkin, Keychain, Magnet, Badge, Wish Card, Candle, Handmade Chocolates & Cookies.</li><li><strong>Bespoke Customization:</strong> Personalize text, names, sizes, and design options step-by-step.</li><li><strong>Luxury Packaging:</strong> Delivered in a gold-embossed matte black wooden gift trunk.</li></ul>",
+      "category": "Hampers & Gifting",
+      "collection": "Premium Gift Hampers",
+      "brand": "BLACKFAWN",
+      "baseSku": "HAMP-CUSTOM-01",
+      "barcode": "890100000099",
+      "material": "Matte Velvet Trunk & Gold Metal Hardware",
+      "fabric": "Champagne Gold Satin Lining",
+      "fit": "Full 14-Piece Bespoke Gift Box",
+      "gender": "unisex",
+      "gstRate": 18,
+      "tags": [
+        "Hamper",
+        "Gift Box",
+        "Customized",
+        "Premium",
+        "Gifting"
+      ],
+      "seo": {
+        "title": "BLACKFAWN Custom Gift Hamper | Bespoke Luxury Gifting",
+        "description": "Personalized premium 14-piece customizable gift hamper featuring custom printed t-shirt, mug, bottle, accessories and gourmet treats.",
+        "keywords": "custom gift hamper, luxury gifting, personalized gift box, corporate hamper"
+      },
+      "status": "active",
+      "isFeatured": true,
+      "isBestSeller": true,
+      "isTrending": true,
+      "isNewArrival": true,
+      "images": [
+        "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&q=80&w=1000",
+        "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&q=80&w=1000",
+        "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=1000",
+        "https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&q=80&w=1000"
+      ],
+      "rating": 5,
+      "reviewCount": 42,
+      "codAvailable": true,
+      "deliveryDaysEst": 3,
+      "price": 3999,
+      "discountPrice": 3999,
+      "createdAt": "2026-08-17T18:30:00.000Z",
+      "updatedAt": "2026-08-17T18:30:00.000Z",
+      "variants": [
+        {
+          "id": "var-hamp-custom-std",
+          "sku": "HAMP-CUSTOM-STD",
+          "size": "Bespoke 14-Piece Box",
+          "color": "Matte Black & Champagne Gold",
+          "price": 3999,
+          "salePrice": 3999,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "images": [
+            "https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&q=80&w=1000",
+            "https://images.unsplash.com/photo-1513519245088-0e12902e5a38?auto=format&fit=crop&q=80&w=1000",
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=1000",
+            "https://images.unsplash.com/photo-1602143407151-7111542de6e8?auto=format&fit=crop&q=80&w=1000"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "round-neck-men",
+      "name": "Printed Round Neck T-Shirt - Men",
+      "slug": "printed-round-neck-tshirt-men",
+      "shortDescription": "Premium printed crew neck tee designed for the modern gentleman. Built with breathable fabrics.",
+      "description": "<p>Constructed with a double-needle stitched neckline and sleeve hems for durability. High-density graphic print on front chest.</p><h3>Care Instructions</h3><ul><li>Machine wash warm, inside out</li><li>Tumble dry medium</li><li>Do not iron print directly</li></ul>",
+      "category": "Printed T-Shirts",
+      "collection": "Core Collection",
+      "brand": "BLACKFAWN",
+      "baseSku": "RN-MEN",
+      "barcode": "890100000001",
+      "material": "100% Cotton / Cotton Blend Options",
+      "fabric": "Cotton Weave",
+      "fit": "Regular / Relaxed Options",
+      "gender": "men",
+      "gstRate": 5,
+      "tags": [
+        "T-Shirts",
+        "Men",
+        "Printed"
+      ],
+      "seo": {
+        "title": "Printed Round Neck T-Shirt - Men | BLACKFAWN",
+        "description": "Premium printed crew neck tee designed for Men.",
+        "keywords": "tshirt, round neck, men, streetwear"
+      },
+      "status": "active",
+      "isFeatured": true,
+      "isTrending": true,
+      "images": [
+        "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800"
+      ],
+      "rating": 4.6,
+      "reviewCount": 38,
+      "codAvailable": true,
+      "deliveryDaysEst": 3,
+      "price": 999,
+      "discountPrice": 799,
+      "createdAt": "2026-08-11T12:19:44.119Z",
+      "updatedAt": "2026-08-11T12:19:44.119Z",
+      "variants": [
+        {
+          "id": "var-xdsr5muvt",
+          "sku": "RN-MEN-S-BLA-100-REG",
+          "size": "S",
+          "color": "Black (100% Cotton, Regular Fit)",
+          "price": 999,
+          "salePrice": 799,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-c1fb5y7ot",
+          "sku": "RN-MEN-S-BLA-100-REL",
+          "size": "S",
+          "color": "Black (100% Cotton, Relaxed Fit)",
+          "price": 999,
+          "salePrice": 799,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-oggqcrgr4",
+          "sku": "RN-MEN-S-BLA-DRY-REG",
+          "size": "S",
+          "color": "Black (Dry Fit, Regular Fit)",
+          "price": 999,
+          "salePrice": 799,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-30u4n0e73",
+          "sku": "RN-MEN-S-BLA-DRY-REL",
+          "size": "S",
+          "color": "Black (Dry Fit, Relaxed Fit)",
+          "price": 999,
+          "salePrice": 799,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-zksygfnx9",
+          "sku": "RN-MEN-S-WHI-100-REG",
+          "size": "S",
+          "color": "White (100% Cotton, Regular Fit)",
+          "price": 999,
+          "salePrice": 799,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-mn0w73793",
+          "sku": "RN-MEN-S-WHI-100-REL",
+          "size": "S",
+          "color": "White (100% Cotton, Relaxed Fit)",
+          "price": 999,
+          "salePrice": 799,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-gkjoyca5s",
+          "sku": "RN-MEN-S-WHI-DRY-REG",
+          "size": "S",
+          "color": "White (Dry Fit, Regular Fit)",
+          "price": 999,
+          "salePrice": 799,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-zywjkbg5m",
+          "sku": "RN-MEN-S-WHI-DRY-REL",
+          "size": "S",
+          "color": "White (Dry Fit, Relaxed Fit)",
+          "price": 999,
+          "salePrice": 799,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-9xyehhxao",
+          "sku": "RN-MEN-S-NAV-100-REG",
+          "size": "S",
+          "color": "Navy (100% Cotton, Regular Fit)",
+          "price": 999,
+          "salePrice": 799,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-gijjx9ovb",
+          "sku": "RN-MEN-S-NAV-100-REL",
+          "size": "S",
+          "color": "Navy (100% Cotton, Relaxed Fit)",
+          "price": 999,
+          "salePrice": 799,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-43dket4ms",
+          "sku": "RN-MEN-S-NAV-DRY-REG",
+          "size": "S",
+          "color": "Navy (Dry Fit, Regular Fit)",
+          "price": 999,
+          "salePrice": 799,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-4fiwu77l0",
+          "sku": "RN-MEN-S-NAV-DRY-REL",
+          "size": "S",
+          "color": "Navy (Dry Fit, Relaxed Fit)",
+          "price": 999,
+          "salePrice": 799,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-agmbcy76t",
+          "sku": "RN-MEN-S-GRE-100-REG",
+          "size": "S",
+          "color": "Grey (100% Cotton, Regular Fit)",
+          "price": 999,
+          "salePrice": 799,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-hgibfwn40",
+          "sku": "RN-MEN-S-GRE-100-REL",
+          "size": "S",
+          "color": "Grey (100% Cotton, Relaxed Fit)",
+          "price": 999,
+          "salePrice": 799,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-gjibtq0ce",
+          "sku": "RN-MEN-S-GRE-DRY-REG",
+          "size": "S",
+          "color": "Grey (Dry Fit, Regular Fit)",
+          "price": 999,
+          "salePrice": 799,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-4npqxntpg",
+          "sku": "RN-MEN-S-GRE-DRY-REL",
+          "size": "S",
+          "color": "Grey (Dry Fit, Relaxed Fit)",
+          "price": 999,
+          "salePrice": 799,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-91bpktmyz",
+          "sku": "RN-MEN-M-BLA-100-REG",
+          "size": "M",
+          "color": "Black (100% Cotton, Regular Fit)",
+          "price": 999,
+          "salePrice": 799,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-bwu3p8gwh",
+          "sku": "RN-MEN-M-BLA-100-REL",
+          "size": "M",
+          "color": "Black (100% Cotton, Relaxed Fit)",
+          "price": 999,
+          "salePrice": 799,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "round-neck-women",
+      "name": "Printed Round Neck T-Shirt - Women",
+      "slug": "printed-round-neck-tshirt-women",
+      "shortDescription": "Chic and soft printed crew neck tee designed for ladies. Features a tailored comfort silhouette.",
+      "description": "<p>Ultra-soft cotton blend fabric designed to look good and feel breathable. Premium minimal tags.</p>",
+      "category": "Printed T-Shirts",
+      "collection": "Core Collection",
+      "brand": "BLACKFAWN",
+      "baseSku": "RN-WOMEN",
+      "barcode": "890100000002",
+      "material": "Cotton Blend",
+      "fabric": "Knit Cotton",
+      "fit": "Regular / Relaxed Options",
+      "gender": "women",
+      "gstRate": 5,
+      "tags": [
+        "T-Shirts",
+        "Women",
+        "Printed"
+      ],
+      "seo": {
+        "title": "Printed Round Neck T-Shirt - Women | BLACKFAWN",
+        "description": "Soft crew neck tee for Women.",
+        "keywords": "tshirt, round neck, women"
+      },
+      "status": "active",
+      "isFeatured": true,
+      "images": [
+        "https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&q=80&w=800"
+      ],
+      "rating": 4.7,
+      "reviewCount": 29,
+      "codAvailable": true,
+      "deliveryDaysEst": 3,
+      "price": 999,
+      "discountPrice": 799,
+      "createdAt": "2026-08-11T12:19:44.120Z",
+      "updatedAt": "2026-08-11T12:19:44.120Z",
+      "variants": [
+        {
+          "id": "var-j0gndbpy6",
+          "sku": "RN-WOMEN-S-WHI-100-REG",
+          "size": "S",
+          "color": "White (100% Cotton, Regular Fit)",
+          "price": 999,
+          "salePrice": 799,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-osqlm7qgk",
+          "sku": "RN-WOMEN-S-WHI-100-SLI",
+          "size": "S",
+          "color": "White (100% Cotton, Slim Fit Fit)",
+          "price": 999,
+          "salePrice": 799,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-94k9903mx",
+          "sku": "RN-WOMEN-S-WHI-COT-REG",
+          "size": "S",
+          "color": "White (Cotton Blend, Regular Fit)",
+          "price": 999,
+          "salePrice": 799,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-h47djg9vn",
+          "sku": "RN-WOMEN-S-WHI-COT-SLI",
+          "size": "S",
+          "color": "White (Cotton Blend, Slim Fit Fit)",
+          "price": 999,
+          "salePrice": 799,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-s7ytr7say",
+          "sku": "RN-WOMEN-S-BLA-100-REG",
+          "size": "S",
+          "color": "Black (100% Cotton, Regular Fit)",
+          "price": 999,
+          "salePrice": 799,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-me2p0wo1g",
+          "sku": "RN-WOMEN-S-BLA-100-SLI",
+          "size": "S",
+          "color": "Black (100% Cotton, Slim Fit Fit)",
+          "price": 999,
+          "salePrice": 799,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-mketx1gca",
+          "sku": "RN-WOMEN-S-BLA-COT-REG",
+          "size": "S",
+          "color": "Black (Cotton Blend, Regular Fit)",
+          "price": 999,
+          "salePrice": 799,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-bfq7pzxcm",
+          "sku": "RN-WOMEN-S-BLA-COT-SLI",
+          "size": "S",
+          "color": "Black (Cotton Blend, Slim Fit Fit)",
+          "price": 999,
+          "salePrice": 799,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-p7s94t75g",
+          "sku": "RN-WOMEN-S-GRE-100-REG",
+          "size": "S",
+          "color": "Grey (100% Cotton, Regular Fit)",
+          "price": 999,
+          "salePrice": 799,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-7q3epiuy9",
+          "sku": "RN-WOMEN-S-GRE-100-SLI",
+          "size": "S",
+          "color": "Grey (100% Cotton, Slim Fit Fit)",
+          "price": 999,
+          "salePrice": 799,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-eaf0yqrud",
+          "sku": "RN-WOMEN-S-GRE-COT-REG",
+          "size": "S",
+          "color": "Grey (Cotton Blend, Regular Fit)",
+          "price": 999,
+          "salePrice": 799,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-j83kue32t",
+          "sku": "RN-WOMEN-S-GRE-COT-SLI",
+          "size": "S",
+          "color": "Grey (Cotton Blend, Slim Fit Fit)",
+          "price": 999,
+          "salePrice": 799,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-fn2azzwef",
+          "sku": "RN-WOMEN-S-RED-100-REG",
+          "size": "S",
+          "color": "Red (100% Cotton, Regular Fit)",
+          "price": 999,
+          "salePrice": 799,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-nbinhxkd7",
+          "sku": "RN-WOMEN-S-RED-100-SLI",
+          "size": "S",
+          "color": "Red (100% Cotton, Slim Fit Fit)",
+          "price": 999,
+          "salePrice": 799,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-itwlg9zez",
+          "sku": "RN-WOMEN-S-RED-COT-REG",
+          "size": "S",
+          "color": "Red (Cotton Blend, Regular Fit)",
+          "price": 999,
+          "salePrice": 799,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-ilkfliv0z",
+          "sku": "RN-WOMEN-S-RED-COT-SLI",
+          "size": "S",
+          "color": "Red (Cotton Blend, Slim Fit Fit)",
+          "price": 999,
+          "salePrice": 799,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-1khs5u5ng",
+          "sku": "RN-WOMEN-M-WHI-100-REG",
+          "size": "M",
+          "color": "White (100% Cotton, Regular Fit)",
+          "price": 999,
+          "salePrice": 799,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-zldriwbmm",
+          "sku": "RN-WOMEN-M-WHI-100-SLI",
+          "size": "M",
+          "color": "White (100% Cotton, Slim Fit Fit)",
+          "price": 999,
+          "salePrice": 799,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "round-neck-kids",
+      "name": "Printed Round Neck T-Shirt - Kids",
+      "slug": "printed-round-neck-tshirt-kids",
+      "shortDescription": "Comfy, vibrant, and fun printed round neck tee for children. Extremely soft on skin.",
+      "description": "<p>Crafted from hypoallergenic organic cotton blends to prevent skin irritation. Vibrant safe printing ink.</p>",
+      "category": "Printed T-Shirts",
+      "collection": "Kids Drop",
+      "brand": "BLACKFAWN",
+      "baseSku": "RN-KIDS",
+      "barcode": "890100000003",
+      "material": "100% Cotton",
+      "fabric": "Soft Jersey",
+      "fit": "Regular",
+      "gender": "unisex",
+      "gstRate": 5,
+      "tags": [
+        "T-Shirts",
+        "Kids",
+        "Vibrant"
+      ],
+      "seo": {
+        "title": "Printed Round Neck T-Shirt - Kids | BLACKFAWN",
+        "description": "Hypoallergenic fun prints for kids.",
+        "keywords": "kids, round neck, tshirt"
+      },
+      "status": "active",
+      "images": [
+        "https://images.unsplash.com/photo-1519457431-44ccd64a579b?auto=format&fit=crop&q=80&w=800"
+      ],
+      "rating": 4.8,
+      "reviewCount": 14,
+      "codAvailable": true,
+      "deliveryDaysEst": 4,
+      "price": 699,
+      "discountPrice": 499,
+      "createdAt": "2026-08-11T12:19:44.120Z",
+      "updatedAt": "2026-08-11T12:19:44.120Z",
+      "variants": [
+        {
+          "id": "var-k0j6a30w0",
+          "sku": "RN-KIDS-S-YEL-100-REG",
+          "size": "S",
+          "color": "Yellow (100% Cotton, Regular Fit)",
+          "price": 699,
+          "salePrice": 499,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-a3lwagvco",
+          "sku": "RN-KIDS-S-RED-100-REG",
+          "size": "S",
+          "color": "Red (100% Cotton, Regular Fit)",
+          "price": 699,
+          "salePrice": 499,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-o1vyi4tjx",
+          "sku": "RN-KIDS-S-BLU-100-REG",
+          "size": "S",
+          "color": "Blue (100% Cotton, Regular Fit)",
+          "price": 699,
+          "salePrice": 499,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-7rtgepxki",
+          "sku": "RN-KIDS-S-GRE-100-REG",
+          "size": "S",
+          "color": "Green (100% Cotton, Regular Fit)",
+          "price": 699,
+          "salePrice": 499,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-dn60q0qul",
+          "sku": "RN-KIDS-M-YEL-100-REG",
+          "size": "M",
+          "color": "Yellow (100% Cotton, Regular Fit)",
+          "price": 699,
+          "salePrice": 499,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-k2xtx4vj7",
+          "sku": "RN-KIDS-M-RED-100-REG",
+          "size": "M",
+          "color": "Red (100% Cotton, Regular Fit)",
+          "price": 699,
+          "salePrice": 499,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-mmo6ig3mm",
+          "sku": "RN-KIDS-M-BLU-100-REG",
+          "size": "M",
+          "color": "Blue (100% Cotton, Regular Fit)",
+          "price": 699,
+          "salePrice": 499,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-40dt8mxoo",
+          "sku": "RN-KIDS-M-GRE-100-REG",
+          "size": "M",
+          "color": "Green (100% Cotton, Regular Fit)",
+          "price": 699,
+          "salePrice": 499,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-lc75byydi",
+          "sku": "RN-KIDS-L-YEL-100-REG",
+          "size": "L",
+          "color": "Yellow (100% Cotton, Regular Fit)",
+          "price": 699,
+          "salePrice": 499,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-7rrg6u26w",
+          "sku": "RN-KIDS-L-RED-100-REG",
+          "size": "L",
+          "color": "Red (100% Cotton, Regular Fit)",
+          "price": 699,
+          "salePrice": 499,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-hefrlz8b3",
+          "sku": "RN-KIDS-L-BLU-100-REG",
+          "size": "L",
+          "color": "Blue (100% Cotton, Regular Fit)",
+          "price": 699,
+          "salePrice": 499,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-b6tn0km6k",
+          "sku": "RN-KIDS-L-GRE-100-REG",
+          "size": "L",
+          "color": "Green (100% Cotton, Regular Fit)",
+          "price": 699,
+          "salePrice": 499,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "polo-men",
+      "name": "Printed Polo T-Shirt - Men",
+      "slug": "printed-polo-tshirt-men",
+      "shortDescription": "Classic collar printed polo shirts for semi-formal styling. Features heavy-weight knit fabric.",
+      "description": "<p>Ribbed collar and cuffs prevent stretching. Button-placket closure for structured neck fit.</p>",
+      "category": "Printed T-Shirts",
+      "collection": "Classics",
+      "brand": "BLACKFAWN",
+      "baseSku": "POLO-MEN",
+      "barcode": "890100000004",
+      "material": "Cotton / Dry Fit Options",
+      "fabric": "Pique Cotton Weave",
+      "fit": "Regular / Slim Options",
+      "gender": "men",
+      "gstRate": 5,
+      "tags": [
+        "Polo",
+        "Men",
+        "Formal"
+      ],
+      "seo": {
+        "title": "Printed Polo T-Shirt - Men | BLACKFAWN",
+        "description": "Sophisticated pique cotton polo for Men.",
+        "keywords": "polo, collar, men"
+      },
+      "status": "active",
+      "isTrending": true,
+      "images": [
+        "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&q=80&w=800"
+      ],
+      "rating": 4.5,
+      "reviewCount": 42,
+      "codAvailable": true,
+      "deliveryDaysEst": 3,
+      "price": 1299,
+      "discountPrice": 999,
+      "createdAt": "2026-08-11T12:19:44.120Z",
+      "updatedAt": "2026-08-11T12:19:44.120Z",
+      "variants": [
+        {
+          "id": "var-ira1t7yo2",
+          "sku": "POLO-MEN-S-NAV-100-REG",
+          "size": "S",
+          "color": "Navy (100% Cotton, Regular Fit)",
+          "price": 1299,
+          "salePrice": 999,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-5vxil6umn",
+          "sku": "POLO-MEN-S-NAV-100-SLI",
+          "size": "S",
+          "color": "Navy (100% Cotton, Slim Fit Fit)",
+          "price": 1299,
+          "salePrice": 999,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-s3yjfmuq8",
+          "sku": "POLO-MEN-S-NAV-DRY-REG",
+          "size": "S",
+          "color": "Navy (Dry Fit, Regular Fit)",
+          "price": 1299,
+          "salePrice": 999,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-cvhhggazg",
+          "sku": "POLO-MEN-S-NAV-DRY-SLI",
+          "size": "S",
+          "color": "Navy (Dry Fit, Slim Fit Fit)",
+          "price": 1299,
+          "salePrice": 999,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-dvot7zc4a",
+          "sku": "POLO-MEN-S-BLA-100-REG",
+          "size": "S",
+          "color": "Black (100% Cotton, Regular Fit)",
+          "price": 1299,
+          "salePrice": 999,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-3hpsjulcs",
+          "sku": "POLO-MEN-S-BLA-100-SLI",
+          "size": "S",
+          "color": "Black (100% Cotton, Slim Fit Fit)",
+          "price": 1299,
+          "salePrice": 999,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-mrbztjk3e",
+          "sku": "POLO-MEN-S-BLA-DRY-REG",
+          "size": "S",
+          "color": "Black (Dry Fit, Regular Fit)",
+          "price": 1299,
+          "salePrice": 999,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-wvrvtwx1l",
+          "sku": "POLO-MEN-S-BLA-DRY-SLI",
+          "size": "S",
+          "color": "Black (Dry Fit, Slim Fit Fit)",
+          "price": 1299,
+          "salePrice": 999,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-6knh2wzvs",
+          "sku": "POLO-MEN-S-GRE-100-REG",
+          "size": "S",
+          "color": "Grey (100% Cotton, Regular Fit)",
+          "price": 1299,
+          "salePrice": 999,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-aa9ctna4q",
+          "sku": "POLO-MEN-S-GRE-100-SLI",
+          "size": "S",
+          "color": "Grey (100% Cotton, Slim Fit Fit)",
+          "price": 1299,
+          "salePrice": 999,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-i5k8v7ovk",
+          "sku": "POLO-MEN-S-GRE-DRY-REG",
+          "size": "S",
+          "color": "Grey (Dry Fit, Regular Fit)",
+          "price": 1299,
+          "salePrice": 999,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-hx1ctavq9",
+          "sku": "POLO-MEN-S-GRE-DRY-SLI",
+          "size": "S",
+          "color": "Grey (Dry Fit, Slim Fit Fit)",
+          "price": 1299,
+          "salePrice": 999,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-lhnq5npbi",
+          "sku": "POLO-MEN-S-WHI-100-REG",
+          "size": "S",
+          "color": "White (100% Cotton, Regular Fit)",
+          "price": 1299,
+          "salePrice": 999,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-hb48wlmyq",
+          "sku": "POLO-MEN-S-WHI-100-SLI",
+          "size": "S",
+          "color": "White (100% Cotton, Slim Fit Fit)",
+          "price": 1299,
+          "salePrice": 999,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-r1a33ivno",
+          "sku": "POLO-MEN-S-WHI-DRY-REG",
+          "size": "S",
+          "color": "White (Dry Fit, Regular Fit)",
+          "price": 1299,
+          "salePrice": 999,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-i4lylamr7",
+          "sku": "POLO-MEN-S-WHI-DRY-SLI",
+          "size": "S",
+          "color": "White (Dry Fit, Slim Fit Fit)",
+          "price": 1299,
+          "salePrice": 999,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-mdgidz27y",
+          "sku": "POLO-MEN-M-NAV-100-REG",
+          "size": "M",
+          "color": "Navy (100% Cotton, Regular Fit)",
+          "price": 1299,
+          "salePrice": 999,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-h4g55hbt3",
+          "sku": "POLO-MEN-M-NAV-100-SLI",
+          "size": "M",
+          "color": "Navy (100% Cotton, Slim Fit Fit)",
+          "price": 1299,
+          "salePrice": 999,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "weight": 200,
+          "dimensions": "30x25x2 cm",
+          "images": [
+            "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1583743814966-8936f5b7be1a?auto=format&fit=crop&q=80&w=800"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "printed-cap",
+      "name": "Printed Cap (Unisex)",
+      "slug": "printed-cap-unisex",
+      "shortDescription": "Signature structure baseball cap featuring flat embroidery tag. One size fits all adjustment.",
+      "description": "<p>Unstructured 6-panel design with brass buckle rear slide adjustment lock. Sweatband built inside.</p>",
+      "category": "Caps",
+      "collection": "Utility Gear",
+      "brand": "BLACKFAWN",
+      "baseSku": "CAP-UNISEX",
+      "barcode": "890100000005",
+      "material": "150g Heavy Canvas Cotton",
+      "fabric": "Canvas",
+      "fit": "Regular Adjustment",
+      "gender": "unisex",
+      "gstRate": 18,
+      "tags": [
+        "Cap",
+        "Unisex",
+        "Headwear"
+      ],
+      "seo": {
+        "title": "Printed Cap (Unisex) | BLACKFAWN",
+        "description": "Heavy embroidery custom adjust caps.",
+        "keywords": "cap, hat, gear"
+      },
+      "status": "active",
+      "images": [
+        "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&q=80&w=800"
+      ],
+      "rating": 4.4,
+      "reviewCount": 22,
+      "codAvailable": true,
+      "deliveryDaysEst": 4,
+      "price": 599,
+      "discountPrice": 449,
+      "createdAt": "2026-08-11T12:19:44.120Z",
+      "updatedAt": "2026-08-11T12:19:44.120Z",
+      "variants": [
+        {
+          "id": "var-cap-1",
+          "sku": "CAP-UNI-OS-BLK",
+          "size": "Free Size",
+          "color": "Black",
+          "price": 599,
+          "salePrice": 449,
+          "stock": 100,
+          "reservedStock": 0,
+          "availableStock": 100,
+          "images": [
+            "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-cap-2",
+          "sku": "CAP-UNI-OS-WHT",
+          "size": "Free Size",
+          "color": "White",
+          "price": 599,
+          "salePrice": 449,
+          "stock": 80,
+          "reservedStock": 0,
+          "availableStock": 80,
+          "images": [
+            "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-cap-3",
+          "sku": "CAP-UNI-OS-NVY",
+          "size": "Free Size",
+          "color": "Navy",
+          "price": 599,
+          "salePrice": 449,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "images": [
+            "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&q=80&w=800"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "printed-socks",
+      "name": "Printed Socks (Unisex)",
+      "slug": "printed-socks-unisex",
+      "shortDescription": "Ultra-comfy socks designed with reinforced heels and custom length options.",
+      "description": "<p>Padded cushion footbed layout keeps feet sweat-free and absorbs active impact during workouts.</p>",
+      "category": "Socks",
+      "collection": "Utility Gear",
+      "brand": "BLACKFAWN",
+      "baseSku": "SOCK-UNISEX",
+      "barcode": "890100000006",
+      "material": "Cotton Lycra Blend",
+      "fabric": "Elastane Weave",
+      "fit": "Snug fit",
+      "gender": "unisex",
+      "gstRate": 12,
+      "tags": [
+        "Socks",
+        "Unisex",
+        "Athletic"
+      ],
+      "seo": {
+        "title": "Printed Socks (Unisex) | BLACKFAWN",
+        "description": "Padded active athletic socks for Unisex.",
+        "keywords": "socks, activewear"
+      },
+      "status": "active",
+      "images": [
+        "https://images.unsplash.com/photo-1582966772680-860e372bb558?auto=format&fit=crop&q=80&w=800"
+      ],
+      "rating": 4.6,
+      "reviewCount": 56,
+      "codAvailable": true,
+      "deliveryDaysEst": 3,
+      "price": 399,
+      "discountPrice": 249,
+      "createdAt": "2026-08-11T12:19:44.120Z",
+      "updatedAt": "2026-08-11T12:19:44.120Z",
+      "variants": [
+        {
+          "id": "var-sock-1",
+          "sku": "SOCK-UNI-ANK-MEN",
+          "size": "Men",
+          "color": "Ankle Length",
+          "price": 399,
+          "salePrice": 249,
+          "stock": 120,
+          "reservedStock": 0,
+          "availableStock": 120,
+          "images": [
+            "https://images.unsplash.com/photo-1582966772680-860e372bb558?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-sock-2",
+          "sku": "SOCK-UNI-CRE-WOM",
+          "size": "Women",
+          "color": "Crew Length",
+          "price": 399,
+          "salePrice": 249,
+          "stock": 100,
+          "reservedStock": 0,
+          "availableStock": 100,
+          "images": [
+            "https://images.unsplash.com/photo-1582966772680-860e372bb558?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-sock-3",
+          "sku": "SOCK-UNI-SPO-KID",
+          "size": "Kids",
+          "color": "Sports Socks",
+          "price": 399,
+          "salePrice": 249,
+          "stock": 50,
+          "reservedStock": 0,
+          "availableStock": 50,
+          "images": [
+            "https://images.unsplash.com/photo-1582966772680-860e372bb558?auto=format&fit=crop&q=80&w=800"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hand-napkin",
+      "name": "Printed Hand Napkin",
+      "slug": "printed-hand-napkin",
+      "shortDescription": "Pocket hand napkins made of heavy loop premium absorbent Terry cotton weave.",
+      "description": "<p>Fast drying loop structures ensure rapid moisture absorption. Easy carry styling.</p>",
+      "category": "Hand Napkins",
+      "collection": "Home Utilities",
+      "brand": "BLACKFAWN",
+      "baseSku": "NAPKIN",
+      "barcode": "890100000007",
+      "material": "Terry Cotton Weave",
+      "fabric": "Terry loops",
+      "fit": "Square",
+      "gender": "unisex",
+      "gstRate": 12,
+      "tags": [
+        "Napkin",
+        "Home",
+        "Absorbent"
+      ],
+      "seo": {
+        "title": "Printed Hand Napkins | BLACKFAWN",
+        "description": "100% Terry cotton absorbent napkins.",
+        "keywords": "napkin, towels"
+      },
+      "status": "active",
+      "images": [
+        "https://images.unsplash.com/photo-1616627561950-9f746e330187?auto=format&fit=crop&q=80&w=800"
+      ],
+      "rating": 4.3,
+      "reviewCount": 18,
+      "codAvailable": true,
+      "deliveryDaysEst": 3,
+      "price": 249,
+      "discountPrice": 149,
+      "createdAt": "2026-08-11T12:19:44.120Z",
+      "updatedAt": "2026-08-11T12:19:44.120Z",
+      "variants": [
+        {
+          "id": "var-nap-1",
+          "sku": "NAP-COT-SML",
+          "size": "Small",
+          "color": "Cotton Weave",
+          "price": 249,
+          "salePrice": 149,
+          "stock": 200,
+          "reservedStock": 0,
+          "availableStock": 200,
+          "images": [
+            "https://images.unsplash.com/photo-1616627561950-9f746e330187?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-nap-2",
+          "sku": "NAP-TER-MED",
+          "size": "Medium",
+          "color": "Terry Cotton Weave",
+          "price": 299,
+          "salePrice": 199,
+          "stock": 150,
+          "reservedStock": 0,
+          "availableStock": 150,
+          "images": [
+            "https://images.unsplash.com/photo-1616627561950-9f746e330187?auto=format&fit=crop&q=80&w=800"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "printed-towels",
+      "name": "Printed Towels",
+      "slug": "printed-towels",
+      "shortDescription": "Vibrant high GSM printed towels in multiple variants for bath, beach and hands.",
+      "description": "<p>Luxurious 500 GSM loop cotton construction. Quick drying, odor-repelling fabric layer.</p>",
+      "category": "Towels",
+      "collection": "Home Utilities",
+      "brand": "BLACKFAWN",
+      "baseSku": "TOWEL",
+      "barcode": "890100000008",
+      "material": "100% Organic Cotton",
+      "fabric": "High GSM loops",
+      "fit": "Rectangular",
+      "gender": "unisex",
+      "gstRate": 12,
+      "tags": [
+        "Towels",
+        "Bath",
+        "Beach"
+      ],
+      "seo": {
+        "title": "Printed Bath & Beach Towels | BLACKFAWN",
+        "description": "Organic high-absorbing custom print towels.",
+        "keywords": "towel, bath, beach"
+      },
+      "status": "active",
+      "images": [
+        "https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?auto=format&fit=crop&q=80&w=800"
+      ],
+      "rating": 4.6,
+      "reviewCount": 45,
+      "codAvailable": true,
+      "deliveryDaysEst": 4,
+      "price": 1199,
+      "discountPrice": 899,
+      "createdAt": "2026-08-11T12:19:44.120Z",
+      "updatedAt": "2026-08-11T12:19:44.120Z",
+      "variants": [
+        {
+          "id": "var-towl-1",
+          "sku": "TOWL-FAC-OS",
+          "size": "30x30 cm",
+          "color": "Face Towel",
+          "price": 399,
+          "salePrice": 299,
+          "stock": 300,
+          "reservedStock": 0,
+          "availableStock": 300,
+          "images": [
+            "https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-towl-2",
+          "sku": "TOWL-HND-OS",
+          "size": "40x60 cm",
+          "color": "Hand Towel",
+          "price": 599,
+          "salePrice": 449,
+          "stock": 250,
+          "reservedStock": 0,
+          "availableStock": 250,
+          "images": [
+            "https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-towl-3",
+          "sku": "TOWL-BTH-OS",
+          "size": "70x140 cm",
+          "color": "Bath Towel",
+          "price": 1199,
+          "salePrice": 899,
+          "stock": 180,
+          "reservedStock": 0,
+          "availableStock": 180,
+          "images": [
+            "https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?auto=format&fit=crop&q=80&w=800"
+          ]
+        },
+        {
+          "id": "var-towl-4",
+          "sku": "TOWL-BCH-OS",
+          "size": "100x180 cm",
+          "color": "Beach Towel",
+          "price": 1599,
+          "salePrice": 1299,
+          "stock": 100,
+          "reservedStock": 0,
+          "availableStock": 100,
+          "images": [
+            "https://images.unsplash.com/photo-1528459801416-a9e53bbf4e17?auto=format&fit=crop&q=80&w=800"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hamp-1",
+      "name": "The Royal Black & Gold Luxury Hamper",
+      "slug": "the-royal-black-gold-luxury-hamper",
+      "shortDescription": "Ultra-exclusive gift hamper containing premium silk accessories, gold foil embossed journals, and artisanal brass keepsakes.",
+      "description": "<p>Ultra-exclusive gift hamper containing premium silk accessories, gold foil embossed journals, and artisanal brass keepsakes.</p><h3>Included In This Box</h3><ul><li>Handcrafted Leatherette Journal</li><li>Signature Brass Pen</li><li>Aromatic Soy Candle</li><li>Gourmet Treats</li></ul>",
+      "category": "Hampers & Gifting",
+      "collection": "Premium Gift Hampers",
+      "brand": "BLACKFAWN",
+      "baseSku": "HAMP-1",
+      "barcode": "890100000010",
+      "material": "Luxury Gift Box",
+      "fabric": "Satin & Velvet",
+      "fit": "Standard Hamper Box",
+      "gender": "unisex",
+      "gstRate": 18,
+      "tags": [
+        "Hamper",
+        "Gift Box",
+        "Premium Gift Hampers"
+      ],
+      "seo": {
+        "title": "The Royal Black & Gold Luxury Hamper | BLACKFAWN Gifting",
+        "description": "Ultra-exclusive gift hamper containing premium silk accessories, gold foil embossed journals, and artisanal brass keepsakes.",
+        "keywords": "gift hamper, luxury box"
+      },
+      "status": "active",
+      "isFeatured": true,
+      "isBestSeller": true,
+      "isNewArrival": true,
+      "images": [
+        "/1.jpeg",
+        "/2.jpeg"
+      ],
+      "rating": 4.8,
+      "reviewCount": 15,
+      "codAvailable": true,
+      "deliveryDaysEst": 2,
+      "price": 4999,
+      "discountPrice": 3999,
+      "createdAt": "2026-08-11T12:30:40.452Z",
+      "updatedAt": "2026-08-11T12:30:40.453Z",
+      "variants": [
+        {
+          "id": "var-hamp-1-std",
+          "sku": "HAMP-1-STD",
+          "size": "Standard Gift Box",
+          "color": "Black & Gold",
+          "price": 4999,
+          "salePrice": 3999,
+          "stock": 35,
+          "reservedStock": 0,
+          "availableStock": 35,
+          "images": [
+            "/1.jpeg",
+            "/2.jpeg"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hamp-2",
+      "name": "Personalized Monogram Keepsake Box",
+      "slug": "personalized-monogram-keepsake-box",
+      "shortDescription": "Bespoke gift box with laser-engraved monogram options, custom greeting cards, and luxury accessories.",
+      "description": "<p>Bespoke gift box with laser-engraved monogram options, custom greeting cards, and luxury accessories.</p><h3>Included In This Box</h3><ul><li>Handcrafted Leatherette Journal</li><li>Signature Brass Pen</li><li>Aromatic Soy Candle</li><li>Gourmet Treats</li></ul>",
+      "category": "Hampers & Gifting",
+      "collection": "Personalized Hampers",
+      "brand": "BLACKFAWN",
+      "baseSku": "HAMP-2",
+      "barcode": "890100000011",
+      "material": "Luxury Gift Box",
+      "fabric": "Satin & Velvet",
+      "fit": "Standard Hamper Box",
+      "gender": "unisex",
+      "gstRate": 18,
+      "tags": [
+        "Hamper",
+        "Gift Box",
+        "Personalized Hampers"
+      ],
+      "seo": {
+        "title": "Personalized Monogram Keepsake Box | BLACKFAWN Gifting",
+        "description": "Bespoke gift box with laser-engraved monogram options, custom greeting cards, and luxury accessories.",
+        "keywords": "gift hamper, luxury box"
+      },
+      "status": "active",
+      "isFeatured": true,
+      "isBestSeller": false,
+      "isNewArrival": false,
+      "images": [
+        "/2.jpeg",
+        "/3.jpeg"
+      ],
+      "rating": 4.8,
+      "reviewCount": 15,
+      "codAvailable": true,
+      "deliveryDaysEst": 2,
+      "price": 3499,
+      "discountPrice": 2899,
+      "createdAt": "2026-08-11T12:30:40.453Z",
+      "updatedAt": "2026-08-11T12:30:40.453Z",
+      "variants": [
+        {
+          "id": "var-hamp-2-std",
+          "sku": "HAMP-2-STD",
+          "size": "Standard Gift Box",
+          "color": "Black & Gold",
+          "price": 3499,
+          "salePrice": 2899,
+          "stock": 35,
+          "reservedStock": 0,
+          "availableStock": 35,
+          "images": [
+            "/2.jpeg",
+            "/3.jpeg"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hamp-3",
+      "name": "The Executive Leadership Corporate Suite",
+      "slug": "the-executive-leadership-corporate-suite",
+      "shortDescription": "Refined corporate gifting collection designed for C-suite clients and valued enterprise partners.",
+      "description": "<p>Refined corporate gifting collection designed for C-suite clients and valued enterprise partners.</p><h3>Included In This Box</h3><ul><li>Handcrafted Leatherette Journal</li><li>Signature Brass Pen</li><li>Aromatic Soy Candle</li><li>Gourmet Treats</li></ul>",
+      "category": "Hampers & Gifting",
+      "collection": "Corporate Hampers",
+      "brand": "BLACKFAWN",
+      "baseSku": "HAMP-3",
+      "barcode": "890100000012",
+      "material": "Luxury Gift Box",
+      "fabric": "Satin & Velvet",
+      "fit": "Standard Hamper Box",
+      "gender": "unisex",
+      "gstRate": 18,
+      "tags": [
+        "Hamper",
+        "Gift Box",
+        "Corporate Hampers"
+      ],
+      "seo": {
+        "title": "The Executive Leadership Corporate Suite | BLACKFAWN Gifting",
+        "description": "Refined corporate gifting collection designed for C-suite clients and valued enterprise partners.",
+        "keywords": "gift hamper, luxury box"
+      },
+      "status": "active",
+      "isFeatured": true,
+      "isBestSeller": false,
+      "isNewArrival": true,
+      "images": [
+        "/3.jpeg",
+        "/4.jpeg"
+      ],
+      "rating": 4.8,
+      "reviewCount": 15,
+      "codAvailable": true,
+      "deliveryDaysEst": 2,
+      "price": 5999,
+      "discountPrice": 4799,
+      "createdAt": "2026-08-11T12:30:40.453Z",
+      "updatedAt": "2026-08-11T12:30:40.453Z",
+      "variants": [
+        {
+          "id": "var-hamp-3-std",
+          "sku": "HAMP-3-STD",
+          "size": "Standard Gift Box",
+          "color": "Black & Gold",
+          "price": 5999,
+          "salePrice": 4799,
+          "stock": 35,
+          "reservedStock": 0,
+          "availableStock": 35,
+          "images": [
+            "/3.jpeg",
+            "/4.jpeg"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hamp-4",
+      "name": "Golden Festival Celebration Hamper",
+      "slug": "golden-festival-celebration-hamper",
+      "shortDescription": "A grand festive box curated with brass diyas, dry fruit assortments, and luxury home fragrances.",
+      "description": "<p>A grand festive box curated with brass diyas, dry fruit assortments, and luxury home fragrances.</p><h3>Included In This Box</h3><ul><li>Handcrafted Leatherette Journal</li><li>Signature Brass Pen</li><li>Aromatic Soy Candle</li><li>Gourmet Treats</li></ul>",
+      "category": "Hampers & Gifting",
+      "collection": "Festival Hampers",
+      "brand": "BLACKFAWN",
+      "baseSku": "HAMP-4",
+      "barcode": "890100000013",
+      "material": "Luxury Gift Box",
+      "fabric": "Satin & Velvet",
+      "fit": "Standard Hamper Box",
+      "gender": "unisex",
+      "gstRate": 18,
+      "tags": [
+        "Hamper",
+        "Gift Box",
+        "Festival Hampers"
+      ],
+      "seo": {
+        "title": "Golden Festival Celebration Hamper | BLACKFAWN Gifting",
+        "description": "A grand festive box curated with brass diyas, dry fruit assortments, and luxury home fragrances.",
+        "keywords": "gift hamper, luxury box"
+      },
+      "status": "active",
+      "isFeatured": true,
+      "isBestSeller": true,
+      "isNewArrival": false,
+      "images": [
+        "/4.jpeg",
+        "/5.jpeg"
+      ],
+      "rating": 4.8,
+      "reviewCount": 15,
+      "codAvailable": true,
+      "deliveryDaysEst": 2,
+      "price": 4299,
+      "discountPrice": 3499,
+      "createdAt": "2026-08-11T12:30:40.453Z",
+      "updatedAt": "2026-08-11T12:30:40.453Z",
+      "variants": [
+        {
+          "id": "var-hamp-4-std",
+          "sku": "HAMP-4-STD",
+          "size": "Standard Gift Box",
+          "color": "Black & Gold",
+          "price": 4299,
+          "salePrice": 3499,
+          "stock": 35,
+          "reservedStock": 0,
+          "availableStock": 35,
+          "images": [
+            "/4.jpeg",
+            "/5.jpeg"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hamp-5",
+      "name": "His & Hers Eternity Couple Hamper",
+      "slug": "his-hers-eternity-couple-hamper",
+      "shortDescription": "Romantic dual luxury box containing paired crystal goblets, scented massage candles, and matching keepsakes.",
+      "description": "<p>Romantic dual luxury box containing paired crystal goblets, scented massage candles, and matching keepsakes.</p><h3>Included In This Box</h3><ul><li>Handcrafted Leatherette Journal</li><li>Signature Brass Pen</li><li>Aromatic Soy Candle</li><li>Gourmet Treats</li></ul>",
+      "category": "Hampers & Gifting",
+      "collection": "Couple Hampers",
+      "brand": "BLACKFAWN",
+      "baseSku": "HAMP-5",
+      "barcode": "890100000014",
+      "material": "Luxury Gift Box",
+      "fabric": "Satin & Velvet",
+      "fit": "Standard Hamper Box",
+      "gender": "unisex",
+      "gstRate": 18,
+      "tags": [
+        "Hamper",
+        "Gift Box",
+        "Couple Hampers"
+      ],
+      "seo": {
+        "title": "His & Hers Eternity Couple Hamper | BLACKFAWN Gifting",
+        "description": "Romantic dual luxury box containing paired crystal goblets, scented massage candles, and matching keepsakes.",
+        "keywords": "gift hamper, luxury box"
+      },
+      "status": "active",
+      "isFeatured": false,
+      "isBestSeller": false,
+      "isNewArrival": true,
+      "images": [
+        "/5.jpeg",
+        "/6.jpeg"
+      ],
+      "rating": 4.8,
+      "reviewCount": 15,
+      "codAvailable": true,
+      "deliveryDaysEst": 2,
+      "price": 5499,
+      "discountPrice": 4299,
+      "createdAt": "2026-08-11T12:30:40.453Z",
+      "updatedAt": "2026-08-11T12:30:40.453Z",
+      "variants": [
+        {
+          "id": "var-hamp-5-std",
+          "sku": "HAMP-5-STD",
+          "size": "Standard Gift Box",
+          "color": "Black & Gold",
+          "price": 5499,
+          "salePrice": 4299,
+          "stock": 35,
+          "reservedStock": 0,
+          "availableStock": 35,
+          "images": [
+            "/5.jpeg",
+            "/6.jpeg"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hamp-6",
+      "name": "Little Prince & Princess Kids Joy Box",
+      "slug": "little-prince-princess-kids-joy-box",
+      "shortDescription": "Delightful kids hamper with organic plush toys, customized storybooks, and premium treats.",
+      "description": "<p>Delightful kids hamper with organic plush toys, customized storybooks, and premium treats.</p><h3>Included In This Box</h3><ul><li>Handcrafted Leatherette Journal</li><li>Signature Brass Pen</li><li>Aromatic Soy Candle</li><li>Gourmet Treats</li></ul>",
+      "category": "Hampers & Gifting",
+      "collection": "Kids Hampers",
+      "brand": "BLACKFAWN",
+      "baseSku": "HAMP-6",
+      "barcode": "890100000015",
+      "material": "Luxury Gift Box",
+      "fabric": "Satin & Velvet",
+      "fit": "Standard Hamper Box",
+      "gender": "unisex",
+      "gstRate": 18,
+      "tags": [
+        "Hamper",
+        "Gift Box",
+        "Kids Hampers"
+      ],
+      "seo": {
+        "title": "Little Prince & Princess Kids Joy Box | BLACKFAWN Gifting",
+        "description": "Delightful kids hamper with organic plush toys, customized storybooks, and premium treats.",
+        "keywords": "gift hamper, luxury box"
+      },
+      "status": "active",
+      "isFeatured": false,
+      "isBestSeller": false,
+      "isNewArrival": false,
+      "images": [
+        "/6.jpeg",
+        "/7.jpeg"
+      ],
+      "rating": 4.8,
+      "reviewCount": 15,
+      "codAvailable": true,
+      "deliveryDaysEst": 2,
+      "price": 2799,
+      "discountPrice": 2199,
+      "createdAt": "2026-08-11T12:30:40.453Z",
+      "updatedAt": "2026-08-11T12:30:40.453Z",
+      "variants": [
+        {
+          "id": "var-hamp-6-std",
+          "sku": "HAMP-6-STD",
+          "size": "Standard Gift Box",
+          "color": "Black & Gold",
+          "price": 2799,
+          "salePrice": 2199,
+          "stock": 35,
+          "reservedStock": 0,
+          "availableStock": 35,
+          "images": [
+            "/6.jpeg",
+            "/7.jpeg"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hamp-7",
+      "name": "Luxe Velvet & Brass Artisan Box",
+      "slug": "luxe-velvet-brass-artisan-box",
+      "shortDescription": "Textured velvet box with brass hardware and handcrafted luxury treats.",
+      "description": "<p>Textured velvet box with brass hardware and handcrafted luxury treats.</p><h3>Included In This Box</h3><ul><li>Handcrafted Leatherette Journal</li><li>Signature Brass Pen</li><li>Aromatic Soy Candle</li><li>Gourmet Treats</li></ul>",
+      "category": "Hampers & Gifting",
+      "collection": "Premium Gift Hampers",
+      "brand": "BLACKFAWN",
+      "baseSku": "HAMP-7",
+      "barcode": "890100000016",
+      "material": "Luxury Gift Box",
+      "fabric": "Satin & Velvet",
+      "fit": "Standard Hamper Box",
+      "gender": "unisex",
+      "gstRate": 18,
+      "tags": [
+        "Hamper",
+        "Gift Box",
+        "Premium Gift Hampers"
+      ],
+      "seo": {
+        "title": "Luxe Velvet & Brass Artisan Box | BLACKFAWN Gifting",
+        "description": "Textured velvet box with brass hardware and handcrafted luxury treats.",
+        "keywords": "gift hamper, luxury box"
+      },
+      "status": "active",
+      "isFeatured": false,
+      "isBestSeller": true,
+      "isNewArrival": true,
+      "images": [
+        "/7.jpeg",
+        "/8.jpeg"
+      ],
+      "rating": 4.8,
+      "reviewCount": 15,
+      "codAvailable": true,
+      "deliveryDaysEst": 2,
+      "price": 4499,
+      "discountPrice": 3699,
+      "createdAt": "2026-08-11T12:30:40.453Z",
+      "updatedAt": "2026-08-11T12:30:40.453Z",
+      "variants": [
+        {
+          "id": "var-hamp-7-std",
+          "sku": "HAMP-7-STD",
+          "size": "Standard Gift Box",
+          "color": "Black & Gold",
+          "price": 4499,
+          "salePrice": 3699,
+          "stock": 35,
+          "reservedStock": 0,
+          "availableStock": 35,
+          "images": [
+            "/7.jpeg",
+            "/8.jpeg"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hamp-8",
+      "name": "Opulent Celebration Gift Trunk",
+      "slug": "opulent-celebration-gift-trunk",
+      "shortDescription": "Opulent gift trunk for festive family gatherings and celebrations.",
+      "description": "<p>Opulent gift trunk for festive family gatherings and celebrations.</p><h3>Included In This Box</h3><ul><li>Handcrafted Leatherette Journal</li><li>Signature Brass Pen</li><li>Aromatic Soy Candle</li><li>Gourmet Treats</li></ul>",
+      "category": "Hampers & Gifting",
+      "collection": "Festival Hampers",
+      "brand": "BLACKFAWN",
+      "baseSku": "HAMP-8",
+      "barcode": "890100000017",
+      "material": "Luxury Gift Box",
+      "fabric": "Satin & Velvet",
+      "fit": "Standard Hamper Box",
+      "gender": "unisex",
+      "gstRate": 18,
+      "tags": [
+        "Hamper",
+        "Gift Box",
+        "Festival Hampers"
+      ],
+      "seo": {
+        "title": "Opulent Celebration Gift Trunk | BLACKFAWN Gifting",
+        "description": "Opulent gift trunk for festive family gatherings and celebrations.",
+        "keywords": "gift hamper, luxury box"
+      },
+      "status": "active",
+      "isFeatured": false,
+      "isBestSeller": false,
+      "isNewArrival": false,
+      "images": [
+        "/8.jpeg",
+        "/9.jpeg"
+      ],
+      "rating": 4.8,
+      "reviewCount": 15,
+      "codAvailable": true,
+      "deliveryDaysEst": 2,
+      "price": 6299,
+      "discountPrice": 4999,
+      "createdAt": "2026-08-11T12:30:40.453Z",
+      "updatedAt": "2026-08-11T12:30:40.453Z",
+      "variants": [
+        {
+          "id": "var-hamp-8-std",
+          "sku": "HAMP-8-STD",
+          "size": "Standard Gift Box",
+          "color": "Black & Gold",
+          "price": 6299,
+          "salePrice": 4999,
+          "stock": 35,
+          "reservedStock": 0,
+          "availableStock": 35,
+          "images": [
+            "/8.jpeg",
+            "/9.jpeg"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hamp-9",
+      "name": "Signature Brass & Leatherette Hamper",
+      "slug": "signature-brass-leatherette-hamper",
+      "shortDescription": "Leatherette gift box featuring custom monogrammed brass tags.",
+      "description": "<p>Leatherette gift box featuring custom monogrammed brass tags.</p><h3>Included In This Box</h3><ul><li>Handcrafted Leatherette Journal</li><li>Signature Brass Pen</li><li>Aromatic Soy Candle</li><li>Gourmet Treats</li></ul>",
+      "category": "Hampers & Gifting",
+      "collection": "Personalized Hampers",
+      "brand": "BLACKFAWN",
+      "baseSku": "HAMP-9",
+      "barcode": "890100000018",
+      "material": "Luxury Gift Box",
+      "fabric": "Satin & Velvet",
+      "fit": "Standard Hamper Box",
+      "gender": "unisex",
+      "gstRate": 18,
+      "tags": [
+        "Hamper",
+        "Gift Box",
+        "Personalized Hampers"
+      ],
+      "seo": {
+        "title": "Signature Brass & Leatherette Hamper | BLACKFAWN Gifting",
+        "description": "Leatherette gift box featuring custom monogrammed brass tags.",
+        "keywords": "gift hamper, luxury box"
+      },
+      "status": "active",
+      "isFeatured": false,
+      "isBestSeller": false,
+      "isNewArrival": true,
+      "images": [
+        "/9.jpeg",
+        "/10.jpeg"
+      ],
+      "rating": 4.8,
+      "reviewCount": 15,
+      "codAvailable": true,
+      "deliveryDaysEst": 2,
+      "price": 3899,
+      "discountPrice": 3199,
+      "createdAt": "2026-08-11T12:30:40.453Z",
+      "updatedAt": "2026-08-11T12:30:40.453Z",
+      "variants": [
+        {
+          "id": "var-hamp-9-std",
+          "sku": "HAMP-9-STD",
+          "size": "Standard Gift Box",
+          "color": "Black & Gold",
+          "price": 3899,
+          "salePrice": 3199,
+          "stock": 35,
+          "reservedStock": 0,
+          "availableStock": 35,
+          "images": [
+            "/9.jpeg",
+            "/10.jpeg"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hamp-10",
+      "name": "Enterprise VIP Client Gift Suite",
+      "slug": "enterprise-vip-client-gift-suite",
+      "shortDescription": "Premium corporate suite designed for high-value client appreciation.",
+      "description": "<p>Premium corporate suite designed for high-value client appreciation.</p><h3>Included In This Box</h3><ul><li>Handcrafted Leatherette Journal</li><li>Signature Brass Pen</li><li>Aromatic Soy Candle</li><li>Gourmet Treats</li></ul>",
+      "category": "Hampers & Gifting",
+      "collection": "Corporate Hampers",
+      "brand": "BLACKFAWN",
+      "baseSku": "HAMP-10",
+      "barcode": "890100000019",
+      "material": "Luxury Gift Box",
+      "fabric": "Satin & Velvet",
+      "fit": "Standard Hamper Box",
+      "gender": "unisex",
+      "gstRate": 18,
+      "tags": [
+        "Hamper",
+        "Gift Box",
+        "Corporate Hampers"
+      ],
+      "seo": {
+        "title": "Enterprise VIP Client Gift Suite | BLACKFAWN Gifting",
+        "description": "Premium corporate suite designed for high-value client appreciation.",
+        "keywords": "gift hamper, luxury box"
+      },
+      "status": "active",
+      "isFeatured": false,
+      "isBestSeller": true,
+      "isNewArrival": false,
+      "images": [
+        "/10.jpeg",
+        "/11.jpeg"
+      ],
+      "rating": 4.8,
+      "reviewCount": 15,
+      "codAvailable": true,
+      "deliveryDaysEst": 2,
+      "price": 6999,
+      "discountPrice": 5499,
+      "createdAt": "2026-08-11T12:30:40.453Z",
+      "updatedAt": "2026-08-11T12:30:40.453Z",
+      "variants": [
+        {
+          "id": "var-hamp-10-std",
+          "sku": "HAMP-10-STD",
+          "size": "Standard Gift Box",
+          "color": "Black & Gold",
+          "price": 6999,
+          "salePrice": 5499,
+          "stock": 35,
+          "reservedStock": 0,
+          "availableStock": 35,
+          "images": [
+            "/10.jpeg",
+            "/11.jpeg"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hamp-11",
+      "name": "Auspicious Brass & Soy Candle Box",
+      "slug": "auspicious-brass-soy-candle-box",
+      "shortDescription": "Handcrafted brass diyas paired with organic soy wax candles.",
+      "description": "<p>Handcrafted brass diyas paired with organic soy wax candles.</p><h3>Included In This Box</h3><ul><li>Handcrafted Leatherette Journal</li><li>Signature Brass Pen</li><li>Aromatic Soy Candle</li><li>Gourmet Treats</li></ul>",
+      "category": "Hampers & Gifting",
+      "collection": "Festival Hampers",
+      "brand": "BLACKFAWN",
+      "baseSku": "HAMP-11",
+      "barcode": "890100000020",
+      "material": "Luxury Gift Box",
+      "fabric": "Satin & Velvet",
+      "fit": "Standard Hamper Box",
+      "gender": "unisex",
+      "gstRate": 18,
+      "tags": [
+        "Hamper",
+        "Gift Box",
+        "Festival Hampers"
+      ],
+      "seo": {
+        "title": "Auspicious Brass & Soy Candle Box | BLACKFAWN Gifting",
+        "description": "Handcrafted brass diyas paired with organic soy wax candles.",
+        "keywords": "gift hamper, luxury box"
+      },
+      "status": "active",
+      "isFeatured": false,
+      "isBestSeller": false,
+      "isNewArrival": true,
+      "images": [
+        "/11.jpeg",
+        "/12.jpeg"
+      ],
+      "rating": 4.8,
+      "reviewCount": 15,
+      "codAvailable": true,
+      "deliveryDaysEst": 2,
+      "price": 3999,
+      "discountPrice": 3299,
+      "createdAt": "2026-08-11T12:30:40.453Z",
+      "updatedAt": "2026-08-11T12:30:40.453Z",
+      "variants": [
+        {
+          "id": "var-hamp-11-std",
+          "sku": "HAMP-11-STD",
+          "size": "Standard Gift Box",
+          "color": "Black & Gold",
+          "price": 3999,
+          "salePrice": 3299,
+          "stock": 35,
+          "reservedStock": 0,
+          "availableStock": 35,
+          "images": [
+            "/11.jpeg",
+            "/12.jpeg"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hamp-12",
+      "name": "Eternity Romance Couple Chest",
+      "slug": "eternity-romance-couple-chest",
+      "shortDescription": "Dual-tier luxury gift chest for anniversary and wedding celebrations.",
+      "description": "<p>Dual-tier luxury gift chest for anniversary and wedding celebrations.</p><h3>Included In This Box</h3><ul><li>Handcrafted Leatherette Journal</li><li>Signature Brass Pen</li><li>Aromatic Soy Candle</li><li>Gourmet Treats</li></ul>",
+      "category": "Hampers & Gifting",
+      "collection": "Couple Hampers",
+      "brand": "BLACKFAWN",
+      "baseSku": "HAMP-12",
+      "barcode": "890100000021",
+      "material": "Luxury Gift Box",
+      "fabric": "Satin & Velvet",
+      "fit": "Standard Hamper Box",
+      "gender": "unisex",
+      "gstRate": 18,
+      "tags": [
+        "Hamper",
+        "Gift Box",
+        "Couple Hampers"
+      ],
+      "seo": {
+        "title": "Eternity Romance Couple Chest | BLACKFAWN Gifting",
+        "description": "Dual-tier luxury gift chest for anniversary and wedding celebrations.",
+        "keywords": "gift hamper, luxury box"
+      },
+      "status": "active",
+      "isFeatured": false,
+      "isBestSeller": false,
+      "isNewArrival": false,
+      "images": [
+        "/12.jpeg",
+        "/13.jpeg"
+      ],
+      "rating": 4.8,
+      "reviewCount": 15,
+      "codAvailable": true,
+      "deliveryDaysEst": 2,
+      "price": 5899,
+      "discountPrice": 4599,
+      "createdAt": "2026-08-11T12:30:40.453Z",
+      "updatedAt": "2026-08-11T12:30:40.453Z",
+      "variants": [
+        {
+          "id": "var-hamp-12-std",
+          "sku": "HAMP-12-STD",
+          "size": "Standard Gift Box",
+          "color": "Black & Gold",
+          "price": 5899,
+          "salePrice": 4599,
+          "stock": 35,
+          "reservedStock": 0,
+          "availableStock": 35,
+          "images": [
+            "/12.jpeg",
+            "/13.jpeg"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hamp-13",
+      "name": "Royal Gold Reserve Gourmet Box",
+      "slug": "royal-gold-reserve-gourmet-box",
+      "shortDescription": "Gourmet artisanal chocolates, dry fruits, and gold foil stationery.",
+      "description": "<p>Gourmet artisanal chocolates, dry fruits, and gold foil stationery.</p><h3>Included In This Box</h3><ul><li>Handcrafted Leatherette Journal</li><li>Signature Brass Pen</li><li>Aromatic Soy Candle</li><li>Gourmet Treats</li></ul>",
+      "category": "Hampers & Gifting",
+      "collection": "Premium Gift Hampers",
+      "brand": "BLACKFAWN",
+      "baseSku": "HAMP-13",
+      "barcode": "890100000022",
+      "material": "Luxury Gift Box",
+      "fabric": "Satin & Velvet",
+      "fit": "Standard Hamper Box",
+      "gender": "unisex",
+      "gstRate": 18,
+      "tags": [
+        "Hamper",
+        "Gift Box",
+        "Premium Gift Hampers"
+      ],
+      "seo": {
+        "title": "Royal Gold Reserve Gourmet Box | BLACKFAWN Gifting",
+        "description": "Gourmet artisanal chocolates, dry fruits, and gold foil stationery.",
+        "keywords": "gift hamper, luxury box"
+      },
+      "status": "active",
+      "isFeatured": false,
+      "isBestSeller": true,
+      "isNewArrival": true,
+      "images": [
+        "/13.jpeg",
+        "/14.jpeg"
+      ],
+      "rating": 4.8,
+      "reviewCount": 15,
+      "codAvailable": true,
+      "deliveryDaysEst": 2,
+      "price": 4799,
+      "discountPrice": 3899,
+      "createdAt": "2026-08-11T12:30:40.453Z",
+      "updatedAt": "2026-08-11T12:30:40.453Z",
+      "variants": [
+        {
+          "id": "var-hamp-13-std",
+          "sku": "HAMP-13-STD",
+          "size": "Standard Gift Box",
+          "color": "Black & Gold",
+          "price": 4799,
+          "salePrice": 3899,
+          "stock": 35,
+          "reservedStock": 0,
+          "availableStock": 35,
+          "images": [
+            "/13.jpeg",
+            "/14.jpeg"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hamp-14",
+      "name": "Junior Explorer Fun & Treats Box",
+      "slug": "junior-explorer-fun-treats-box",
+      "shortDescription": "Vibrant and safe children gift box with interactive games and plush toys.",
+      "description": "<p>Vibrant and safe children gift box with interactive games and plush toys.</p><h3>Included In This Box</h3><ul><li>Handcrafted Leatherette Journal</li><li>Signature Brass Pen</li><li>Aromatic Soy Candle</li><li>Gourmet Treats</li></ul>",
+      "category": "Hampers & Gifting",
+      "collection": "Kids Hampers",
+      "brand": "BLACKFAWN",
+      "baseSku": "HAMP-14",
+      "barcode": "890100000023",
+      "material": "Luxury Gift Box",
+      "fabric": "Satin & Velvet",
+      "fit": "Standard Hamper Box",
+      "gender": "unisex",
+      "gstRate": 18,
+      "tags": [
+        "Hamper",
+        "Gift Box",
+        "Kids Hampers"
+      ],
+      "seo": {
+        "title": "Junior Explorer Fun & Treats Box | BLACKFAWN Gifting",
+        "description": "Vibrant and safe children gift box with interactive games and plush toys.",
+        "keywords": "gift hamper, luxury box"
+      },
+      "status": "active",
+      "isFeatured": false,
+      "isBestSeller": false,
+      "isNewArrival": false,
+      "images": [
+        "/14.jpeg",
+        "/1.jpeg"
+      ],
+      "rating": 4.8,
+      "reviewCount": 15,
+      "codAvailable": true,
+      "deliveryDaysEst": 2,
+      "price": 2999,
+      "discountPrice": 2399,
+      "createdAt": "2026-08-11T12:30:40.453Z",
+      "updatedAt": "2026-08-11T12:30:40.453Z",
+      "variants": [
+        {
+          "id": "var-hamp-14-std",
+          "sku": "HAMP-14-STD",
+          "size": "Standard Gift Box",
+          "color": "Black & Gold",
+          "price": 2999,
+          "salePrice": 2399,
+          "stock": 35,
+          "reservedStock": 0,
+          "availableStock": 35,
+          "images": [
+            "/14.jpeg",
+            "/1.jpeg"
+          ]
+        }
+      ]
+    }
+  ],
+  "categories": [
+    {
+      "id": "cat-1",
+      "name": "Printed T-Shirts",
+      "slug": "Printed T-Shirts",
+      "description": "Vibrant round neck, polo and kids printed tees"
+    },
+    {
+      "id": "cat-2",
+      "name": "Caps",
+      "slug": "Caps",
+      "description": "Embroidery headwear and baseball caps"
+    },
+    {
+      "id": "cat-3",
+      "name": "Socks",
+      "slug": "Socks",
+      "description": "Crew, ankle and athletic sports socks"
+    },
+    {
+      "id": "cat-4",
+      "name": "Hand Napkins",
+      "description": " absorbent pocket hand napkins",
+      "slug": "Hand Napkins"
+    },
+    {
+      "id": "cat-5",
+      "name": "Towels",
+      "description": "Bath, face, hand and beach towels",
+      "slug": "Towels"
+    },
+    {
+      "id": "cat-6",
+      "name": "Hampers & Gifting",
+      "description": "Curated luxury gift hampers and artisanal boxes",
+      "slug": "Hampers & Gifting"
+    }
+  ],
+  "collections": [
+    {
+      "id": "coll-1",
+      "name": "Core Collection",
+      "slug": "core-collection"
+    },
+    {
+      "id": "coll-2",
+      "name": "Home Utilities",
+      "slug": "home-utilities"
+    },
+    {
+      "id": "coll-3",
+      "name": "Utility Gear",
+      "slug": "utility-gear"
+    },
+    {
+      "id": "coll-4",
+      "name": "Premium Gift Hampers",
+      "slug": "Premium Gift Hampers"
+    },
+    {
+      "id": "coll-5",
+      "name": "Personalized Hampers",
+      "slug": "Personalized Hampers"
+    },
+    {
+      "id": "coll-6",
+      "name": "Corporate Hampers",
+      "slug": "Corporate Hampers"
+    },
+    {
+      "id": "coll-7",
+      "name": "Festival Hampers",
+      "slug": "Festival Hampers"
+    },
+    {
+      "id": "coll-8",
+      "name": "Couple Hampers",
+      "slug": "Couple Hampers"
+    },
+    {
+      "id": "coll-9",
+      "name": "Kids Hampers",
+      "slug": "Kids Hampers"
+    }
+  ],
+  "coupons": [
+    {
+      "id": "coup-1",
+      "code": "BLACKFAWN10",
+      "type": "percentage",
+      "value": 10,
+      "minPurchase": 1499,
+      "description": "10% off on all printed apparel orders above ₹1,499",
+      "expiresAt": "2026-12-31",
+      "usageCount": 0
+    }
+  ],
+  "returnRequests": [],
+  "giftCards": [],
+  "blogs": [
+    {
+      "id": "printed-apparel-guide",
+      "title": "The Art of Printed Apparel Care",
+      "slug": "art-of-printed-apparel-care",
+      "excerpt": "Learn how to preserve high-density rubber prints and screen prints on your premium garments.",
+      "content": "\nPrinted garments are the core of modern street culture. To ensure your custom graphic prints remain crisp and resist cracking over time, follow our textile care guide.\n\n### Wash Cold, Wash Inside Out\nAlways flip your printed garments inside out before placing them in the washing machine. This protects the printed graphics from friction against other clothes. Use cold water (under 30°C) on a gentle cycle.\n\n### Air Dry Only\nNever place printed items in a hot tumble dryer. The heat breaks down print adhesive and leads to peeling. Hang dry in shade.\n    ",
+      "image": "https://images.unsplash.com/photo-1523381210434-271e8be1f52b?auto=format&fit=crop&q=80&w=1000",
+      "author": "Fawn Textile Team",
+      "date": "July 12, 2026",
+      "readTime": "3 min read",
+      "tags": [
+        "Printed Apparel",
+        "Care Guide",
+        "Textiles"
+      ]
+    }
+  ],
+  "banners": [
+    {
+      "id": "banner-1",
+      "imageUrl": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=1600",
+      "title": "ACT I: SHADOWS OF INDUS",
+      "subtitle": "A modern street tribute to structural minimalism and luxury drapery.",
+      "link": "Printed T-Shirts"
+    },
+    {
+      "id": "banner-2",
+      "imageUrl": "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&q=80&w=1600",
+      "title": "EMBROIDERED CANVAS CAPS",
+      "subtitle": "Experience custom adjust locks and structure canvas crown support.",
+      "link": "Caps"
+    },
+    {
+      "id": "banner-3",
+      "imageUrl": "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&q=80&w=1600",
+      "title": "PREMIUM ORGANIC TOWELS",
+      "subtitle": "Heavy loop Terry structures designed for ultimate moisture absorption.",
+      "link": "Towels"
+    }
+  ],
+  "businessInfo": {
+    "name": "BLACKFAWN",
+    "addressLine1": "Office No. 413, 4th Floor,",
+    "addressLine2": "Siddhivinayak Arcus,",
+    "addressLine3": "Bhayli Road,",
+    "cityState": "Bhayli, Vadodara.",
+    "fullAddress": "Office No. 413, 4th Floor,\nSiddhivinayak Arcus,\nBhayli Road,\nBhayli, Vadodara.",
+    "email": "info@blackfawn.in",
+    "phone": "+91 9274821162",
+    "mapsUrl": "https://maps.google.com/?q=Office+No.+413,+4th+Floor,+Siddhivinayak+Arcus,+Bhayli+Road,+Bhayli,+Vadodara"
+  },
+  "navigationConfig": [
+    {
+      "id": "nav-shop",
+      "label": "SHOP",
+      "slug": "shop",
+      "enabled": true,
+      "order": 1,
+      "columns": [
+        {
+          "id": "col-shop-clothing",
+          "title": "CLOTHING",
+          "links": [
+            {
+              "id": "l-s-1",
+              "label": "Printed Round Neck T-Shirts - Men",
+              "url": "#/t-shirts",
+              "categoryFilter": "T-Shirts",
+              "subCategoryFilter": "Printed Round Neck T-Shirts - Men"
+            },
+            {
+              "id": "l-s-2",
+              "label": "Printed Round Neck T-Shirts - Women",
+              "url": "#/t-shirts",
+              "categoryFilter": "T-Shirts",
+              "subCategoryFilter": "Printed Round Neck T-Shirts - Women"
+            },
+            {
+              "id": "l-s-3",
+              "label": "Printed Round Neck T-Shirts - Kids",
+              "url": "#/t-shirts",
+              "categoryFilter": "T-Shirts",
+              "subCategoryFilter": "Printed Round Neck T-Shirts - Kids"
+            },
+            {
+              "id": "l-s-4",
+              "label": "Printed Polo T-Shirts - Men",
+              "url": "#/polo-t-shirts",
+              "categoryFilter": "Polo T-Shirts",
+              "subCategoryFilter": "Printed Polo T-Shirts - Men"
+            }
+          ]
+        },
+        {
+          "id": "col-shop-acc",
+          "title": "ACCESSORIES",
+          "links": [
+            {
+              "id": "l-s-5",
+              "label": "Caps",
+              "url": "#/caps",
+              "categoryFilter": "Caps"
+            },
+            {
+              "id": "l-s-6",
+              "label": "Socks",
+              "url": "#/socks",
+              "categoryFilter": "Socks"
+            },
+            {
+              "id": "l-s-7",
+              "label": "Towels",
+              "url": "#/towels",
+              "categoryFilter": "Towels"
+            },
+            {
+              "id": "l-s-8",
+              "label": "Hand Napkins",
+              "url": "#/hand-napkins",
+              "categoryFilter": "Hand Napkins"
+            },
+            {
+              "id": "l-s-9",
+              "label": "Mugs",
+              "url": "#/mugs",
+              "categoryFilter": "Mugs"
+            },
+            {
+              "id": "l-s-10",
+              "label": "Bottles",
+              "url": "#/bottles",
+              "categoryFilter": "Bottles"
+            }
+          ]
+        },
+        {
+          "id": "col-shop-gifting",
+          "title": "GIFTING",
+          "links": [
+            {
+              "id": "l-s-11",
+              "label": "Hampers & Gifting",
+              "url": "#/hampers",
+              "categoryFilter": "Hampers & Gifting"
+            },
+            {
+              "id": "l-s-12",
+              "label": "Premium Gift Hampers",
+              "url": "#/hampers",
+              "categoryFilter": "Hampers & Gifting",
+              "collectionFilter": "Premium Gift Hampers"
+            },
+            {
+              "id": "l-s-13",
+              "label": "Personalized Gifts",
+              "url": "#/collections/personalized-gifts",
+              "collectionFilter": "Personalized Gifts"
+            },
+            {
+              "id": "l-s-14",
+              "label": "Corporate Gifting",
+              "url": "#/collections/corporate-gifting",
+              "collectionFilter": "Corporate Gifting"
+            }
+          ]
+        },
+        {
+          "id": "col-shop-by",
+          "title": "SHOP BY",
+          "links": [
+            {
+              "id": "l-s-15",
+              "label": "New Arrivals",
+              "url": "#/collections/new-arrivals",
+              "collectionFilter": "New Arrivals"
+            },
+            {
+              "id": "l-s-16",
+              "label": "Best Sellers",
+              "url": "#/collections/best-sellers",
+              "collectionFilter": "Best Sellers"
+            },
+            {
+              "id": "l-s-17",
+              "label": "Trending",
+              "url": "#/collections/trending",
+              "collectionFilter": "Trending"
+            },
+            {
+              "id": "l-s-18",
+              "label": "Limited Edition",
+              "url": "#/collections/limited-edition",
+              "collectionFilter": "Limited Edition"
+            }
+          ]
+        }
+      ],
+      "featuredCard": {
+        "title": "ATELIER DROP 2026",
+        "subtitle": "Discover high-density heavy cottons and bespoke hampers.",
+        "image": "https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&q=80&w=600",
+        "ctaText": "EXPLORE ALL DROPS",
+        "ctaUrl": "#/shop"
+      }
+    },
+    {
+      "id": "nav-tshirts",
+      "label": "T-SHIRTS",
+      "slug": "t-shirts",
+      "enabled": true,
+      "order": 2,
+      "columns": [
+        {
+          "id": "col-ts-men",
+          "title": "MEN",
+          "links": [
+            {
+              "id": "l-ts-1",
+              "label": "Printed Round Neck T-Shirts",
+              "url": "#/t-shirts",
+              "categoryFilter": "T-Shirts",
+              "subCategoryFilter": "Printed Round Neck T-Shirts - Men"
+            },
+            {
+              "id": "l-ts-2",
+              "label": "Printed Polo T-Shirts",
+              "url": "#/polo-t-shirts",
+              "categoryFilter": "Polo T-Shirts",
+              "subCategoryFilter": "Printed Polo T-Shirts - Men"
+            }
+          ]
+        },
+        {
+          "id": "col-ts-women",
+          "title": "WOMEN",
+          "links": [
+            {
+              "id": "l-ts-3",
+              "label": "Printed Round Neck T-Shirts",
+              "url": "#/t-shirts",
+              "categoryFilter": "T-Shirts",
+              "subCategoryFilter": "Printed Round Neck T-Shirts - Women"
+            }
+          ]
+        },
+        {
+          "id": "col-ts-kids",
+          "title": "KIDS",
+          "links": [
+            {
+              "id": "l-ts-4",
+              "label": "Printed Round Neck T-Shirts",
+              "url": "#/t-shirts",
+              "categoryFilter": "T-Shirts",
+              "subCategoryFilter": "Printed Round Neck T-Shirts - Kids"
+            }
+          ]
+        },
+        {
+          "id": "col-ts-style",
+          "title": "SHOP BY STYLE",
+          "links": [
+            {
+              "id": "l-ts-5",
+              "label": "Printed",
+              "url": "#/t-shirts",
+              "categoryFilter": "T-Shirts"
+            },
+            {
+              "id": "l-ts-6",
+              "label": "Customized",
+              "url": "#/t-shirts",
+              "categoryFilter": "T-Shirts",
+              "personalizedFilter": true
+            },
+            {
+              "id": "l-ts-7",
+              "label": "New Arrivals",
+              "url": "#/t-shirts",
+              "categoryFilter": "T-Shirts",
+              "collectionFilter": "New Arrivals"
+            },
+            {
+              "id": "l-ts-8",
+              "label": "Best Sellers",
+              "url": "#/t-shirts",
+              "categoryFilter": "T-Shirts",
+              "collectionFilter": "Best Sellers"
+            }
+          ]
+        }
+      ],
+      "featuredCard": {
+        "title": "HEAVYWEIGHT COTTONS",
+        "subtitle": "Pre-shrunk 240 GSM organic combed cotton t-shirts.",
+        "image": "https://images.unsplash.com/photo-1521572267360-ee0c2909d518?auto=format&fit=crop&q=80&w=600",
+        "ctaText": "SHOP ALL T-SHIRTS",
+        "ctaUrl": "#/t-shirts"
+      },
+      "ctaText": "SHOP ALL T-SHIRTS",
+      "ctaUrl": "#/t-shirts"
+    },
+    {
+      "id": "nav-accessories",
+      "label": "ACCESSORIES",
+      "slug": "accessories",
+      "enabled": true,
+      "order": 3,
+      "columns": [
+        {
+          "id": "col-acc-wearable",
+          "title": "WEARABLE",
+          "links": [
+            {
+              "id": "l-ac-1",
+              "label": "Caps",
+              "url": "#/caps",
+              "categoryFilter": "Caps"
+            },
+            {
+              "id": "l-ac-2",
+              "label": "Socks",
+              "url": "#/socks",
+              "categoryFilter": "Socks"
+            }
+          ]
+        },
+        {
+          "id": "col-acc-home",
+          "title": "HOME & LIFESTYLE",
+          "links": [
+            {
+              "id": "l-ac-3",
+              "label": "Towels",
+              "url": "#/towels",
+              "categoryFilter": "Towels"
+            },
+            {
+              "id": "l-ac-4",
+              "label": "Hand Napkins",
+              "url": "#/hand-napkins",
+              "categoryFilter": "Hand Napkins"
+            },
+            {
+              "id": "l-ac-5",
+              "label": "Mugs",
+              "url": "#/mugs",
+              "categoryFilter": "Mugs"
+            },
+            {
+              "id": "l-ac-6",
+              "label": "Bottles",
+              "url": "#/bottles",
+              "categoryFilter": "Bottles"
+            }
+          ]
+        },
+        {
+          "id": "col-acc-shopby",
+          "title": "SHOP BY",
+          "links": [
+            {
+              "id": "l-ac-7",
+              "label": "Personalized",
+              "url": "#/shop",
+              "personalizedFilter": true
+            },
+            {
+              "id": "l-ac-8",
+              "label": "New Arrivals",
+              "url": "#/collections/new-arrivals",
+              "collectionFilter": "New Arrivals"
+            },
+            {
+              "id": "l-ac-9",
+              "label": "Best Sellers",
+              "url": "#/collections/best-sellers",
+              "collectionFilter": "Best Sellers"
+            }
+          ]
+        }
+      ],
+      "featuredCard": {
+        "title": "ATELIER ESSENTIALS",
+        "subtitle": "Canvas caps, Terry towels, and laser-etched metal bottles.",
+        "image": "https://images.unsplash.com/photo-1588850561407-ed78c282e89b?auto=format&fit=crop&q=80&w=600",
+        "ctaText": "SHOP ALL ACCESSORIES",
+        "ctaUrl": "#/caps"
+      },
+      "ctaText": "SHOP ALL ACCESSORIES",
+      "ctaUrl": "#/caps"
+    },
+    {
+      "id": "nav-hampers",
+      "label": "HAMPERS & GIFTING",
+      "slug": "hampers",
+      "enabled": true,
+      "order": 4,
+      "columns": [
+        {
+          "id": "col-hamp-types",
+          "title": "GIFT HAMPERS",
+          "links": [
+            {
+              "id": "l-h-1",
+              "label": "Premium Gift Hampers",
+              "url": "#/hampers",
+              "categoryFilter": "Hampers & Gifting",
+              "collectionFilter": "Premium Gift Hampers"
+            },
+            {
+              "id": "l-h-2",
+              "label": "Personalized Hampers",
+              "url": "#/hampers",
+              "categoryFilter": "Hampers & Gifting",
+              "collectionFilter": "Personalized Hampers"
+            },
+            {
+              "id": "l-h-3",
+              "label": "Couple Hampers",
+              "url": "#/hampers",
+              "categoryFilter": "Hampers & Gifting",
+              "collectionFilter": "Couple Hampers"
+            },
+            {
+              "id": "l-h-4",
+              "label": "Kids Hampers",
+              "url": "#/hampers",
+              "categoryFilter": "Hampers & Gifting",
+              "collectionFilter": "Kids Hampers"
+            },
+            {
+              "id": "l-h-5",
+              "label": "Corporate Hampers",
+              "url": "#/hampers",
+              "categoryFilter": "Hampers & Gifting",
+              "collectionFilter": "Corporate Hampers"
+            },
+            {
+              "id": "l-h-6",
+              "label": "Festival Hampers",
+              "url": "#/hampers",
+              "categoryFilter": "Hampers & Gifting",
+              "collectionFilter": "Festival Hampers"
+            }
+          ]
+        },
+        {
+          "id": "col-hamp-occ",
+          "title": "GIFT BY OCCASION",
+          "links": [
+            {
+              "id": "l-h-7",
+              "label": "Birthday",
+              "url": "#/collections/birthday-gifts",
+              "collectionFilter": "Birthday Gifts"
+            },
+            {
+              "id": "l-h-8",
+              "label": "Anniversary",
+              "url": "#/collections/anniversary-gifts",
+              "collectionFilter": "Anniversary Gifts"
+            },
+            {
+              "id": "l-h-9",
+              "label": "Corporate Gifting",
+              "url": "#/collections/corporate-gifting",
+              "collectionFilter": "Corporate Gifting"
+            },
+            {
+              "id": "l-h-10",
+              "label": "Festival Gifting",
+              "url": "#/collections/festival-gifting",
+              "collectionFilter": "Festival Gifting"
+            },
+            {
+              "id": "l-h-11",
+              "label": "Special Moments",
+              "url": "#/hampers",
+              "categoryFilter": "Hampers & Gifting"
+            }
+          ]
+        },
+        {
+          "id": "col-hamp-budget",
+          "title": "GIFT BY BUDGET",
+          "links": [
+            {
+              "id": "l-h-12",
+              "label": "Under ₹999",
+              "url": "#/collections/under-999",
+              "collectionFilter": "Under ₹999",
+              "budgetFilterMax": 999
+            },
+            {
+              "id": "l-h-13",
+              "label": "Under ₹1,499",
+              "url": "#/collections/under-1499",
+              "collectionFilter": "Under ₹1,499",
+              "budgetFilterMax": 1499
+            },
+            {
+              "id": "l-h-14",
+              "label": "Under ₹1,999",
+              "url": "#/collections/under-1999",
+              "collectionFilter": "Under ₹1,999",
+              "budgetFilterMax": 1999
+            },
+            {
+              "id": "l-h-15",
+              "label": "Premium Gifts",
+              "url": "#/collections/premium-gifts",
+              "collectionFilter": "Premium Gifts"
+            }
+          ]
+        }
+      ],
+      "featuredCard": {
+        "title": "THE ROYAL GIFT BOX",
+        "subtitle": "Bespoke 14-piece customizable velvet gift trunk with satin lining.",
+        "image": "/1.jpeg",
+        "ctaText": "EXPLORE ALL HAMPERS",
+        "ctaUrl": "#/hampers"
+      },
+      "ctaText": "EXPLORE ALL HAMPERS",
+      "ctaUrl": "#/hampers"
+    },
+    {
+      "id": "nav-personalized",
+      "label": "PERSONALIZED",
+      "slug": "personalized",
+      "enabled": true,
+      "order": 5,
+      "columns": [
+        {
+          "id": "col-pers-clothing",
+          "title": "PERSONALIZED CLOTHING",
+          "links": [
+            {
+              "id": "l-p-1",
+              "label": "Customized T-Shirts",
+              "url": "#/t-shirts",
+              "categoryFilter": "T-Shirts",
+              "personalizedFilter": true
+            },
+            {
+              "id": "l-p-2",
+              "label": "Customized Caps",
+              "url": "#/caps",
+              "categoryFilter": "Caps",
+              "personalizedFilter": true
+            }
+          ]
+        },
+        {
+          "id": "col-pers-acc",
+          "title": "PERSONALIZED ACCESSORIES",
+          "links": [
+            {
+              "id": "l-p-3",
+              "label": "Customized Mugs",
+              "url": "#/mugs",
+              "categoryFilter": "Mugs",
+              "personalizedFilter": true
+            },
+            {
+              "id": "l-p-4",
+              "label": "Customized Bottles",
+              "url": "#/bottles",
+              "categoryFilter": "Bottles",
+              "personalizedFilter": true
+            },
+            {
+              "id": "l-p-5",
+              "label": "Customized Towels",
+              "url": "#/towels",
+              "categoryFilter": "Towels",
+              "personalizedFilter": true
+            },
+            {
+              "id": "l-p-6",
+              "label": "Customized Hand Napkins",
+              "url": "#/hand-napkins",
+              "categoryFilter": "Hand Napkins",
+              "personalizedFilter": true
+            },
+            {
+              "id": "l-p-7",
+              "label": "Customized Keychains",
+              "url": "#/hampers",
+              "categoryFilter": "Hampers & Gifting"
+            },
+            {
+              "id": "l-p-8",
+              "label": "Customized Fridge Magnets",
+              "url": "#/hampers",
+              "categoryFilter": "Hampers & Gifting"
+            }
+          ]
+        },
+        {
+          "id": "col-pers-gifts",
+          "title": "PERSONALIZED GIFTS",
+          "links": [
+            {
+              "id": "l-p-9",
+              "label": "Personalized Hampers",
+              "url": "#/hampers",
+              "categoryFilter": "Hampers & Gifting",
+              "collectionFilter": "Personalized Hampers"
+            },
+            {
+              "id": "l-p-10",
+              "label": "Custom Gift Sets",
+              "url": "#/collections/personalized-gifts",
+              "collectionFilter": "Personalized Gifts"
+            },
+            {
+              "id": "l-p-11",
+              "label": "Corporate Gifts",
+              "url": "#/collections/corporate-gifting",
+              "collectionFilter": "Corporate Gifting"
+            }
+          ]
+        }
+      ],
+      "featuredCard": {
+        "title": "ATELIER EMBROIDERY & ENGRAVING",
+        "subtitle": "Custom names, monograms, and custom graphics on demand.",
+        "image": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&q=80&w=600",
+        "ctaText": "CREATE SOMETHING PERSONAL",
+        "ctaUrl": "#/hampers"
+      },
+      "ctaText": "CREATE SOMETHING PERSONAL",
+      "ctaUrl": "#/hampers"
+    },
+    {
+      "id": "nav-new-arrivals",
+      "label": "NEW ARRIVALS",
+      "slug": "new-arrivals",
+      "enabled": true,
+      "order": 6,
+      "columns": [
+        {
+          "id": "col-new-items",
+          "title": "LATEST DROPS",
+          "links": [
+            {
+              "id": "l-na-1",
+              "label": "Latest T-Shirts",
+              "url": "#/t-shirts",
+              "categoryFilter": "T-Shirts",
+              "collectionFilter": "New Arrivals"
+            },
+            {
+              "id": "l-na-2",
+              "label": "Latest Accessories",
+              "url": "#/caps",
+              "collectionFilter": "New Arrivals"
+            },
+            {
+              "id": "l-na-3",
+              "label": "Latest Hampers",
+              "url": "#/hampers",
+              "categoryFilter": "Hampers & Gifting",
+              "collectionFilter": "New Arrivals"
+            },
+            {
+              "id": "l-na-4",
+              "label": "Latest Personalized Products",
+              "url": "#/shop",
+              "personalizedFilter": true,
+              "collectionFilter": "New Arrivals"
+            }
+          ]
+        }
+      ],
+      "featuredCard": {
+        "title": "SPRING / SUMMER 2026",
+        "subtitle": "Explore newly dropped products freshly marked by the atelier.",
+        "image": "https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&q=80&w=600",
+        "ctaText": "SHOP NEW ARRIVALS",
+        "ctaUrl": "#/collections/new-arrivals"
+      },
+      "ctaText": "SHOP NEW ARRIVALS",
+      "ctaUrl": "#/collections/new-arrivals"
+    },
+    {
+      "id": "nav-sale",
+      "label": "SALE",
+      "slug": "sale",
+      "enabled": true,
+      "order": 7,
+      "columns": [
+        {
+          "id": "col-sale-budget",
+          "title": "SHOP SALE BY BUDGET",
+          "links": [
+            {
+              "id": "l-sa-1",
+              "label": "Under ₹999",
+              "url": "#/collections/under-999",
+              "collectionFilter": "Under ₹999"
+            },
+            {
+              "id": "l-sa-2",
+              "label": "Under ₹1,499",
+              "url": "#/collections/under-1499",
+              "collectionFilter": "Under ₹1,499"
+            },
+            {
+              "id": "l-sa-3",
+              "label": "Under ₹1,999",
+              "url": "#/collections/under-1999",
+              "collectionFilter": "Under ₹1,999"
+            }
+          ]
+        },
+        {
+          "id": "col-sale-cat",
+          "title": "BY CATEGORY",
+          "links": [
+            {
+              "id": "l-sa-4",
+              "label": "T-Shirts Sale",
+              "url": "#/t-shirts",
+              "categoryFilter": "T-Shirts"
+            },
+            {
+              "id": "l-sa-5",
+              "label": "Accessories Sale",
+              "url": "#/caps"
+            },
+            {
+              "id": "l-sa-6",
+              "label": "Hampers & Gifting Privilege Deals",
+              "url": "#/hampers",
+              "categoryFilter": "Hampers & Gifting"
+            }
+          ]
+        }
+      ],
+      "featuredCard": {
+        "title": "ATELIER PRIVILEGE OFFERS",
+        "subtitle": "Up to 55% OFF select drops and luxury hamper bundles.",
+        "image": "https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&q=80&w=600",
+        "ctaText": "EXPLORE ATELIER SALE",
+        "ctaUrl": "#/collections/under-999"
+      },
+      "ctaText": "EXPLORE ATELIER SALE",
+      "ctaUrl": "#/collections/under-999"
+    }
+  ]
+}
