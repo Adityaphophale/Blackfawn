@@ -1,6 +1,6 @@
 {
-  "buildCommand": "vite build",
-  "outputDirectory": "storefront/dist",
+  "buildCommand": "npm run build:storefront",
+  "outputDirectory": "dist",
   "rewrites": [
     {
       "source": "/(.*)",
